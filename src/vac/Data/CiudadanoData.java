@@ -40,7 +40,7 @@ Ciudadano pers=new Ciudadano();
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                pers.setIdCiudadano(rs.getInt("idCiudadano"));//Si falla poner 1 en lugar de idCiudadano
+                pers.setIdCiudadano(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Se inscribió correctamente");
             }
             ps.close();
