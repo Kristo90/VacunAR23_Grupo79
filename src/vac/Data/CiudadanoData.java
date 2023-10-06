@@ -13,7 +13,19 @@ import vac_Entidades.Ciudadano;
 import vac_Entidades.Laboratorio;
 
 public class CiudadanoData {
-Ciudadano pers=new Ciudadano();
+    
+    
+    private final String SQL_INSERT = "INSERT INTO ciudadano (dni,nombre,apellido,email,celular, patologia, ambitoTrabajo,estado)"
+            + "VALUES(?,?,?,?,?,?,?,?)";
+    private final String SQL_SELECT = "SELECT nombre, apellido, email, celular, patologia, ambitoTrabajo, estado FROM ciudadano WHERE dni=? AND estado=1";
+    
+    private final String SQL_UPDATE = "UPDATE ciudadano SET estado = 0 WHERE dni = ? ";
+    
+    
+    private PreparedStatement ps;
+    private ResultSet rs;
+    
+    Ciudadano pers=new Ciudadano();
     private Connection con = null;
     Laboratorio lab=new Laboratorio();
 
@@ -22,13 +34,8 @@ Ciudadano pers=new Ciudadano();
     }
 
     public void inscribirCiudadano(Ciudadano pers) {
-        //INSERT INTO `ciudadano`(`idCiudadano`, `dni`, `nombre`, `apellido`, `email`, `celular`, `patologia`, `ambitoTrabajo`) 
-        //VALUES ()
-        String sql = "INSERT INTO ciudadano (dni,nombre,apellido,email,celular, patologia, ambitoTrabajo,estado)"
-                + "VALUES(?,?,?,?,?,?,?,?)";
-
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, pers.getDni());
             ps.setString(2, pers.getNombre());
             ps.setString(3, pers.getApellido());
@@ -38,7 +45,7 @@ Ciudadano pers=new Ciudadano();
             ps.setString(7, pers.getAmbtrabajo());
             ps.setBoolean(8, pers.isEstado());
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
+            rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 pers.setIdCiudadano(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Se inscribió correctamente");
@@ -53,11 +60,10 @@ Ciudadano pers=new Ciudadano();
     public Ciudadano buscarCiudadano(int dni){
         
         try {
-            String sql="SELECT nombre, apellido, email, celular, patologia, ambitoTrabajo, estado FROM ciudadano WHERE dni=? AND estado=1";
-            
-            PreparedStatement ps= con.prepareStatement(sql);
+                        
+            ps= con.prepareStatement(SQL_SELECT);
             ps.setInt(1, dni);
-            ResultSet rs= ps.executeQuery();
+            rs= ps.executeQuery();
             
             if(rs.next()){
                 pers.setNombre(rs.getNString(1));//si falla poner "nombre"
@@ -80,8 +86,8 @@ Ciudadano pers=new Ciudadano();
     
    public void bajaCiudadano(int dni) {
         try {
-            String sql = "UPDATE ciudadano SET estado = 0 WHERE dni = ? ";
-            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps = con.prepareStatement(SQL_UPDATE);
             ps.setInt(1, dni);
             int fila = ps.executeUpdate();
 

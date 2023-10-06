@@ -11,7 +11,8 @@ public class frmPrincipal extends javax.swing.JFrame {
     
     public frmPrincipal() {
         initComponents();
-       
+        // Esto para ponerlo en el centro cuando se ejecuta el programa
+       this.setLocationRelativeTo(null);
         
     }
 
