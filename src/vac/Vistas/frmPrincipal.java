@@ -5,14 +5,14 @@ import javax.swing.JDesktopPane;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import vac_Entidades.Laboratorio;
 
 public class frmPrincipal extends javax.swing.JFrame {
 
     
     public frmPrincipal() {
         initComponents();
-        // Esto para ponerlo en el centro cuando se ejecuta el programa
-       this.setLocationRelativeTo(null);
+       
         
     }
 
@@ -25,7 +25,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/imagen/fondoPpal1.jpg"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagen/fondoPpal.jpg"));
         Image image = icon.getImage();
         sDescritorio = new javax.swing.JDesktopPane(){
             public void paintComponent(Graphics g){
@@ -43,20 +43,23 @@ public class frmPrincipal extends javax.swing.JFrame {
         jMsalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 700));
+        setResizable(false);
+
+        sDescritorio.setPreferredSize(new java.awt.Dimension(860, 680));
 
         javax.swing.GroupLayout sDescritorioLayout = new javax.swing.GroupLayout(sDescritorio);
         sDescritorio.setLayout(sDescritorioLayout);
         sDescritorioLayout.setHorizontalGroup(
             sDescritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 798, Short.MAX_VALUE)
+            .addGap(0, 973, Short.MAX_VALUE)
         );
         sDescritorioLayout.setVerticalGroup(
             sDescritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 494, Short.MAX_VALUE)
+            .addGap(0, 735, Short.MAX_VALUE)
         );
 
         jAdm.setText("Administracion");
+        jAdm.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         jMciudadano.setText("Administrar Ciudadano");
         jMciudadano.addActionListener(new java.awt.event.ActionListener() {
@@ -67,6 +70,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         jAdm.add(jMciudadano);
 
         jMlab.setText("Administrar Laboratorio");
+        jMlab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMlabActionPerformed(evt);
+            }
+        });
         jAdm.add(jMlab);
 
         jMcita.setText("Administrar Cita");
@@ -78,9 +86,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jAdm);
 
         jConsultas.setText("Consultas");
+        jConsultas.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jMenuBar1.add(jConsultas);
 
         jSalir.setText("Salir");
+        jSalir.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         jMsalir.setText("Salir");
         jMsalir.addActionListener(new java.awt.event.ActionListener() {
@@ -98,11 +108,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sDescritorio)
+            .addComponent(sDescritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 973, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sDescritorio, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(sDescritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
         );
 
         pack();
@@ -127,6 +137,22 @@ public class frmPrincipal extends javax.swing.JFrame {
         // Escritorio principal agregar el Objeto (ventana formilario)
         sDescritorio.add(ac);
     }//GEN-LAST:event_jMciudadanoActionPerformed
+
+    private void jMlabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMlabActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+         // Remover la pantalla principal
+        sDescritorio.removeAll();
+        // Redibuja el escritorio principal
+        sDescritorio.repaint();
+        // Crear el objeto de la ventana fomulario alunmo(Clase)
+        AdmLaboratorio al = new AdmLaboratorio();
+        // Hacer visible el objeto (ventana formulario)
+        al.setVisible(true);
+        
+        // Escritorio principal agregar el Objeto (ventana formilario)
+        sDescritorio.add(al);
+    }//GEN-LAST:event_jMlabActionPerformed
 
     /**
      * @param args the command line arguments
