@@ -42,15 +42,26 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         jTmail = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTtelefono = new javax.swing.JTextField();
+        jBsalir1 = new javax.swing.JButton();
+        jBbuscar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jCriesgo = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jCescencial = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setClosable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTdni.addActionListener(new java.awt.event.ActionListener() {
@@ -63,60 +74,75 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
                 jTdniKeyTyped(evt);
             }
         });
-        getContentPane().add(jTdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 240, -1));
+        getContentPane().add(jTdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 140, -1));
 
         jLabel5.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel5.setText("Ingrese nombre:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 140, 20));
+        jLabel5.setText("Nombre:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 80, 20));
 
         jTnombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTnombreKeyTyped(evt);
             }
         });
-        getContentPane().add(jTnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 240, -1));
+        getContentPane().add(jTnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 230, -1));
 
         jLabel2.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Ingrese apellido:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 150, 20));
+        jLabel2.setText("Apellido:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 80, 20));
 
         jTapellido.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTapellidoKeyTyped(evt);
             }
         });
-        getContentPane().add(jTapellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 240, -1));
+        getContentPane().add(jTapellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 230, -1));
 
         jLabel6.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel6.setText("Ingrese e-mail:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 150, 20));
+        jLabel6.setText("E-mail:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 70, 20));
 
         jTmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTmailFocusLost(evt);
             }
         });
-        getContentPane().add(jTmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 240, -1));
+        getContentPane().add(jTmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 230, -1));
 
         jLabel7.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel7.setText("Ingrese telefono:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 150, 20));
+        jLabel7.setText("Telefono:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 90, 20));
 
         jTtelefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTtelefonoKeyTyped(evt);
             }
         });
-        getContentPane().add(jTtelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 240, -1));
+        getContentPane().add(jTtelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 230, -1));
+
+        jBsalir1.setBackground(new java.awt.Color(255, 153, 153));
+        jBsalir1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jBsalir1.setForeground(new java.awt.Color(51, 51, 51));
+        jBsalir1.setText("Salir");
+        jBsalir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBsalir1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBsalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, 100, 30));
+
+        jBbuscar.setBackground(new java.awt.Color(153, 255, 204));
+        jBbuscar.setText("Buscar");
+        getContentPane().add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, 100, 40));
 
         jLabel8.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel8.setText("Enfermedad de riesgo:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 190, 20));
+        jLabel8.setText("Enf. de riesgo:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 190, 20));
 
         jCriesgo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "0.Ninguna", "1. Enfermedad pulmonar", "2. Cardiopatías", "3. Diabetes", "4. Obesidad", "5. Transplante", "6. Inmuno deprimido", " " }));
         jCriesgo.addActionListener(new java.awt.event.ActionListener() {
@@ -124,29 +150,50 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
                 jCriesgoActionPerformed(evt);
             }
         });
-        getContentPane().add(jCriesgo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 230, -1));
+        getContentPane().add(jCriesgo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 230, -1));
 
         jLabel9.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel9.setText("Actividad esencial:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 190, 20));
+        jLabel9.setText("Act. esencial:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 120, 20));
+
+        jButton1.setText("Modificar");
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, -1, 20));
 
         jCescencial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Ninguna", "1. Personal de Salud, Fuerzas de seguridad, Fuerzas Armadas.", "2. Autoridades superiores de los gobiernosres.", "3. Personal de los servicios de justicia de turno.", "4. Personal diplomático y consular extranjero. ", "5. Personas que deban asistir a otras con discapacidad. ", "6. Personas que deban atender una situación de fuerza mayor.", "7. Personas afectadas a la realización de servicios funerarios.", "8. Personas afectadas a la atención de comedoress.", "9. Personal que se desempeña en los servicios de comunicación.", "10. Personal afectado a obra pública.", "11. Supermercados y comercios minoristas de proximidad. ", "12. Industrias de alimentación", "13. Actividades distribución y comercialización agropecuaria y de pesca.", "14. Actividades de telecomunicaciones.", "15. Comercio exterior.", "16. Recolección, transporte y tratamiento de residuos sólidos urbanos.", "17. Mantenimiento de los servicios básicos.", "18. Transporte público de pasajeros.", "19. Reparto a domicilio.", "20. Servicios de lavandería.", "21. Servicios postales y de distribución de paquetería.", "22. Servicios esenciales de vigilancia, limpieza y guardia.", " " }));
-        getContentPane().add(jCescencial, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, 420, -1));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 112, 630, 10));
+        getContentPane().add(jCescencial, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 420, -1));
 
-        jLabel3.setFont(new java.awt.Font("Gulim", 0, 36)); // NOI18N
+        jButton2.setText("Modificar");
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, -1, 20));
+
+        jButton3.setText("Modificar");
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, -1, 20));
+
+        jButton4.setText("Modificar");
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 290, -1, 20));
+
+        jButton5.setText("Modificar");
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 330, -1, 20));
+
+        jButton6.setText("Modificar");
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, -1, 20));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 700, 10));
+
+        jLabel3.setFont(new java.awt.Font("Gulim", 1, 30)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Actualización de Datos");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 410, 40));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 410, 40));
 
         jLabel4.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("Ingrese DNI de la persona a actualizar:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 340, 20));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 340, 20));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/transparent white.png"))); // NOI18N
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 460));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondoCiudadano.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 460));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -225,11 +272,25 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCriesgoActionPerformed
 
+    private void jBsalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalir1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jBsalir1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBbuscar;
+    private javax.swing.JButton jBsalir1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jCescencial;
     private javax.swing.JComboBox<String> jCriesgo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

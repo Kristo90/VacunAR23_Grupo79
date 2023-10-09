@@ -199,6 +199,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMsalir;
     private javax.swing.JMenuItem jMvacuna;
     private javax.swing.JMenu jSalir;
-    private javax.swing.JDesktopPane sDescritorio;
+    public static javax.swing.JDesktopPane sDescritorio;
     // End of variables declaration//GEN-END:variables
 }
