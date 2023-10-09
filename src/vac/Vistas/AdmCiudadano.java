@@ -1,9 +1,11 @@
 package vac.Vistas;
 
+import java.awt.Component;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import vac.Data.CiudadanoData;
@@ -13,12 +15,14 @@ public class AdmCiudadano extends javax.swing.JInternalFrame {
 
      public Ciudadano pers = new Ciudadano();
     CiudadanoData cd = new CiudadanoData();
+
    
     public AdmCiudadano() {
         initComponents();
 
 
     }
+    
 public void limpiar(){
     jTdni.setText("");
         jTnombre.setText("");
