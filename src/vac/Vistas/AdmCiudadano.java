@@ -373,21 +373,26 @@ public void limpiar(){
 
     private void jBactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBactualizarActionPerformed
         // TODO add your handling code here:
-                    if (jTnombre.getText().isEmpty() || jTapellido.getText().isEmpty() || jTdni.getText().isEmpty() || jTmail.getText().isEmpty() || jTtelefono.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Para actualizar debe completar todos los campos con los datos de la persona a mofificar y luego presionar ACTUALIZAR");
-
-        } else {
-            pers.setDni(Integer.parseInt(jTdni.getText()));
-            pers.setNombre(jTnombre.getText());
-            pers.setApellido(jTapellido.getText());
-            pers.setEmail(jTmail.getText());
-            pers.setCelular(jTtelefono.getText());
-            pers.setPatologia(jCriesgo.getSelectedItem().toString());
-            pers.setAmbtrabajo(jCescencial.getSelectedItem().toString());
-            cd.actualizarCiudadano(pers);
-
-            limpiar();
-        }
+        ActualizaCiudadano ac= new ActualizaCiudadano();
+        frmPrincipal.sDescritorio.add(ac);
+        ac.toFront();
+        ac.setVisible(true);
+        
+//                    if (jTnombre.getText().isEmpty() || jTapellido.getText().isEmpty() || jTdni.getText().isEmpty() || jTmail.getText().isEmpty() || jTtelefono.getText().isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "Para actualizar debe completar todos los campos con los datos de la persona a mofificar y luego presionar ACTUALIZAR");
+//
+//        } else {
+//            pers.setDni(Integer.parseInt(jTdni.getText()));
+//            pers.setNombre(jTnombre.getText());
+//            pers.setApellido(jTapellido.getText());
+//            pers.setEmail(jTmail.getText());
+//            pers.setCelular(jTtelefono.getText());
+//            pers.setPatologia(jCriesgo.getSelectedItem().toString());
+//            pers.setAmbtrabajo(jCescencial.getSelectedItem().toString());
+//            cd.actualizarCiudadano(pers);
+//
+//            limpiar();
+//        }
      
        
          
