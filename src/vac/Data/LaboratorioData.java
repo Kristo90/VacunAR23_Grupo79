@@ -70,9 +70,12 @@ public class LaboratorioData {
             
             if (RS.next()) {
                 
+                lab.setNomLab(RS.getString(1));
+                lab.setPais(RS.getString(2));
+                lab.setDomCom(RS.getString(3));
+                lab.setEstado(RS.getBoolean(4));
                 
-                
-                
+                JOptionPane.showMessageDialog(null, "Laboratio Encontrado");
             }
             
         } catch (SQLException ex) {
@@ -80,4 +83,29 @@ public class LaboratorioData {
         }
         return lab;           
    }
+    
+    public void actualizarLaboratorio(Laboratorio lab) {
+        
+        try {
+            PS = con.prepareStatement(SQL_ACTUALIZAR);
+            
+            PS.setString(1, lab.getNomLab());
+            PS.setString(2, lab.getPais());
+            PS.setString(3, lab.getDomCom());
+            PS.setBoolean(4, lab.isEstado());
+            PS.setInt(5, lab.getCuit());
+            
+            int FILA = PS.executeUpdate();
+            
+            if (FILA == 1) {
+                JOptionPane.showMessageDialog(null,"Se actualizo la información del Laboratorio" );
+            }
+            
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla ciudadano");
+        }
+    }
+    
+    
 }

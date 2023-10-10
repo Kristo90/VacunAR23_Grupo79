@@ -78,7 +78,7 @@ public class CiudadanoData {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla Ciudadano");
+            JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla Laboratorio");
         }
         return pers;
     }
