@@ -9,7 +9,9 @@ import java.awt.event.KeyEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import vac.Data.CiudadanoData;
 import vac.Vistas.AdmCiudadano;
+import vac_Entidades.Ciudadano;
 
 /**
  *
@@ -22,8 +24,19 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
      */
     public ActualizaCiudadano() {
         initComponents();
+        
     }
-
+    Ciudadano pers=new Ciudadano();
+    CiudadanoData cd=new CiudadanoData();
+    public void limpiar(){
+    jTdni.setText("");
+        jTnombre.setText("");
+        jTapellido.setText("");
+        jTmail.setText("");
+        jTtelefono.setText("");
+        jCriesgo.setSelectedIndex(0);
+        jCescencial.setSelectedIndex(0);
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,22 +52,22 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jTapellido = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        jBsalir1 = new javax.swing.JButton();
         jTmail = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTtelefono = new javax.swing.JTextField();
-        jBsalir1 = new javax.swing.JButton();
+        jBmodificar = new javax.swing.JButton();
         jBbuscar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jCriesgo = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jCescencial = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel11 = new javax.swing.JLabel();
+        jinactivo = new javax.swing.JCheckBox();
+        jactivo = new javax.swing.JCheckBox();
+        jBguardarCambios = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -78,8 +91,8 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel5.setText("Nombre:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 80, 20));
+        jLabel5.setText("Estado:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 70, 20));
 
         jTnombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -105,6 +118,17 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         jLabel6.setText("E-mail:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 70, 20));
 
+        jBsalir1.setBackground(new java.awt.Color(255, 153, 153));
+        jBsalir1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jBsalir1.setForeground(new java.awt.Color(51, 51, 51));
+        jBsalir1.setText("Salir");
+        jBsalir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBsalir1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBsalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 390, 160, 50));
+
         jTmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTmailFocusLost(evt);
@@ -124,19 +148,24 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jTtelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 230, -1));
 
-        jBsalir1.setBackground(new java.awt.Color(255, 153, 153));
-        jBsalir1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jBsalir1.setForeground(new java.awt.Color(51, 51, 51));
-        jBsalir1.setText("Salir");
-        jBsalir1.addActionListener(new java.awt.event.ActionListener() {
+        jBmodificar.setBackground(new java.awt.Color(255, 255, 153));
+        jBmodificar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jBmodificar.setForeground(new java.awt.Color(0, 0, 0));
+        jBmodificar.setText("Modificar");
+        jBmodificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBsalir1ActionPerformed(evt);
+                jBmodificarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBsalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, 100, 30));
+        getContentPane().add(jBmodificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 120, 50));
 
         jBbuscar.setBackground(new java.awt.Color(153, 255, 204));
         jBbuscar.setText("Buscar");
+        jBbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbuscarActionPerformed(evt);
+            }
+        });
         getContentPane().add(jBbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, 100, 40));
 
         jLabel8.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
@@ -157,27 +186,34 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         jLabel9.setText("Act. esencial:");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 120, 20));
 
-        jButton1.setText("Modificar");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, -1, 20));
-
         jCescencial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Ninguna", "1. Personal de Salud, Fuerzas de seguridad, Fuerzas Armadas.", "2. Autoridades superiores de los gobiernosres.", "3. Personal de los servicios de justicia de turno.", "4. Personal diplomático y consular extranjero. ", "5. Personas que deban asistir a otras con discapacidad. ", "6. Personas que deban atender una situación de fuerza mayor.", "7. Personas afectadas a la realización de servicios funerarios.", "8. Personas afectadas a la atención de comedoress.", "9. Personal que se desempeña en los servicios de comunicación.", "10. Personal afectado a obra pública.", "11. Supermercados y comercios minoristas de proximidad. ", "12. Industrias de alimentación", "13. Actividades distribución y comercialización agropecuaria y de pesca.", "14. Actividades de telecomunicaciones.", "15. Comercio exterior.", "16. Recolección, transporte y tratamiento de residuos sólidos urbanos.", "17. Mantenimiento de los servicios básicos.", "18. Transporte público de pasajeros.", "19. Reparto a domicilio.", "20. Servicios de lavandería.", "21. Servicios postales y de distribución de paquetería.", "22. Servicios esenciales de vigilancia, limpieza y guardia.", " " }));
         getContentPane().add(jCescencial, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 420, -1));
 
-        jButton2.setText("Modificar");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, -1, 20));
-
-        jButton3.setText("Modificar");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, -1, 20));
-
-        jButton4.setText("Modificar");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 290, -1, 20));
-
         jButton5.setText("Modificar");
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 330, -1, 20));
-
-        jButton6.setText("Modificar");
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, -1, 20));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 700, 10));
+
+        jLabel11.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel11.setText("Nombre:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 80, 20));
+
+        jinactivo.setText("Inactivo");
+        getContentPane().add(jinactivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 130, -1, -1));
+
+        jactivo.setText("Activo");
+        getContentPane().add(jactivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 70, -1));
+
+        jBguardarCambios.setBackground(new java.awt.Color(102, 204, 255));
+        jBguardarCambios.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jBguardarCambios.setForeground(new java.awt.Color(51, 51, 51));
+        jBguardarCambios.setText("Guardar Cambios");
+        jBguardarCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBguardarCambiosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBguardarCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, 160, 50));
 
         jLabel3.setFont(new java.awt.Font("Gulim", 1, 30)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
@@ -277,20 +313,78 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jBsalir1ActionPerformed
 
+    private void jBguardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarCambiosActionPerformed
+        // TODO add your handling code here:
+        if (jTnombre.getText().isEmpty() || jTapellido.getText().isEmpty() || jTdni.getText().isEmpty() || jTmail.getText().isEmpty() || jTtelefono.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
+
+        } else {
+            pers.setDni(Integer.parseInt(jTdni.getText()));
+            pers.setNombre(jTnombre.getText());
+            pers.setApellido(jTapellido.getText());
+            pers.setEmail(jTmail.getText());
+            pers.setCelular(jTtelefono.getText());
+            pers.setPatologia(jCriesgo.getSelectedItem().toString());
+            pers.setAmbtrabajo(jCescencial.getSelectedItem().toString());
+            
+            cd.actualizarCiudadano(pers);
+
+            limpiar();
+        }
+
+    }//GEN-LAST:event_jBguardarCambiosActionPerformed
+
+    private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
+        // TODO add your handling code here:
+        pers = cd.buscarCiudadano(Integer.parseInt(jTdni.getText()));
+         System.out.println(pers);       
+        jTnombre.setText(pers.getNombre());
+        jTapellido.setText(pers.getApellido());
+        jTmail.setText(pers.getEmail());
+        jTtelefono.setText(pers.getCelular());
+         if(pers.isEstado()==false){
+             jinactivo.setSelected(true);
+             jinactivo.setSelected(false);
+            }else{
+             jinactivo.setSelected(false);
+             jinactivo.setSelected(true);
+                 
+         }
+        
+        
+        jTnombre.setEnabled(false);
+        jTapellido.setEnabled(false);
+        jTmail.setEnabled(false);
+        jTtelefono.setEnabled(false);
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jBbuscarActionPerformed
+
+    private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
+        // TODO add your handling code here:
+        jTnombre.setEnabled(true);
+        jTapellido.setEnabled(true);
+        jTmail.setEnabled(true);
+        jTtelefono.setEnabled(true);
+        
+        
+    }//GEN-LAST:event_jBmodificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscar;
+    private javax.swing.JButton jBguardarCambios;
+    private javax.swing.JButton jBmodificar;
     private javax.swing.JButton jBsalir1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jCescencial;
     private javax.swing.JComboBox<String> jCriesgo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -305,5 +399,7 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTmail;
     private javax.swing.JTextField jTnombre;
     private javax.swing.JTextField jTtelefono;
+    private javax.swing.JCheckBox jactivo;
+    private javax.swing.JCheckBox jinactivo;
     // End of variables declaration//GEN-END:variables
 }
