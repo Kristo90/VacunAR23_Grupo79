@@ -14,8 +14,19 @@ import vac_Entidades.Laboratorio;
 
 
 public class LaboratorioData {
-   private Connection con = null;
-   Laboratorio lab=new Laboratorio();
+    
+    private Connection con = null;
+    Laboratorio lab = new Laboratorio();
+   
+    String SQL_ACTUALIZAR = "UPDATE laboratiro set nomLaboratorio = ?, pais = ?, domComercial = ?, estado = ? WHERE cuit = ?";
+   
+    // SELECT idLaboratorio,cuit, nomLaboratorio, pais, domComercial, estado FROM laboratorio WHERE nomLaboratorio like ?" 
+    // VALUES ('?,?,?,?,?')
+   
+    String SQL_BUSCAR = "SELECT idLaboratorio,cuit, nomLaboratorio, pais, domComercial, estado FROM laboratorio WHERE nomLaboratorio = '?'";
+   
+    private PreparedStatement PS;
+    private ResultSet RS;
 
     public LaboratorioData() {
         con = MiConexion.getConexion();
@@ -28,20 +39,20 @@ public class LaboratorioData {
         String sql="INSERT INTO laboratorio (cuit,nomLaboratorio,pais,domComercial,estado)"+
                 "VALUES(?,?,?,?,?)";
        try {
-           PreparedStatement ps=con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-           ps.setInt(1,lab.getCuit());
-           ps.setString(2,lab.getNomLab());
-           ps.setString(3, lab.getPais());
-           ps.setString(4, lab.getDomCom());
-           ps.setBoolean(5, lab.isEstado());
+           PS =con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+           PS.setInt(1,lab.getCuit());
+           PS.setString(2,lab.getNomLab());
+           PS.setString(3, lab.getPais());
+           PS.setString(4, lab.getDomCom());
+           PS.setBoolean(5, lab.isEstado());
            
-           ps.executeUpdate();
-           ResultSet rs= ps.getGeneratedKeys();
+           PS.executeUpdate();
+           RS = PS.getGeneratedKeys();
            
-           if(rs.next()){
-               lab.setIdLaboratorio(rs.getInt(1));//Si falla cambiar por "idLaboratorio"
+           if(RS.next()){
+               lab.setIdLaboratorio(RS.getInt(1));//Si falla cambiar por "idLaboratorio"
                JOptionPane.showMessageDialog(null, "Se agrego exitosamente el Laboratorio.");
-               ps.close();
+               PS.close();
            }
            
        } catch (SQLException ex) {
@@ -49,11 +60,24 @@ public class LaboratorioData {
        }
         
     }
-    public Laboratorio buscarLab(String nombre){
-       // SELECT idLaboratorio,cuit, nomLaboratorio, pais, domComercial, estado FROM laboratorio WHERE nomLaboratorio like ?" 
-        //VALUES ('?,?,?,?,?')
-        String sql="SELECT idLaboratorio,cuit, nomLaboratorio, pais, domComercial, estado FROM laboratorio WHERE nomLaboratorio = '?'";
-       
-       return lab;
+    public Laboratorio buscarLaboratorio(int cuit) {
+                    
+        try {
+            PS = con.prepareStatement(SQL_BUSCAR);
+            PS.setInt(1, cuit);
+            
+            RS = PS.executeQuery();
+            
+            if (RS.next()) {
+                
+                
+                
+                
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla Ciudadano");
+        }
+        return lab;           
    }
 }
