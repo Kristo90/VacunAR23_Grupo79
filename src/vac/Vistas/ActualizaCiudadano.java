@@ -5,6 +5,7 @@
  */
 package vac.Vistas;
 
+
 import java.awt.event.KeyEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,19 +25,35 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
      */
     public ActualizaCiudadano() {
         initComponents();
-        
+        jTnombre.setEnabled(false);
+        jTapellido.setEnabled(false);
+        jTmail.setEnabled(false);
+        jTtelefono.setEnabled(false);
+        jinactivo.setEnabled(false);
+        jactivo.setEnabled(false);
+        jBguardarCambios.setEnabled(false);
+        jCriesgo.setEnabled(false);
+        jCescencial.setEnabled(false);
+        jBmodificar.setEnabled(false);
+        jBcancelar.setEnabled(false);
+
+      
     }
-    Ciudadano pers=new Ciudadano();
-    CiudadanoData cd=new CiudadanoData();
-    public void limpiar(){
-    jTdni.setText("");
+    Ciudadano pers = new Ciudadano();
+    CiudadanoData cd = new CiudadanoData();
+
+    public void limpiar() {
+        jTdni.setText("");
         jTnombre.setText("");
         jTapellido.setText("");
         jTmail.setText("");
         jTtelefono.setText("");
         jCriesgo.setSelectedIndex(0);
         jCescencial.setSelectedIndex(0);
-}
+        jactivo.setSelected(false);
+        jinactivo.setSelected(false);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,10 +76,10 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         jBmodificar = new javax.swing.JButton();
         jBbuscar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jBcancelar = new javax.swing.JButton();
         jCriesgo = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jCescencial = new javax.swing.JComboBox<>();
-        jButton5 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel11 = new javax.swing.JLabel();
         jinactivo = new javax.swing.JCheckBox();
@@ -94,6 +111,7 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         jLabel5.setText("Estado:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 70, 20));
 
+        jTnombre.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jTnombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTnombreKeyTyped(evt);
@@ -106,6 +124,7 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         jLabel2.setText("Apellido:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 80, 20));
 
+        jTapellido.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jTapellido.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTapellidoKeyTyped(evt);
@@ -129,6 +148,7 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jBsalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 390, 160, 50));
 
+        jTmail.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jTmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTmailFocusLost(evt);
@@ -141,6 +161,7 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         jLabel7.setText("Telefono:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 90, 20));
 
+        jTtelefono.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jTtelefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTtelefonoKeyTyped(evt);
@@ -173,7 +194,18 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         jLabel8.setText("Enf. de riesgo:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 190, 20));
 
-        jCriesgo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "0.Ninguna", "1. Enfermedad pulmonar", "2. Cardiopatías", "3. Diabetes", "4. Obesidad", "5. Transplante", "6. Inmuno deprimido", " " }));
+        jBcancelar.setBackground(new java.awt.Color(255, 51, 51));
+        jBcancelar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jBcancelar.setForeground(new java.awt.Color(0, 0, 0));
+        jBcancelar.setText("Cancelar");
+        jBcancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBcancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, 120, 50));
+
+        jCriesgo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0-Seleccione", "1-Ninguna", "2- Enfermedad pulmonar", "3- Cardiopatías", "4- Diabetes", "5- Obesidad", "6- Transplante", "7- Inmuno deprimido", " " }));
         jCriesgo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCriesgoActionPerformed(evt);
@@ -186,11 +218,8 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         jLabel9.setText("Act. esencial:");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 120, 20));
 
-        jCescencial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Ninguna", "1. Personal de Salud, Fuerzas de seguridad, Fuerzas Armadas.", "2. Autoridades superiores de los gobiernosres.", "3. Personal de los servicios de justicia de turno.", "4. Personal diplomático y consular extranjero. ", "5. Personas que deban asistir a otras con discapacidad. ", "6. Personas que deban atender una situación de fuerza mayor.", "7. Personas afectadas a la realización de servicios funerarios.", "8. Personas afectadas a la atención de comedoress.", "9. Personal que se desempeña en los servicios de comunicación.", "10. Personal afectado a obra pública.", "11. Supermercados y comercios minoristas de proximidad. ", "12. Industrias de alimentación", "13. Actividades distribución y comercialización agropecuaria y de pesca.", "14. Actividades de telecomunicaciones.", "15. Comercio exterior.", "16. Recolección, transporte y tratamiento de residuos sólidos urbanos.", "17. Mantenimiento de los servicios básicos.", "18. Transporte público de pasajeros.", "19. Reparto a domicilio.", "20. Servicios de lavandería.", "21. Servicios postales y de distribución de paquetería.", "22. Servicios esenciales de vigilancia, limpieza y guardia.", " " }));
+        jCescencial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0-Seleccione", "1-Ninguna", "2- Personal de Salud, Fuerzas de seguridad, Fuerzas Armadas.", "3- Autoridades superiores de los gobiernosres.", "4- Personal de los servicios de justicia de turno.", "5- Personal diplomático y consular extranjero. ", "6- Personas que deban asistir a otras con discapacidad. ", "7- Personas que deban atender una situación de fuerza mayor.", "8- Personas afectadas a la realización de servicios funerarios.", "9- Personas afectadas a la atención de comedoress.", "10- Personal de servicios de comunicación.", "11- Personal afectado a obra pública.", "12- Supermercados y comercios minoristas de proximidad. ", "13- Industrias de alimentación", "14- Actividades distribución y comercialización agropecuaria.", "15- Actividades de telecomunicaciones.", "16- Comercio exterior.", "17- Recolección, transporte y tratamiento de residuos.", "18- Mantenimiento de los servicios básicos.", "19- Transporte público de pasajeros.", "20- Reparto a domicilio.", "21- Servicios de lavandería.", "22- Servicios postales y de distribución de paquetería.", "23- Servicios esenciales de vigilancia, limpieza y guardia.", " ", " " }));
         getContentPane().add(jCescencial, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 420, -1));
-
-        jButton5.setText("Modificar");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 330, -1, 20));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 700, 10));
 
         jLabel11.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
@@ -199,9 +228,19 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 80, 20));
 
         jinactivo.setText("Inactivo");
+        jinactivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jinactivoActionPerformed(evt);
+            }
+        });
         getContentPane().add(jinactivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 130, -1, -1));
 
         jactivo.setText("Activo");
+        jactivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jactivoActionPerformed(evt);
+            }
+        });
         getContentPane().add(jactivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 70, -1));
 
         jBguardarCambios.setBackground(new java.awt.Color(102, 204, 255));
@@ -270,19 +309,19 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_jTapellidoKeyTyped
-//    public boolean isEmail(String correo) {
-//        Pattern pat = null;
-//        Matcher mat = null;
-//        pat = Pattern.compile("^[\\w\\\\\\+]+(\\.[\\w\\\\]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$");
-//        mat = pat.matcher(correo);
-//
-//        if (mat.find()) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//
-//    }
+    public boolean isEmail(String correo) {
+        Pattern pat = null;
+        Matcher mat = null;
+        pat = Pattern.compile("^[\\w\\\\\\+]+(\\.[\\w\\\\]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$");
+        mat = pat.matcher(correo);
+
+        if (mat.find()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
     private void jTmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTmailFocusLost
 //        // TODO add your handling code here:
 //       // if (isEmail(jTmail.getText())) {
@@ -326,10 +365,32 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
             pers.setCelular(jTtelefono.getText());
             pers.setPatologia(jCriesgo.getSelectedItem().toString());
             pers.setAmbtrabajo(jCescencial.getSelectedItem().toString());
-            
+            if(jactivo.isSelected()){
+                pers.setEstado(true);
+            }else{
+                pers.setEstado(false);
+            }
+
             cd.actualizarCiudadano(pers);
 
             limpiar();
+            
+            jTnombre.setEnabled(false);
+        jTapellido.setEnabled(false);
+        jTmail.setEnabled(false);
+        jTtelefono.setEnabled(false);
+        jinactivo.setEnabled(false);
+        jactivo.setEnabled(false);
+        jBguardarCambios.setEnabled(false);
+        jCriesgo.setEnabled(false);
+        jCescencial.setEnabled(false);
+        jBmodificar.setEnabled(true);
+        jinactivo.setEnabled(false);
+        jactivo.setEnabled(false);
+        jBbuscar.setEnabled(true);
+        jBguardarCambios.setEnabled(false);
+        jBmodificar.setEnabled(false);
+            
         }
 
     }//GEN-LAST:event_jBguardarCambiosActionPerformed
@@ -337,30 +398,42 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
         // TODO add your handling code here:
         pers = cd.buscarCiudadano(Integer.parseInt(jTdni.getText()));
-         System.out.println(pers);       
+
         jTnombre.setText(pers.getNombre());
         jTapellido.setText(pers.getApellido());
         jTmail.setText(pers.getEmail());
         jTtelefono.setText(pers.getCelular());
-         if(pers.isEstado()==false){
-             jinactivo.setSelected(true);
-             jinactivo.setSelected(false);
-            }else{
-             jinactivo.setSelected(false);
-             jinactivo.setSelected(true);
-                 
-         }
         
+        String cadena=pers.getAmbtrabajo();
+        String[]frag=cadena.split("-");
+        jCescencial.setSelectedIndex(Integer.parseInt(frag[0]));
         
+        String cadenaPat=pers.getPatologia();
+        String[]fragpat=cadenaPat.split("-");
+        jCriesgo.setSelectedIndex(Integer.parseInt(fragpat[0]));
+
+        
+        if (pers.isEstado()) {
+            jactivo.setSelected(true);
+            jinactivo.setSelected(false);
+        } else {
+            jinactivo.setSelected(true);
+            jactivo.setSelected(false);
+
+        }
+
         jTnombre.setEnabled(false);
         jTapellido.setEnabled(false);
         jTmail.setEnabled(false);
         jTtelefono.setEnabled(false);
-        
-        
-        
-        
-        
+        jinactivo.setEnabled(false);
+        jactivo.setEnabled(false);
+        jBguardarCambios.setEnabled(false);
+        jCriesgo.setEnabled(false);
+        jCescencial.setEnabled(false);
+        jBmodificar.setEnabled(true);
+
+
     }//GEN-LAST:event_jBbuscarActionPerformed
 
     private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
@@ -369,17 +442,53 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         jTapellido.setEnabled(true);
         jTmail.setEnabled(true);
         jTtelefono.setEnabled(true);
+        jinactivo.setEnabled(true);
+        jactivo.setEnabled(true);
+        jBguardarCambios.setEnabled(true);
+        jCriesgo.setEnabled(true);
+        jCescencial.setEnabled(true);
+        jBbuscar.setEnabled(false);
+        jBcancelar.setEnabled(true);
+
         
-        
+
     }//GEN-LAST:event_jBmodificarActionPerformed
+
+    private void jactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jactivoActionPerformed
+        // TODO add your handling code here:
+        jinactivo.setSelected(false);
+    }//GEN-LAST:event_jactivoActionPerformed
+
+    private void jinactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jinactivoActionPerformed
+        // TODO add your handling code here:
+        jactivo.setSelected(false);
+    }//GEN-LAST:event_jinactivoActionPerformed
+
+    private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+         jTnombre.setEnabled(false);
+        jTapellido.setEnabled(false);
+        jTmail.setEnabled(false);
+        jTtelefono.setEnabled(false);
+        jinactivo.setEnabled(false);
+        jactivo.setEnabled(false);
+        jBguardarCambios.setEnabled(false);
+        jCriesgo.setEnabled(false);
+        jCescencial.setEnabled(false);
+        jBbuscar.setEnabled(true);
+        jBmodificar.setEnabled(false);
+        jBcancelar.setEnabled(false);
+        
+    }//GEN-LAST:event_jBcancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBbuscar;
+    private javax.swing.JButton jBcancelar;
     private javax.swing.JButton jBguardarCambios;
     private javax.swing.JButton jBmodificar;
     private javax.swing.JButton jBsalir1;
-    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jCescencial;
     private javax.swing.JComboBox<String> jCriesgo;
     private javax.swing.JLabel jLabel1;
