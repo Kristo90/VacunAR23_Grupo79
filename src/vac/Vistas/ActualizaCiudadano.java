@@ -390,6 +390,7 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         jBbuscar.setEnabled(true);
         jBguardarCambios.setEnabled(false);
         jBmodificar.setEnabled(false);
+        jBcancelar.setEnabled(false);
             
         }
 
@@ -432,6 +433,7 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         jCriesgo.setEnabled(false);
         jCescencial.setEnabled(false);
         jBmodificar.setEnabled(true);
+        jBcancelar.setEnabled(false);
 
 
     }//GEN-LAST:event_jBbuscarActionPerformed
@@ -449,6 +451,7 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         jCescencial.setEnabled(true);
         jBbuscar.setEnabled(false);
         jBcancelar.setEnabled(true);
+        jBmodificar.setEnabled(false);
 
         
 
