@@ -8,7 +8,7 @@ public class CitaVacunacion {
     private int idCita;
     private Ciudadano persona;
     private int codigoRefuerzo;
-    private LocalDateTime fechaHoraCita;
+    private String fechaHoraCita;
     private String centroVacunacion;
     private LocalDateTime fechaHoraColocada;
     private Vacuna dosis;
@@ -17,7 +17,7 @@ public class CitaVacunacion {
     public CitaVacunacion() {
     }
 
-    public CitaVacunacion(Ciudadano persona, int codigoRefuerzo, LocalDateTime fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColocada, Vacuna dosis, boolean estado) {
+    public CitaVacunacion(Ciudadano persona, int codigoRefuerzo, String fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColocada, Vacuna dosis, boolean estado) {
         this.persona = persona;
         this.codigoRefuerzo = codigoRefuerzo;
         this.fechaHoraCita = fechaHoraCita;
@@ -27,7 +27,7 @@ public class CitaVacunacion {
         this.estado = estado;
     }
 
-    public CitaVacunacion(int idCita, Ciudadano persona, int codigoRefuerzo, LocalDateTime fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColocada, Vacuna dosis, boolean estado) {
+    public CitaVacunacion(int idCita, Ciudadano persona, int codigoRefuerzo, String fechaHoraCita, String centroVacunacion, LocalDateTime fechaHoraColocada, Vacuna dosis, boolean estado) {
         this.idCita = idCita;
         this.persona = persona;
         this.codigoRefuerzo = codigoRefuerzo;
@@ -62,11 +62,11 @@ public class CitaVacunacion {
         this.codigoRefuerzo = codigoRefuerzo;
     }
 
-    public LocalDateTime getFechaHoraCita() {
+    public String getFechaHoraCita() {
         return fechaHoraCita;
     }
 
-    public void setFechaHoraCita(LocalDateTime fechaHoraCita) {
+    public void setFechaHoraCita(String fechaHoraCita) {
         this.fechaHoraCita = fechaHoraCita;
     }
 

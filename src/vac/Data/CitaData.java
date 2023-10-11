@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.ZoneId;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -41,9 +42,19 @@ private Connection CON = null;
         
     
     }
-public void turnoVac(){
+public void turnoVac(CitaVacunacion cv){
     try {
         ps= CON.prepareStatement(SQL_INGRESAR, Statement.RETURN_GENERATED_KEYS);
+        
+        ps.setInt(1, pers.getDni());
+        ps.setInt(2, cv.getCodigoRefuerzo());
+        ps.setString(3,cv.getFechaHoraCita());
+        ps.setString(4,cv.getCentroVacunacion());
+        //ps.setString(5, cv.getFechaHoraColocada().)
+        ps.setBoolean(6, cv.getDosis().isColocada());
+        ps.setBoolean(7, cv.isEstado());
+        
+        
         ps.executeUpdate();
         rs= ps.getGeneratedKeys();
         
