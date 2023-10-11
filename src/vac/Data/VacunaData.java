@@ -43,7 +43,7 @@ public class VacunaData {
             PS.setInt(1, vac.getNoSerieDosis());
             PS.setString(2, vac.getMarca().getNomLab());
             PS.setDouble(3, vac.getMedida());
-            PS.setDate(4, toInstant(vac.getFechaCaduca()));
+            PS.setDate(4, Date.valueOf(vac.getFechaCaduca()));
             PS.setBoolean(5, vac.isEstado());
             PS.setBoolean(6, vac.isEstado());
             PS.executeUpdate();
@@ -60,7 +60,4 @@ public class VacunaData {
         }
     }
 
-    private Date toInstant(LocalDateTime fechaCaduca) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

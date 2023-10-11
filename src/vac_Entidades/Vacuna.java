@@ -1,6 +1,7 @@
 
 package vac_Entidades;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -9,14 +10,14 @@ public class Vacuna {
     private int noSerieDosis;
     private Laboratorio marca;
     private double medida;
-    private LocalDateTime fechaCaduca;
+    private LocalDate fechaCaduca;
     private boolean colocada;
     private boolean estado;
 
     public Vacuna() {
     }
 
-    public Vacuna(int noSerieDosis, Laboratorio marca, double medida, LocalDateTime fechaCaduca, boolean colocada, boolean estado) {
+    public Vacuna(int noSerieDosis, Laboratorio marca, double medida, LocalDate fechaCaduca, boolean colocada, boolean estado) {
         this.noSerieDosis = noSerieDosis;
         this.marca = marca;
         this.medida = medida;
@@ -25,7 +26,7 @@ public class Vacuna {
         this.estado = estado;
     }
 
-    public Vacuna(int idVacuna, int noSerieDosis, Laboratorio marca, double medida, LocalDateTime fechaCaduca, boolean colocada, boolean estado) {
+    public Vacuna(int idVacuna, int noSerieDosis, Laboratorio marca, double medida, LocalDate fechaCaduca, boolean colocada, boolean estado) {
         this.idVacuna = idVacuna;
         this.noSerieDosis = noSerieDosis;
         this.marca = marca;
@@ -67,11 +68,11 @@ public class Vacuna {
         this.medida = medida;
     }
 
-    public LocalDateTime getFechaCaduca() {
+    public LocalDate getFechaCaduca() {
         return fechaCaduca;
     }
 
-    public void setFechaCaduca(LocalDateTime fechaCaduca) {
+    public void setFechaCaduca(LocalDate fechaCaduca) {
         this.fechaCaduca = fechaCaduca;
     }
 
