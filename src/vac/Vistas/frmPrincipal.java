@@ -81,6 +81,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         jAdm.add(jMcita);
 
         jMvacuna.setText("Administrar Vacuna");
+        jMvacuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMvacunaActionPerformed(evt);
+            }
+        });
         jAdm.add(jMvacuna);
 
         jMenuBar1.add(jAdm);
@@ -153,6 +158,21 @@ public class frmPrincipal extends javax.swing.JFrame {
         // Escritorio principal agregar el Objeto (ventana formilario)
         sDescritorio.add(al);
     }//GEN-LAST:event_jMlabActionPerformed
+
+    private void jMvacunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMvacunaActionPerformed
+                 // TODO add your handling code here:
+         // Remover la pantalla principal
+        sDescritorio.removeAll();
+        // Redibuja el escritorio principal
+        sDescritorio.repaint();
+        // Crear el objeto de la ventana fomulario alunmo(Clase)
+        AdmVacuna admvac = new AdmVacuna();
+        // Hacer visible el objeto (ventana formulario)
+        admvac.setVisible(true);
+        sDescritorio.add(admvac);
+        
+        
+    }//GEN-LAST:event_jMvacunaActionPerformed
 
     /**
      * @param args the command line arguments

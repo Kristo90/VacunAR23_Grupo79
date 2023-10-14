@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -27,6 +28,7 @@ public class LaboratorioData {
    
     private PreparedStatement PS;
     private ResultSet RS;
+    ArrayList<String>lista=new ArrayList();
 
     public LaboratorioData() {
         con = MiConexion.getConexion();
@@ -107,5 +109,26 @@ public class LaboratorioData {
         }
     }
     
+    public void eliminarLab(Laboratorio cuit){
+        
+    }
     
+    public ArrayList<String> listarLab(){
+        String sql="SELECT nomLaboratorio FROM laboratorio";
+        
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            
+            while(rs.next()){
+                lista.add(rs.getString("nomLaboratorio"));
+                ps.close();
+            }
+            JOptionPane.showMessageDialog(null,"Lista de Marcas Actualizada" );
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"No se pudo acceder a la tabla Laboratorio" );
+        }
+        return lista;
+    }
+
 }

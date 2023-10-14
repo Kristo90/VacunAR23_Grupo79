@@ -5,19 +5,44 @@
  */
 package vac.Vistas;
 
+import java.awt.event.KeyEvent;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import static java.time.temporal.TemporalQueries.localDate;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import vac.Data.LaboratorioData;
+import vac_Entidades.Vacuna;
+
 /**
  *
  * @author Ana y Guille
  */
 public class AdmVacuna extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AdmVacuna
-     */
+  public LaboratorioData ld=new LaboratorioData();
+  public Vacuna vac = new Vacuna();
+  
     public AdmVacuna() {
         initComponents();
+        jDateChooser1.setMinSelectableDate(Date.valueOf(LocalDate.of(2024, 10, 15)));
+        cargaCombo();
+        
+        //Seteo de Date
+        
+//          Seteo de DateChooser para dosis de refuerzo
+//        jDateChooser1.setMinSelectableDate(fechaColocada+28);
+//        jDateChooser1.setMaxSelectableDate(fechaColocada+56);
+
     }
 
+    public void limpiar() {
+//        jTcuit.setText("");
+//        jTnombre.setText("");
+//        jTdomicilio.setText("");
+//        jTdomicilio.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,68 +52,232 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
+        jTcuitEliminar = new javax.swing.JTextField();
+        jBregistrar = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jBsalir = new javax.swing.JButton();
+        jBactualizar = new javax.swing.JButton();
+        jBeliminarLab = new javax.swing.JButton();
+        jBlimpiar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jTnoDosis = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jCvacunas = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
+        jCmedida = new javax.swing.JComboBox<>();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel6 = new javax.swing.JLabel();
+        jLfondo = new javax.swing.JLabel();
 
-        jLabel1.setText("Nro Serie");
+        setPreferredSize(new java.awt.Dimension(700, 530));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("Marca");
+        jInternalFrame1.setBackground(new java.awt.Color(102, 102, 102));
+        jInternalFrame1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jInternalFrame1.setClosable(true);
+        jInternalFrame1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 0, 0));
 
-        jLabel3.setText("FEcha CAduca");
+        jTcuitEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTcuitEliminarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTcuitEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 180, -1));
 
-        jLabel4.setText("Medida");
+        jBregistrar.setBackground(new java.awt.Color(102, 204, 255));
+        jBregistrar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jBregistrar.setForeground(new java.awt.Color(51, 51, 51));
+        jBregistrar.setText("Registrar");
+        jBregistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBregistrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBregistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 350, 150, 50));
 
-        jLabel5.setText("Clolocada");
+        jLabel7.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel7.setText("Ingrese N° de Serie de Dosis:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 250, 20));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addContainerGap(317, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
-                .addComponent(jLabel4)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel5)
-                .addContainerGap(258, Short.MAX_VALUE))
-        );
+        jBsalir.setBackground(new java.awt.Color(255, 153, 153));
+        jBsalir.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jBsalir.setForeground(new java.awt.Color(51, 51, 51));
+        jBsalir.setText("Salir");
+        jBsalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBsalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 150, 50));
+
+        jBactualizar.setBackground(new java.awt.Color(255, 255, 153));
+        jBactualizar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jBactualizar.setForeground(new java.awt.Color(51, 51, 51));
+        jBactualizar.setText("Editar");
+        jBactualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBactualizarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 150, 50));
+
+        jBeliminarLab.setBackground(new java.awt.Color(204, 0, 51));
+        jBeliminarLab.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jBeliminarLab.setForeground(new java.awt.Color(255, 255, 255));
+        jBeliminarLab.setText("Eliminar Vacuna");
+        getContentPane().add(jBeliminarLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 430, 180, 50));
+
+        jBlimpiar.setBackground(new java.awt.Color(153, 255, 153));
+        jBlimpiar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jBlimpiar.setForeground(new java.awt.Color(51, 51, 51));
+        jBlimpiar.setText("Limpiar campos");
+        jBlimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBlimpiarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBlimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 150, 50));
+
+        jLabel4.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel4.setText("N° Dosis:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 100, 20));
+
+        jTnoDosis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTnoDosisActionPerformed(evt);
+            }
+        });
+        jTnoDosis.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTnoDosisKeyTyped(evt);
+            }
+        });
+        getContentPane().add(jTnoDosis, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 240, -1));
+
+        jLabel2.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setText("Fecha caducidad:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, 170, 20));
+
+        jLabel3.setFont(new java.awt.Font("Gulim", 0, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel3.setText("Registro de Vacunas");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 360, 40));
+
+        getContentPane().add(jCvacunas, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 240, -1));
+
+        jLabel5.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel5.setText("Marca:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 70, 20));
+
+        jCmedida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0. Seleccione...", "1. 0,3ml", "2. 0,5ml", "3. 0,9ml" }));
+        getContentPane().add(jCmedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 240, -1));
+        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 230, 240, -1));
+
+        jLabel6.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel6.setText("Medida:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, 70, 20));
+
+        jLfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondovacuna.jpg"))); // NOI18N
+        getContentPane().add(jLfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jBsalirActionPerformed
+
+    private void jBregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBregistrarActionPerformed
+        // TODO add your handling code here:
+//        if (jTnoDosis.getText().isEmpty() || jCvacunas.getSelectedItem()) || jTcuit.getText().isEmpty() || jTdomicilio.getText().isEmpty() || jTdomicilio.getText().isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
+//
+//        } else {
+//            vac.setColocada(false);
+//            vac.setFechaCaduca(jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+//
+//            //ejecutar metodo registarLab()
+//
+//            limpiar();
+//        }
+    }//GEN-LAST:event_jBregistrarActionPerformed
+
+    private void jBlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_jBlimpiarActionPerformed
+
+    private void jBactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBactualizarActionPerformed
+        // TODO add your handling code here:
+//        JOptionPane.showMessageDialog(null, "Para actualizar debe completar todos los campos con los datos del laboratorio a mofificar y luego presionar ACTUALIZAR");
+//        if (jTnombre.getText().isEmpty() || jTnombre.getText().isEmpty() || jTcuit.getText().isEmpty() || jTdomicilio.getText().isEmpty() || jTdomicilio.getText().isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
+//
+//        } else {
+//            //instanciar objeto lab
+//
+//            limpiar();
+//        }
+    }//GEN-LAST:event_jBactualizarActionPerformed
+
+    private void jTcuitEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcuitEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTcuitEliminarActionPerformed
+
+    private void jTnoDosisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTnoDosisKeyTyped
+        // TODO add your handling code here:
+        char car = evt.getKeyChar();
+        if ((car < '0' || car > '9') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Este campo solo admite números \nVuelva a ingresarlo");
+            jTnoDosis.setText("");
+
+        }
+    }//GEN-LAST:event_jTnoDosisKeyTyped
+
+    private void jTnoDosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTnoDosisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTnoDosisActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBactualizar;
+    private javax.swing.JButton jBeliminarLab;
+    private javax.swing.JButton jBlimpiar;
+    private javax.swing.JButton jBregistrar;
+    private javax.swing.JButton jBsalir;
+    private javax.swing.JComboBox<String> jCmedida;
+    private javax.swing.JComboBox<String> jCvacunas;
     private com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLfondo;
+    private javax.swing.JTextField jTcuitEliminar;
+    private javax.swing.JTextField jTnoDosis;
     // End of variables declaration//GEN-END:variables
+
+private void cargaCombo() {
+        
+        ArrayList<String> vac = new ArrayList<>();
+        vac = (ArrayList<String>) ld.listarLab();
+
+        for (String vacuna : vac) {
+            jCvacunas.addItem(vacuna);
+        }
+    }
 }

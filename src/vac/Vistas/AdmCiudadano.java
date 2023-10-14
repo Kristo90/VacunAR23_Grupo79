@@ -257,7 +257,7 @@ public void limpiar(){
 
     private void jBinscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBinscribirActionPerformed
         // TODO add your handling code here:
-        if (jTnombre.getText().isEmpty() || jTapellido.getText().isEmpty() || jTdni.getText().isEmpty() || jTmail.getText().isEmpty() || jTtelefono.getText().isEmpty()) {
+        if (jTnombre.getText().isEmpty() || jTapellido.getText().isEmpty() || jTdni.getText().isEmpty() || jTmail.getText().isEmpty() || jTtelefono.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
 
         } else {

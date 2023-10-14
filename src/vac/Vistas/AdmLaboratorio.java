@@ -28,6 +28,7 @@ public class AdmLaboratorio extends javax.swing.JInternalFrame {
         jTnombre.setText("");
         jTdomicilio.setText("");
         jTdomicilio.setText("");
+        jTpais.setText("");
 
     }
 
@@ -247,7 +248,7 @@ public class AdmLaboratorio extends javax.swing.JInternalFrame {
     private void jTdomicilioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTdomicilioKeyTyped
         // TODO add your handling code here:
         char car = evt.getKeyChar();
-        if ((car < 65 || car > 90) && (car < 96 || car > 122) && (car < 128 || car > 183) && (car != (char) KeyEvent.VK_BACK_SPACE) && (car != (char) KeyEvent.VK_SPACE) || (car < '0' || car > '9')) {
+        if ((car < 65 || car > 90) && (car < 96 || car > 122) && (car < 128 || car > 183) && (car != (char) KeyEvent.VK_BACK_SPACE) && (car != (char) KeyEvent.VK_SPACE) && (car < '0' || car > '9')) {
             evt.consume();
             JOptionPane.showMessageDialog(null, "Este campo solo admite texto \nVuelva a ingresarlo");
             jTpais.setText("");
@@ -266,9 +267,12 @@ public class AdmLaboratorio extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
 
         } else {
-            //instanciar objeto lab
-            
-                    //ejecutar metodo registarLab()
+            lab.setCuit(Integer.parseInt(jTcuit.getText()));
+            lab.setNomLab(jTnombre.getText());
+            lab.setPais(jTpais.getText());
+            lab.setDomCom(jTdomicilio.getText());
+            lab.setEstado(true);
+            ld.guardarLaboratorio(lab);
 
                     limpiar();
         }
