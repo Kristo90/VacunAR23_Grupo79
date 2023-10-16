@@ -80,7 +80,7 @@ public class Laboratorio {
 
     @Override
     public String toString() {
-        return "Laboratorio{" + "idLaboratorio=" + idLaboratorio + ", cuit=" + cuit + ", nomLab=" + nomLab + ", pais=" + pais + ", domCom=" + domCom + ", estado=" + estado + '}';
+        return  nomLab;
     }
 
 }

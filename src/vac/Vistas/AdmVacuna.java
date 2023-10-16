@@ -13,6 +13,8 @@ import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import vac.Data.LaboratorioData;
+import vac.Data.VacunaData;
+import vac_Entidades.Laboratorio;
 import vac_Entidades.Vacuna;
 
 /**
@@ -20,29 +22,29 @@ import vac_Entidades.Vacuna;
  * @author Ana y Guille
  */
 public class AdmVacuna extends javax.swing.JInternalFrame {
-
-  public LaboratorioData ld=new LaboratorioData();
-  public Vacuna vac = new Vacuna();
-  
+    public Laboratorio lab=new Laboratorio();
+    public LaboratorioData ld = new LaboratorioData();
+    public Vacuna vac = new Vacuna();
+    public  VacunaData vd=new VacunaData();
+    
     public AdmVacuna() {
         initComponents();
         jDateChooser1.setMinSelectableDate(Date.valueOf(LocalDate.of(2024, 10, 15)));
         cargaCombo();
-        
+
         //Seteo de Date
-        
 //          Seteo de DateChooser para dosis de refuerzo
 //        jDateChooser1.setMinSelectableDate(fechaColocada+28);
 //        jDateChooser1.setMaxSelectableDate(fechaColocada+56);
-
     }
-
+    
     public void limpiar() {
-//        jTcuit.setText("");
-//        jTnombre.setText("");
-//        jTdomicilio.setText("");
-//        jTdomicilio.setText("");
+        jTnoDosis.setText("");
+        jCvacunas.setSelectedIndex(0);
+        jCmedida.setSelectedIndex(0);
+        jDateChooser1.setDate(null);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -176,14 +178,14 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
         jLabel5.setText("Marca:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 70, 20));
 
-        jCmedida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0. Seleccione...", "1. 0,3ml", "2. 0,5ml", "3. 0,9ml" }));
+        jCmedida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0- Seleccione...", "0.3", "0.5", "0.9" }));
         getContentPane().add(jCmedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 240, -1));
         getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 230, 240, -1));
 
         jLabel6.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel6.setText("Medida:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, 70, 20));
+        jLabel6.setText("Medida(ml):");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 100, 20));
 
         jLfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondovacuna.jpg"))); // NOI18N
         getContentPane().add(jLfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -198,17 +200,21 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
 
     private void jBregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBregistrarActionPerformed
         // TODO add your handling code here:
-//        if (jTnoDosis.getText().isEmpty() || jCvacunas.getSelectedItem()) || jTcuit.getText().isEmpty() || jTdomicilio.getText().isEmpty() || jTdomicilio.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
-//
-//        } else {
-//            vac.setColocada(false);
-//            vac.setFechaCaduca(jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-//
-//            //ejecutar metodo registarLab()
-//
-//            limpiar();
-//        }
+        if (jTnoDosis.getText().isEmpty() /*|| jDateChooser1.getDate() == null || jCvacunas.getSelectedIndex() == 0 || jCmedida.getSelectedIndex() == 0*/) {
+            JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
+            
+        } else {
+            vac.setMarca((Laboratorio) jCvacunas.getSelectedItem());
+            vac.setMedida(Double.parseDouble((String) jCmedida.getSelectedItem()));
+            vac.setEstado(true);
+            vac.setNoSerieDosis(Integer.parseInt(jTnoDosis.getText()));
+            vac.setColocada(false);
+            vac.setFechaCaduca(jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            System.out.println(vac.getMarca());
+            
+            limpiar();
+            
+        }
     }//GEN-LAST:event_jBregistrarActionPerformed
 
     private void jBlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlimpiarActionPerformed
@@ -237,11 +243,11 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         char car = evt.getKeyChar();
         if ((car < '0' || car > '9') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
-
+            
             evt.consume();
             JOptionPane.showMessageDialog(null, "Este campo solo admite números \nVuelva a ingresarlo");
             jTnoDosis.setText("");
-
+            
         }
     }//GEN-LAST:event_jTnoDosisKeyTyped
 
@@ -257,7 +263,7 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBregistrar;
     private javax.swing.JButton jBsalir;
     private javax.swing.JComboBox<String> jCmedida;
-    private javax.swing.JComboBox<String> jCvacunas;
+    private javax.swing.JComboBox<Laboratorio> jCvacunas;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel2;
@@ -271,13 +277,16 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTnoDosis;
     // End of variables declaration//GEN-END:variables
 
-private void cargaCombo() {
+    private void cargaCombo() {
         
-        ArrayList<String> vac = new ArrayList<>();
-        vac = (ArrayList<String>) ld.listarLab();
-
-        for (String vacuna : vac) {
-            jCvacunas.addItem(vacuna);
+        ArrayList<Laboratorio> lista = new ArrayList<>();
+        lista=ld.listarLab();
+        
+        
+        for (Laboratorio laboratorio : lista) {
+            
+            jCvacunas.addItem(laboratorio);
+            
         }
     }
 }
