@@ -17,7 +17,7 @@ public class LaboratorioData {
     private Connection con = null;
     Laboratorio lab = new Laboratorio();
 
-    String SQL_ACTUALIZAR = "UPDATE laboratiro set nomLaboratorio = ?, pais = ?, domComercial = ?, estado = ? WHERE cuit = ?";
+    String SQL_ACTUALIZAR = "UPDATE laboratorio set nomLaboratorio = ?, pais = ?, domComercial = ?, estado = ? WHERE cuit = ?";
 
     // SELECT idLaboratorio,cuit, nomLaboratorio, pais, domComercial, estado FROM laboratorio WHERE nomLaboratorio like ?" 
     // VALUES ('?,?,?,?,?')
@@ -25,7 +25,7 @@ public class LaboratorioData {
 
     private PreparedStatement PS;
     private ResultSet RS;
-    ArrayList<Laboratorio> lista = new ArrayList();
+    ArrayList<String> lista = new ArrayList();
 
     public LaboratorioData() {
         con = MiConexion.getConexion();
@@ -110,16 +110,16 @@ public class LaboratorioData {
 
     }
 
-    public ArrayList<Laboratorio> listarLab() {
+    public ArrayList<String> listarLab() {
         String sql = "SELECT nomLaboratorio FROM laboratorio";
-
+        String labo;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                lab.setNomLab(rs.getString("nomLaboratorio"));
-                lista.add(lab);
+                labo=(rs.getString("nomLaboratorio"));
+                lista.add(labo);
 
             }
             ps.close();

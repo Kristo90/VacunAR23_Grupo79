@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 
 public class Vacuna {
     private int idVacuna;
-    private int noSerieDosis;
-    private Laboratorio marca;
+    private String noSerieDosis;
+    private String marca;
     private double medida;
     private LocalDate fechaCaduca;
     private boolean colocada;
@@ -17,7 +17,7 @@ public class Vacuna {
     public Vacuna() {
     }
 
-    public Vacuna(int noSerieDosis, Laboratorio marca, double medida, LocalDate fechaCaduca, boolean colocada, boolean estado) {
+    public Vacuna(String noSerieDosis, String marca, double medida, LocalDate fechaCaduca, boolean colocada, boolean estado) {
         this.noSerieDosis = noSerieDosis;
         this.marca = marca;
         this.medida = medida;
@@ -26,7 +26,7 @@ public class Vacuna {
         this.estado = estado;
     }
 
-    public Vacuna(int idVacuna, int noSerieDosis, Laboratorio marca, double medida, LocalDate fechaCaduca, boolean colocada, boolean estado) {
+    public Vacuna(int idVacuna, String noSerieDosis, String marca, double medida, LocalDate fechaCaduca, boolean colocada, boolean estado) {
         this.idVacuna = idVacuna;
         this.noSerieDosis = noSerieDosis;
         this.marca = marca;
@@ -44,19 +44,19 @@ public class Vacuna {
         this.idVacuna = idVacuna;
     }
 
-    public int getNoSerieDosis() {
+    public String getNoSerieDosis() {
         return noSerieDosis;
     }
 
-    public void setNoSerieDosis(int noSerieDosis) {
+    public void setNoSerieDosis(String noSerieDosis) {
         this.noSerieDosis = noSerieDosis;
     }
 
-    public Laboratorio getMarca() {
+    public String getMarca() {
         return marca;
     }
 
-    public void setMarca(Laboratorio marca) {
+    public void setMarca(String marca) {
         this.marca = marca;
     }
 

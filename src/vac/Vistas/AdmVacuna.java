@@ -55,12 +55,12 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
-        jTcuitEliminar = new javax.swing.JTextField();
+        jTeliminaDosis = new javax.swing.JTextField();
         jBregistrar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jBsalir = new javax.swing.JButton();
         jBactualizar = new javax.swing.JButton();
-        jBeliminarLab = new javax.swing.JButton();
+        jBeliminaDosis = new javax.swing.JButton();
         jBlimpiar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jTnoDosis = new javax.swing.JTextField();
@@ -82,12 +82,12 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
         jInternalFrame1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 0, 0));
 
-        jTcuitEliminar.addActionListener(new java.awt.event.ActionListener() {
+        jTeliminaDosis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTcuitEliminarActionPerformed(evt);
+                jTeliminaDosisActionPerformed(evt);
             }
         });
-        getContentPane().add(jTcuitEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 180, -1));
+        getContentPane().add(jTeliminaDosis, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 180, -1));
 
         jBregistrar.setBackground(new java.awt.Color(102, 204, 255));
         jBregistrar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -127,11 +127,16 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jBactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 150, 50));
 
-        jBeliminarLab.setBackground(new java.awt.Color(204, 0, 51));
-        jBeliminarLab.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jBeliminarLab.setForeground(new java.awt.Color(255, 255, 255));
-        jBeliminarLab.setText("Eliminar Vacuna");
-        getContentPane().add(jBeliminarLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 430, 180, 50));
+        jBeliminaDosis.setBackground(new java.awt.Color(204, 0, 51));
+        jBeliminaDosis.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jBeliminaDosis.setForeground(new java.awt.Color(255, 255, 255));
+        jBeliminaDosis.setText("Eliminar Vacuna");
+        jBeliminaDosis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBeliminaDosisActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBeliminaDosis, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 430, 180, 50));
 
         jBlimpiar.setBackground(new java.awt.Color(153, 255, 153));
         jBlimpiar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -171,6 +176,7 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
         jLabel3.setText("Registro de Vacunas");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 360, 40));
 
+        jCvacunas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione..." }));
         getContentPane().add(jCvacunas, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, 240, -1));
 
         jLabel5.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
@@ -178,7 +184,7 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
         jLabel5.setText("Marca:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 70, 20));
 
-        jCmedida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0- Seleccione...", "0.3", "0.5", "0.9" }));
+        jCmedida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " Seleccione...", "0.3", "0.5", "0.9" }));
         getContentPane().add(jCmedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 240, -1));
         getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(418, 230, 240, -1));
 
@@ -200,18 +206,18 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
 
     private void jBregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBregistrarActionPerformed
         // TODO add your handling code here:
-        if (jTnoDosis.getText().isEmpty() /*|| jDateChooser1.getDate() == null || jCvacunas.getSelectedIndex() == 0 || jCmedida.getSelectedIndex() == 0*/) {
+        if (jTnoDosis.getText().isEmpty() || jDateChooser1.getDate() == null || jCvacunas.getSelectedIndex() == 0 || jCmedida.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
             
         } else {
-            vac.setMarca((Laboratorio) jCvacunas.getSelectedItem());
+            vac.setMarca(jCvacunas.getSelectedItem().toString());
             vac.setMedida(Double.parseDouble((String) jCmedida.getSelectedItem()));
             vac.setEstado(true);
-            vac.setNoSerieDosis(Integer.parseInt(jTnoDosis.getText()));
-            vac.setColocada(false);
+            vac.setNoSerieDosis((jTnoDosis.getText()));
+            vac.setColocada(0==1);
             vac.setFechaCaduca(jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-            System.out.println(vac.getMarca());
             
+            vd.ingresarVacuna(vac);
             limpiar();
             
         }
@@ -235,14 +241,16 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
 //        }
     }//GEN-LAST:event_jBactualizarActionPerformed
 
-    private void jTcuitEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcuitEliminarActionPerformed
+    private void jTeliminaDosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTeliminaDosisActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTcuitEliminarActionPerformed
+        
+        
+    }//GEN-LAST:event_jTeliminaDosisActionPerformed
 
     private void jTnoDosisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTnoDosisKeyTyped
         // TODO add your handling code here:
         char car = evt.getKeyChar();
-        if ((car < '0' || car > '9') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+        if ((car < '0' || car > '9') && (car != (char) KeyEvent.VK_BACK_SPACE)&&(car < 'A' || car > 'z')&&(car < 45 || car > 45)) {
             
             evt.consume();
             JOptionPane.showMessageDialog(null, "Este campo solo admite números \nVuelva a ingresarlo");
@@ -255,15 +263,21 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTnoDosisActionPerformed
 
+    private void jBeliminaDosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminaDosisActionPerformed
+        // TODO add your handling code here:
+        vd.eliminarVacuna(jTeliminaDosis.getText());
+        jTeliminaDosis.setText("");
+    }//GEN-LAST:event_jBeliminaDosisActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBactualizar;
-    private javax.swing.JButton jBeliminarLab;
+    private javax.swing.JButton jBeliminaDosis;
     private javax.swing.JButton jBlimpiar;
     private javax.swing.JButton jBregistrar;
     private javax.swing.JButton jBsalir;
     private javax.swing.JComboBox<String> jCmedida;
-    private javax.swing.JComboBox<Laboratorio> jCvacunas;
+    private javax.swing.JComboBox<String> jCvacunas;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel2;
@@ -273,19 +287,19 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLfondo;
-    private javax.swing.JTextField jTcuitEliminar;
+    private javax.swing.JTextField jTeliminaDosis;
     private javax.swing.JTextField jTnoDosis;
     // End of variables declaration//GEN-END:variables
 
     private void cargaCombo() {
         
-        ArrayList<Laboratorio> lista = new ArrayList<>();
+        ArrayList<String> lista = new ArrayList<>();
         lista=ld.listarLab();
         
         
-        for (Laboratorio laboratorio : lista) {
+        for (String elemento : lista) {
             
-            jCvacunas.addItem(laboratorio);
+            jCvacunas.addItem(elemento);
             
         }
     }
