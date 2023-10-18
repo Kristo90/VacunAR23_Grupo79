@@ -102,7 +102,7 @@ public class CitaData {
         }
     }
 
-    public CitaVacunacion buscarCita(CitaVacunacion DNipersona) {
+    public CitaVacunacion buscarCita(int DNipersona) {
        // (`codCita`, `persona`, `codRefuerzo`, `fechaHoraCita`, `centroVacunacion`, `fechaHoraColoca`, `dosis`, `estado`)
         String sql = "SELECT * FROM citavacunacion WHERE persona=? ";
         try {
@@ -122,7 +122,11 @@ public class CitaData {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla citaVacunacion");
-        }
-        return cv;
+        
+        }catch (NullPointerException ex){
+         JOptionPane.showMessageDialog(null, "No existe turno para la persona ingresada.");
+        
     }
+        return cv;
+}
 }

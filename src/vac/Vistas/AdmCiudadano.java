@@ -42,7 +42,6 @@ public void limpiar(){
         jCriesgo = new javax.swing.JComboBox<>();
         jCescencial = new javax.swing.JComboBox<>();
         jTnombre = new javax.swing.JTextField();
-        jTdni = new javax.swing.JTextField();
         jBeliminar = new javax.swing.JButton();
         jTapellido = new javax.swing.JTextField();
         jTdniEliminar = new javax.swing.JTextField();
@@ -63,6 +62,7 @@ public void limpiar(){
         jLabel3 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jfondo = new javax.swing.JLabel();
+        jTdni = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -106,18 +106,6 @@ public void limpiar(){
             }
         });
         Background.add(jTnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 240, -1));
-
-        jTdni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTdniActionPerformed(evt);
-            }
-        });
-        jTdni.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTdniKeyTyped(evt);
-            }
-        });
-        Background.add(jTdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, 240, -1));
 
         jBeliminar.setBackground(new java.awt.Color(204, 0, 51));
         jBeliminar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -241,15 +229,33 @@ public void limpiar(){
         jfondo.setPreferredSize(new java.awt.Dimension(600, 800));
         Background.add(jfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 490));
 
+        jTdni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTdniActionPerformed(evt);
+            }
+        });
+        jTdni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTdniKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTdni, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(173, 173, 173)
+                .addComponent(jTdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

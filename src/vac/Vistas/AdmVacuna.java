@@ -71,6 +71,7 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
         jCmedida = new javax.swing.JComboBox<>();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jLfondo = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(700, 530));
@@ -193,6 +194,9 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
         jLabel6.setText("Medida(ml):");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 100, 20));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/light-gray-concrete-wall.jpg"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 700, 90));
+
         jLfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondovacuna.jpg"))); // NOI18N
         getContentPane().add(jLfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -280,6 +284,7 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jCvacunas;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

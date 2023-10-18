@@ -6,7 +6,14 @@
 package vac.Vistas;
 
 import java.awt.event.KeyEvent;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import vac.Data.CitaData;
+import vac.Data.CiudadanoData;
+import vac.Data.VacunaData;
+import vac_Entidades.CitaVacunacion;
+import vac_Entidades.Ciudadano;
+import vac_Entidades.Vacuna;
 
 /**
  *
@@ -14,11 +21,22 @@ import javax.swing.JOptionPane;
  */
 public class AdmCita extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AdmCita
-     */
+    Ciudadano pers = new Ciudadano();
+    CiudadanoData cd = new CiudadanoData();
+    Vacuna vac = new Vacuna();
+    VacunaData vd = new VacunaData();
+    CitaData cdata = new CitaData();
+    CitaVacunacion cv = new CitaVacunacion();
+
     public AdmCita() {
         initComponents();
+        jTnomApe.setEnabled(false);
+
+        if (jCdosis.getSelectedIndex() == 0) {
+            jDateChooser1.setMinSelectableDate(new Date());
+        } else if (jCdosis.getSelectedIndex() == 1) {
+
+        }
     }
 
     /**
@@ -30,28 +48,49 @@ public class AdmCita extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCdosis = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTdni = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jCvacunas = new javax.swing.JComboBox<>();
         jCvacunatorio = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jTnomApe = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jBbuscarCita = new javax.swing.JButton();
+        jTdni = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jBeliminarLab = new javax.swing.JButton();
+        jBposponerTurno = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jBguardarTurno = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jBbuscarPers = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/transparent white_1.png"))); // NOI18N
 
         setPreferredSize(new java.awt.Dimension(700, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setText("Fecha :");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, -1, -1));
-        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 190, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "1°", "2°", "3°", " " }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 190, -1));
+        jDateChooser1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jDateChooser1MouseReleased(evt);
+            }
+        });
+        getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 190, -1));
+
+        jCdosis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "1°", "2°", "3°", " " }));
+        getContentPane().add(jCdosis, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 190, -1));
 
         jLabel6.setFont(new java.awt.Font("Gulim", 0, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
@@ -60,8 +99,59 @@ public class AdmCita extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel4.setText("Fecha Turno:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, 20));
+        jLabel4.setText("Franja Horaria:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, 20));
+
+        jLabel7.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel7.setText("DNI Persona:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 120, 20));
+
+        jCvacunatorio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0- Seleccione...", "1- Cruz Roja Central", "2- Centro Cultural Leo Messi", "3- Club Social y Deportivo Cebollitas", "5- Escuela Normal N°10" }));
+        getContentPane().add(jCvacunatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 190, -1));
+
+        jLabel9.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel9.setText("Dosis:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, -1, 20));
+
+        jButton1.setText("Informar vacunacion exitosa");
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, 230, 50));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 190, -1));
+
+        jTnomApe.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jTnomApe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTnomApeActionPerformed(evt);
+            }
+        });
+        jTnomApe.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTnomApeKeyTyped(evt);
+            }
+        });
+        getContentPane().add(jTnomApe, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 260, -1));
+
+        jLabel2.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setText("Nombre y apellido:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 160, 20));
+
+        jLabel10.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel10.setText("Fecha Turno:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, 20));
+
+        jBbuscarCita.setBackground(new java.awt.Color(153, 255, 204));
+        jBbuscarCita.setText("Buscar Cita");
+        jBbuscarCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbuscarCitaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBbuscarCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 130, 40));
 
         jTdni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,28 +163,54 @@ public class AdmCita extends javax.swing.JInternalFrame {
                 jTdniKeyTyped(evt);
             }
         });
-        getContentPane().add(jTdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 190, -1));
+        getContentPane().add(jTdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 120, -1));
 
-        jLabel7.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel7.setText("DNI Persona:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 120, 20));
+        jLabel11.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel11.setText("Vacunatorio:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, 20));
 
-        jLabel8.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel8.setText("Vacuna:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 70, 20));
+        jBeliminarLab.setBackground(new java.awt.Color(204, 0, 51));
+        jBeliminarLab.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jBeliminarLab.setForeground(new java.awt.Color(255, 255, 255));
+        jBeliminarLab.setText("Cancelar Turno");
+        getContentPane().add(jBeliminarLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 310, 150, 50));
 
-        jCvacunas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione..." }));
-        getContentPane().add(jCvacunas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 190, -1));
+        jBposponerTurno.setBackground(new java.awt.Color(255, 255, 153));
+        jBposponerTurno.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jBposponerTurno.setForeground(new java.awt.Color(51, 51, 51));
+        jBposponerTurno.setText("Posponer Turno");
+        jBposponerTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBposponerTurnoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBposponerTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 250, 150, 50));
 
-        jCvacunatorio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0- Seleccione...", "1- Cruz Roja Central", "2- Centro Cultural Leo Messi", "3- Club Social y Deportivo Cebollitas", "5- Escuela Normal N°10" }));
-        getContentPane().add(jCvacunatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 190, -1));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/light-gray-concrete-wall.jpg"))); // NOI18N
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 700, 90));
 
-        jLabel9.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel9.setText("Dosis:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, 20));
+        jBguardarTurno.setBackground(new java.awt.Color(102, 204, 255));
+        jBguardarTurno.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jBguardarTurno.setForeground(new java.awt.Color(51, 51, 51));
+        jBguardarTurno.setText("Guardar Turno");
+        jBguardarTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBguardarTurnoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBguardarTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 150, 50));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 700, 20));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 700, 10));
+
+        jBbuscarPers.setBackground(new java.awt.Color(153, 255, 204));
+        jBbuscarPers.setText("Buscar Persona ");
+        jBbuscarPers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbuscarPersActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBbuscarPers, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 130, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondoCita.jpg"))); // NOI18N
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -102,6 +218,14 @@ public class AdmCita extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBbuscarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarCitaActionPerformed
+        // TODO add your handling code here:
+        cdata.buscarCita(Integer.parseInt(jTdni.getText()));
+        jTnomApe.setText(cv.getPersona().getNombre() + " " + cv.getPersona().getApellido());
+
+
+    }//GEN-LAST:event_jBbuscarCitaActionPerformed
 
     private void jTdniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTdniActionPerformed
         // TODO add your handling code here:
@@ -118,19 +242,105 @@ public class AdmCita extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTdniKeyTyped
 
+    private void jTnomApeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTnomApeKeyTyped
+        // TODO add your handling code here:
+        char car = evt.getKeyChar();
+        if ((car < 65 || car > 90) && (car < 96 || car > 122) && (car < 128 || car > 183) && (car != (char) KeyEvent.VK_BACK_SPACE) && (car != (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Este campo solo admite letras \nVuelva a ingresarlo");
+            jTnomApe.setText("");
+
+        }
+    }//GEN-LAST:event_jTnomApeKeyTyped
+
+    private void jTnomApeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTnomApeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTnomApeActionPerformed
+
+    private void jBguardarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarTurnoActionPerformed
+        // TODO add your handling code here:
+//        if (jTnombre.getText().isEmpty() || jTnomApe.getText().isEmpty() || jTdni.getText().isEmpty() || jTmail.getText().isEmpty() || jTtelefono.getText().isEmpty()||jCriesgo.getSelectedIndex()==0||jCescencial.getSelectedIndex()==0){
+//            JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
+//
+//        } else {
+//            pers.setDni(Integer.parseInt(jTdni.getText()));
+//            pers.setNombre(jTnombre.getText());
+//            pers.setApellido(jTnomApe.getText());
+//            pers.setEmail(jTmail.getText());
+//            pers.setCelular(jTtelefono.getText());
+//            pers.setPatologia(jCriesgo.getSelectedItem().toString());
+//            pers.setAmbtrabajo(jCescencial.getSelectedItem().toString());
+//            cd.inscribirCiudadano(pers);
+//
+//            limpiar();
+//        }
+
+    }//GEN-LAST:event_jBguardarTurnoActionPerformed
+
+    private void jBposponerTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBposponerTurnoActionPerformed
+        // TODO add your handling code here:
+        ActualizaCiudadano ac = new ActualizaCiudadano();
+        frmPrincipal.sDescritorio.add(ac);
+        ac.toFront();
+        ac.setVisible(true);
+
+        //                    if (jTnombre.getText().isEmpty() || jTapellido.getText().isEmpty() || jTdni.getText().isEmpty() || jTmail.getText().isEmpty() || jTtelefono.getText().isEmpty()) {
+        //            JOptionPane.showMessageDialog(null, "Para actualizar debe completar todos los campos con los datos de la persona a mofificar y luego presionar ACTUALIZAR");
+        //
+        //        } else {
+        //            pers.setDni(Integer.parseInt(jTdni.getText()));
+        //            pers.setNombre(jTnombre.getText());
+        //            pers.setApellido(jTapellido.getText());
+        //            pers.setEmail(jTmail.getText());
+        //            pers.setCelular(jTtelefono.getText());
+        //            pers.setPatologia(jCriesgo.getSelectedItem().toString());
+        //            pers.setAmbtrabajo(jCescencial.getSelectedItem().toString());
+        //            cd.actualizarCiudadano(pers);
+        //
+        //            limpiar();
+        //        }
+
+    }//GEN-LAST:event_jBposponerTurnoActionPerformed
+
+    private void jDateChooser1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser1MouseReleased
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_jDateChooser1MouseReleased
+
+    private void jBbuscarPersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarPersActionPerformed
+        // TODO add your handling code here:
+        pers=cd.buscarCiudadano(Integer.parseInt(jTdni.getText()));
+        jTnomApe.setText(pers.getNombre()+" "+pers.getApellido());
+        
+    }//GEN-LAST:event_jBbuscarPersActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jCvacunas;
+    private javax.swing.JButton jBbuscarCita;
+    private javax.swing.JButton jBbuscarPers;
+    private javax.swing.JButton jBeliminarLab;
+    private javax.swing.JButton jBguardarTurno;
+    private javax.swing.JButton jBposponerTurno;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jCdosis;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jCvacunatorio;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTdni;
+    private javax.swing.JTextField jTnomApe;
     // End of variables declaration//GEN-END:variables
 }

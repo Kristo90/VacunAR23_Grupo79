@@ -60,6 +60,11 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         jAdm.setText("Administracion");
         jAdm.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jAdm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAdmActionPerformed(evt);
+            }
+        });
 
         jMciudadano.setText("Administrar Ciudadano");
         jMciudadano.addActionListener(new java.awt.event.ActionListener() {
@@ -78,6 +83,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         jAdm.add(jMlab);
 
         jMcita.setText("Administrar Cita");
+        jMcita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMcitaActionPerformed(evt);
+            }
+        });
         jAdm.add(jMcita);
 
         jMvacuna.setText("Administrar Vacuna");
@@ -173,6 +183,32 @@ public class frmPrincipal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMvacunaActionPerformed
+
+    private void jAdmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAdmActionPerformed
+        // TODO add your handling code here:
+        // Remover la pantalla principal
+        sDescritorio.removeAll();
+        // Redibuja el escritorio principal
+        sDescritorio.repaint();
+        // Crear el objeto de la ventana fomulario alunmo(Clase)
+        AdmCita admCita = new AdmCita();
+        // Hacer visible el objeto (ventana formulario)
+        admCita.setVisible(true);
+        sDescritorio.add(admCita);
+    }//GEN-LAST:event_jAdmActionPerformed
+
+    private void jMcitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMcitaActionPerformed
+        // TODO add your handling code here:
+        // Remover la pantalla principal
+        sDescritorio.removeAll();
+        // Redibuja el escritorio principal
+        sDescritorio.repaint();
+        // Crear el objeto de la ventana fomulario alunmo(Clase)
+        AdmCita admCita = new AdmCita();
+        // Hacer visible el objeto (ventana formulario)
+        admCita.setVisible(true);
+        sDescritorio.add(admCita);
+    }//GEN-LAST:event_jMcitaActionPerformed
 
     /**
      * @param args the command line arguments
