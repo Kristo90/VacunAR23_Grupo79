@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,6 +25,11 @@ public class CiudadanoData {
     
     private final String SQL_ELIMINAR = "UPDATE ciudadano SET estado = 0 WHERE dni = ? ";
     String SQL_ACTUALIZAR = "UPDATE ciudadano SET nombre=?, apellido=?, email=?, celular=?, patologia=?, ambitoTrabajo=?, estado=? WHERE dni = ? ";
+    
+    String SQL_LISTA = "SELECT nombre, apellido FROM ciudadano WHERE estado = 1";
+    
+    private PreparedStatement ps;
+    private ResultSet rs;
 
     public CiudadanoData() {
         con = MiConexion.getConexion();
@@ -32,7 +39,7 @@ public class CiudadanoData {
        
 
         try {
-            PreparedStatement ps = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
+            ps = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, pers.getDni());
             ps.setString(2, pers.getNombre());
             ps.setString(3, pers.getApellido());
@@ -42,7 +49,7 @@ public class CiudadanoData {
             ps.setString(7, pers.getAmbtrabajo());
             ps.setBoolean(8, pers.isEstado());
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
+            rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 pers.setIdCiudadano(rs.getInt(1));//Si falla poner 1 en lugar de idCiudadano
                 JOptionPane.showMessageDialog(null, "Se inscribió correctamente");
@@ -61,9 +68,9 @@ public class CiudadanoData {
         try {
             
 
-            PreparedStatement ps = con.prepareStatement(SQL_SELECT);
+            ps = con.prepareStatement(SQL_SELECT);
             ps.setInt(1, dni);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             if (rs.next()) {
                 pers.setNombre(rs.getNString(1));
@@ -86,7 +93,7 @@ public class CiudadanoData {
     public void bajaCiudadano(int dni) {
         try {
             
-            PreparedStatement ps = con.prepareStatement(SQL_ELIMINAR);
+            ps = con.prepareStatement(SQL_ELIMINAR);
             ps.setInt(1, dni);
             int fila = ps.executeUpdate();
 
@@ -104,7 +111,7 @@ public class CiudadanoData {
         
         try {
             
-            PreparedStatement ps = con.prepareStatement(SQL_ACTUALIZAR);
+            ps = con.prepareStatement(SQL_ACTUALIZAR);
             
             ps.setString(1, pers.getNombre());
             ps.setString(2, pers.getApellido());
@@ -125,4 +132,31 @@ public class CiudadanoData {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla ciudadano");
         }
     }
+    
+    public List<Ciudadano> listaCiudadano() {
+        
+      ArrayList<Ciudadano> LISTA = new ArrayList();
+      
+        try {
+            ps = con.prepareStatement(SQL_LISTA);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                
+                Ciudadano ciu = new Ciudadano(nombre, apellido);
+                
+                LISTA.add(ciu);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CiudadanoData.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+      
+      return LISTA;
+        
+    }
+    
 }

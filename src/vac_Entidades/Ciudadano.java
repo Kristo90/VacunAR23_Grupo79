@@ -37,6 +37,10 @@ public class Ciudadano {
         this.estado = estado;
     }
 
+    public Ciudadano(String nombre, String apellido) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getIdCiudadano() {
         return idCiudadano;
     }

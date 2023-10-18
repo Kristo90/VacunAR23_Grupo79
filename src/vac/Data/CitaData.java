@@ -110,7 +110,7 @@ public class CitaData {
 
             ps.setInt(1, cv.getPersona().getDni());
 
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             if (rs.next()) {
                 cv.setIdCita(rs.getInt(1));
