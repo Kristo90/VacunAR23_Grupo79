@@ -6,6 +6,7 @@
 package vac.Vistas;
 
 import java.awt.event.KeyEvent;
+import java.time.ZoneId;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import vac.Data.CitaData;
@@ -39,6 +40,15 @@ public class AdmCita extends javax.swing.JInternalFrame {
         }
     }
 
+    public void limpiar() {
+        jTdni.setText("");
+        jCdosis.setSelectedIndex(-1);
+        jChorario.setSelectedIndex(0);
+        jCvacunatorio.setSelectedIndex(0);
+        jDateChooser1.setDate(null);
+        jTnomApe.setText("");
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,11 +68,10 @@ public class AdmCita extends javax.swing.JInternalFrame {
         jCvacunatorio = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jChorario = new javax.swing.JComboBox<>();
         jTnomApe = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jBbuscarCita = new javax.swing.JButton();
         jTdni = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jBeliminarLab = new javax.swing.JButton();
@@ -89,7 +98,7 @@ public class AdmCita extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 190, -1));
 
-        jCdosis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "1°", "2°", "3°", " " }));
+        jCdosis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "1", "2", "3", " " }));
         getContentPane().add(jCdosis, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 190, -1));
 
         jLabel6.setFont(new java.awt.Font("Gulim", 0, 36)); // NOI18N
@@ -118,8 +127,8 @@ public class AdmCita extends javax.swing.JInternalFrame {
         jButton1.setText("Informar vacunacion exitosa");
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, 230, 50));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 190, -1));
+        jChorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", " ", "10:00 a 10:30", "10:30 a 11:00", "11:00 a 11:30", "11:30 a 12:00", "12:00 a 12:30", "12:30 a 13:00", "13:00 a 13:30", "13:30 a 14:00", "14:00 a 14:30", "14:30 a 15:00", "15:00 a 15:30", "15:30 a 16:00" }));
+        getContentPane().add(jChorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 190, -1));
 
         jTnomApe.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jTnomApe.addActionListener(new java.awt.event.ActionListener() {
@@ -143,15 +152,6 @@ public class AdmCita extends javax.swing.JInternalFrame {
         jLabel10.setForeground(new java.awt.Color(51, 51, 51));
         jLabel10.setText("Fecha Turno:");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, 20));
-
-        jBbuscarCita.setBackground(new java.awt.Color(153, 255, 204));
-        jBbuscarCita.setText("Buscar Cita");
-        jBbuscarCita.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBbuscarCitaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBbuscarCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 130, 40));
 
         jTdni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,7 +210,7 @@ public class AdmCita extends javax.swing.JInternalFrame {
                 jBbuscarPersActionPerformed(evt);
             }
         });
-        getContentPane().add(jBbuscarPers, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 130, 40));
+        getContentPane().add(jBbuscarPers, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 130, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondoCita.jpg"))); // NOI18N
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -218,14 +218,6 @@ public class AdmCita extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jBbuscarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarCitaActionPerformed
-        // TODO add your handling code here:
-        cdata.buscarCita(Integer.parseInt(jTdni.getText()));
-        jTnomApe.setText(cv.getPersona().getNombre() + " " + cv.getPersona().getApellido());
-
-
-    }//GEN-LAST:event_jBbuscarCitaActionPerformed
 
     private void jTdniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTdniActionPerformed
         // TODO add your handling code here:
@@ -259,21 +251,25 @@ public class AdmCita extends javax.swing.JInternalFrame {
 
     private void jBguardarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarTurnoActionPerformed
         // TODO add your handling code here:
-//        if (jTnombre.getText().isEmpty() || jTnomApe.getText().isEmpty() || jTdni.getText().isEmpty() || jTmail.getText().isEmpty() || jTtelefono.getText().isEmpty()||jCriesgo.getSelectedIndex()==0||jCescencial.getSelectedIndex()==0){
-//            JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
-//
-//        } else {
-//            pers.setDni(Integer.parseInt(jTdni.getText()));
-//            pers.setNombre(jTnombre.getText());
-//            pers.setApellido(jTnomApe.getText());
-//            pers.setEmail(jTmail.getText());
-//            pers.setCelular(jTtelefono.getText());
-//            pers.setPatologia(jCriesgo.getSelectedItem().toString());
-//            pers.setAmbtrabajo(jCescencial.getSelectedItem().toString());
-//            cd.inscribirCiudadano(pers);
-//
-//            limpiar();
-//        }
+        pers = cd.buscarCiudadano(Integer.parseInt(jTdni.getText()));
+        cv.setPersona(pers);
+        
+        cv.setCodigoRefuerzo(Integer.parseInt(jCdosis.getSelectedItem().toString()));
+        
+        cv.setCentroVacunacion(jCvacunatorio.getSelectedItem().toString());
+        
+        cv.setFechaHoraCita((jDateChooser1.getDate().toInstant() + " " + jChorario.getSelectedItem()));
+        System.out.println(cv.getFechaHoraCita());
+        cv.setEstado(true);
+        
+        cv.setFechaHoraColocada(new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+       
+        cv.setDosis(vac);
+       
+        cdata.turnoVac(cv);
+
+        limpiar();
+
 
     }//GEN-LAST:event_jBguardarTurnoActionPerformed
 
@@ -310,21 +306,20 @@ public class AdmCita extends javax.swing.JInternalFrame {
 
     private void jBbuscarPersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarPersActionPerformed
         // TODO add your handling code here:
-        pers=cd.buscarCiudadano(Integer.parseInt(jTdni.getText()));
-        jTnomApe.setText(pers.getNombre()+" "+pers.getApellido());
-        
+        pers = cd.buscarCiudadano(Integer.parseInt(jTdni.getText()));
+        jTnomApe.setText(pers.getNombre() + " " + pers.getApellido());
+
     }//GEN-LAST:event_jBbuscarPersActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBbuscarCita;
     private javax.swing.JButton jBbuscarPers;
     private javax.swing.JButton jBeliminarLab;
     private javax.swing.JButton jBguardarTurno;
     private javax.swing.JButton jBposponerTurno;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCdosis;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jChorario;
     private javax.swing.JComboBox<String> jCvacunatorio;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;

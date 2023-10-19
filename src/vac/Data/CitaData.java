@@ -43,12 +43,12 @@ public class CitaData {
         try {
             ps = CON.prepareStatement(SQL_INGRESAR, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1, cv.getPersona().getDni());
+            ps.setInt(1, 1);
             ps.setInt(2, cv.getCodigoRefuerzo());
             ps.setString(3, cv.getFechaHoraCita());
             ps.setString(4, cv.getCentroVacunacion());
             ps.setDate(5, Date.valueOf(cv.getFechaHoraColocada()));
-            ps.setBoolean(6, cv.getDosis().isColocada());
+            ps.setInt(6, 8);
             ps.setBoolean(7, cv.isEstado());
 
             ps.executeUpdate();
