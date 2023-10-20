@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -18,6 +19,7 @@ public class VacunaData {
 
     public Vacuna vac = new Vacuna();
     private Connection CON = null;
+    public ArrayList<Integer>vacu=new ArrayList();
 
     PreparedStatement PS;
     ResultSet RS;
@@ -72,4 +74,21 @@ public class VacunaData {
         }
         
     }
+    public ArrayList<Integer>  buscarvacuna(){
+        String sql="SELECT idVacuna FROM vacuna WHERE colocada=0";
+        try {
+            PS= CON.prepareStatement(sql);
+            RS=PS.executeQuery();
+             while(RS.next()){
+               vac.setIdVacuna(RS.getInt(1));
+               vacu.add(vac.getIdVacuna());
+               vacu.get(0);
+             }             
+        } catch (SQLException ex) {
+            Logger.getLogger(VacunaData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+        return vacu;  
+    }
+    
 }

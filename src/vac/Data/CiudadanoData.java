@@ -16,12 +16,12 @@ import vac_Entidades.Laboratorio;
 
 public class CiudadanoData {
 
-    public Ciudadano pers = new Ciudadano();
+     Ciudadano pers = new Ciudadano();
     private Connection con = null;
     Laboratorio lab = new Laboratorio();
     private final String SQL_INSERT = "INSERT INTO ciudadano (dni,nombre,apellido,email,celular, patologia, ambitoTrabajo,estado)"
             + "VALUES(?,?,?,?,?,?,?,?)";
-    private final String SQL_SELECT = "SELECT nombre, apellido, email, celular, patologia, ambitoTrabajo, estado FROM ciudadano WHERE dni=?";
+    
     
     private final String SQL_ELIMINAR = "UPDATE ciudadano SET estado = 0 WHERE dni = ? ";
     String SQL_ACTUALIZAR = "UPDATE ciudadano SET nombre=?, apellido=?, email=?, celular=?, patologia=?, ambitoTrabajo=?, estado=? WHERE dni = ? ";
@@ -64,7 +64,8 @@ public class CiudadanoData {
     }
 
     public Ciudadano buscarCiudadano(int dni) {
-
+        Ciudadano pers = new Ciudadano();
+      String SQL_SELECT = "SELECT idCiudadano, nombre, apellido, email, celular, patologia, ambitoTrabajo, estado FROM ciudadano WHERE dni=?";
         try {
             
 
@@ -73,13 +74,14 @@ public class CiudadanoData {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                pers.setNombre(rs.getNString(1));
-                pers.setApellido(rs.getNString(2));
-                pers.setEmail(rs.getString(3));
-                pers.setCelular(rs.getNString(4));
-                pers.setPatologia(rs.getNString(5));
-                pers.setAmbtrabajo(rs.getNString(6));
-                pers.setEstado(rs.getBoolean(7));
+                pers.setIdCiudadano(rs.getInt(1));
+                pers.setNombre(rs.getNString(2));
+                pers.setApellido(rs.getNString(3));
+                pers.setEmail(rs.getString(4));
+                pers.setCelular(rs.getNString(5));
+                pers.setPatologia(rs.getNString(6));
+                pers.setAmbtrabajo(rs.getNString(7));
+                pers.setEstado(rs.getBoolean(8));
                 
                 JOptionPane.showMessageDialog(null, "Persona encontrada");
             }

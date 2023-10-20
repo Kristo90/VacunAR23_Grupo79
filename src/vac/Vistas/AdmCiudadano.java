@@ -60,9 +60,9 @@ public void limpiar(){
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jTdni = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jfondo = new javax.swing.JLabel();
-        jTdni = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -218,6 +218,18 @@ public void limpiar(){
         jLabel3.setText("Inscripción de Ciudadano");
         Background.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 500, 40));
 
+        jTdni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTdniActionPerformed(evt);
+            }
+        });
+        jTdni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTdniKeyTyped(evt);
+            }
+        });
+        Background.add(jTdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, 240, -1));
+
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/transparent white.png"))); // NOI18N
         jLabel12.setText("jLabel12");
         Background.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 490));
@@ -229,33 +241,17 @@ public void limpiar(){
         jfondo.setPreferredSize(new java.awt.Dimension(600, 800));
         Background.add(jfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 490));
 
-        jTdni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTdniActionPerformed(evt);
-            }
-        });
-        jTdni.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTdniKeyTyped(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTdni, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(246, 246, 246))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(173, 173, 173)
-                .addComponent(jTdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
