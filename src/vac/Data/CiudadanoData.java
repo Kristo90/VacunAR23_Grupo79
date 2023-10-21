@@ -16,149 +16,177 @@ import vac_Entidades.Laboratorio;
 
 public class CiudadanoData {
 
-     Ciudadano pers = new Ciudadano();
-    private Connection con = null;
+    Ciudadano pers = new Ciudadano();
+     
+    private Connection CON = null;
+    
     Laboratorio lab = new Laboratorio();
-    private final String SQL_INSERT = "INSERT INTO ciudadano (dni,nombre,apellido,email,celular, patologia, ambitoTrabajo,estado)"
-            + "VALUES(?,?,?,?,?,?,?,?)";
-    
-    
-    private final String SQL_ELIMINAR = "UPDATE ciudadano SET estado = 0 WHERE dni = ? ";
-    String SQL_ACTUALIZAR = "UPDATE ciudadano SET nombre=?, apellido=?, email=?, celular=?, patologia=?, ambitoTrabajo=?, estado=? WHERE dni = ? ";
-    
-    String SQL_LISTA = "SELECT nombre, apellido FROM ciudadano WHERE estado = 1";
-    
-    private PreparedStatement ps;
-    private ResultSet rs;
 
     public CiudadanoData() {
-        con = MiConexion.getConexion();
+        CON = MiConexion.getConexion();
     }
 
     public void inscribirCiudadano(Ciudadano pers) {
        
-
+        String SQL_INSCRIBIR = "INSERT INTO ciudadano (dni, nombre, apellido, email, celular, patologia, ambitoTrabajo, estado)"
+            + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        
         try {
-            ps = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, pers.getDni());
-            ps.setString(2, pers.getNombre());
-            ps.setString(3, pers.getApellido());
-            ps.setString(4, pers.getEmail());
-            ps.setString(5, pers.getCelular());
-            ps.setString(6, pers.getPatologia());
-            ps.setString(7, pers.getAmbtrabajo());
-            ps.setBoolean(8, pers.isEstado());
-            ps.executeUpdate();
-            rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                pers.setIdCiudadano(rs.getInt(1));//Si falla poner 1 en lugar de idCiudadano
+            
+            PreparedStatement PS = CON.prepareStatement(SQL_INSCRIBIR, Statement.RETURN_GENERATED_KEYS);
+            
+            PS.setInt(1, pers.getDni());
+            PS.setString(2, pers.getNombre());
+            PS.setString(3, pers.getApellido());
+            PS.setString(4, pers.getEmail());
+            PS.setString(5, pers.getCelular());
+            PS.setString(6, pers.getPatologia());
+            PS.setString(7, pers.getAmbtrabajo());
+            PS.setBoolean(8, pers.isEstado());
+            PS.executeUpdate();
+            
+            ResultSet RS = PS.getGeneratedKeys();
+            
+            if (RS.next()) {
+                pers.setIdCiudadano(RS.getInt(1));//Si falla poner 1 en lugar de idCiudadano
                 JOptionPane.showMessageDialog(null, "Se inscribió correctamente");
                 System.out.println(pers.getIdCiudadano());
             }
-            ps.close();
+            
+            PS.close();
 
         } catch (SQLException ex) {
+            
             JOptionPane.showMessageDialog(null, "La persona ya existe en la Base de Datos");
 
         }
     }
 
     public Ciudadano buscarCiudadano(int dni) {
-        Ciudadano pers = new Ciudadano();
-      String SQL_SELECT = "SELECT idCiudadano, nombre, apellido, email, celular, patologia, ambitoTrabajo, estado FROM ciudadano WHERE dni=?";
+        
+        Ciudadano PERS = new Ciudadano();
+        
+        String SQL_BUSCAR = "SELECT idCiudadano, nombre, apellido, email, celular, patologia, ambitoTrabajo, estado FROM ciudadano WHERE dni=?";
+        
         try {
             
+            PreparedStatement PS = CON.prepareStatement(SQL_BUSCAR);
+            PS.setInt(1, dni);
+            
+            ResultSet RS = PS.executeQuery();
 
-            ps = con.prepareStatement(SQL_SELECT);
-            ps.setInt(1, dni);
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                pers.setIdCiudadano(rs.getInt(1));
-                pers.setNombre(rs.getNString(2));
-                pers.setApellido(rs.getNString(3));
-                pers.setEmail(rs.getString(4));
-                pers.setCelular(rs.getNString(5));
-                pers.setPatologia(rs.getNString(6));
-                pers.setAmbtrabajo(rs.getNString(7));
-                pers.setEstado(rs.getBoolean(8));
+            if (RS.next()) {
+                PERS.setIdCiudadano(RS.getInt(1));
+                PERS.setNombre(RS.getNString(2));
+                PERS.setApellido(RS.getNString(3));
+                PERS.setEmail(RS.getString(4));
+                PERS.setCelular(RS.getNString(5));
+                PERS.setPatologia(RS.getNString(6));
+                PERS.setAmbtrabajo(RS.getNString(7));
+                PERS.setEstado(RS.getBoolean(8));
                 
                 JOptionPane.showMessageDialog(null, "Persona encontrada");
             }
 
         } catch (SQLException ex) {
+            
             JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla Laboratorio");
+            
         }
-        return pers;
+        
+        return PERS;
+        
     }
 
     public void bajaCiudadano(int dni) {
+        
+        String SQL_ELIMINAR = "UPDATE ciudadano SET estado = 0 WHERE dni = ? ";
+        
         try {
             
-            ps = con.prepareStatement(SQL_ELIMINAR);
-            ps.setInt(1, dni);
-            int fila = ps.executeUpdate();
+            PreparedStatement PS = CON.prepareStatement(SQL_ELIMINAR);
+            PS.setInt(1, dni);
+            
+            int fila = PS.executeUpdate();
 
             if (fila == 1) {
                 JOptionPane.showMessageDialog(null, " Se eliminó a la persona del programa VacunAr23");
             }
-            ps.close();
+            
+            PS.close();
+            
         } catch (SQLException e) {
+            
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla ciudadano");
+            
         } catch (NumberFormatException ex) {
+            
         }
     }
 
     public void actualizarCiudadano(Ciudadano pers) {
         
+        String SQL_ACTUALIZAR = "UPDATE ciudadano SET nombre=?, apellido=?, email=?, celular=?, patologia=?, ambitoTrabajo=?, estado=? WHERE dni = ? ";
+        
         try {
             
-            ps = con.prepareStatement(SQL_ACTUALIZAR);
+            PreparedStatement PS = CON.prepareStatement(SQL_ACTUALIZAR);
             
-            ps.setString(1, pers.getNombre());
-            ps.setString(2, pers.getApellido());
-            ps.setString(3, pers.getEmail());
-            ps.setString(4, pers.getCelular());
-            ps.setString(5, pers.getPatologia());
-            ps.setString(6, pers.getAmbtrabajo());
-            ps.setBoolean(7, pers.isEstado());
-            ps.setInt(8, pers.getDni());
+            PS.setString(1, pers.getNombre());
+            PS.setString(2, pers.getApellido());
+            PS.setString(3, pers.getEmail());
+            PS.setString(4, pers.getCelular());
+            PS.setString(5, pers.getPatologia());
+            PS.setString(6, pers.getAmbtrabajo());
+            PS.setBoolean(7, pers.isEstado());
+            PS.setInt(8, pers.getDni());
             
-            int fila = ps.executeUpdate();
+            int fila = PS.executeUpdate();
             
             if (fila == 1) {
+                
                 JOptionPane.showMessageDialog(null, "Se actualizó la información del ciudadano");
+            
             }
-            ps.close();
+            
+            PS.close();
+            
         } catch (SQLException e) {
+            
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla ciudadano");
+            
         }
     }
     
     public List<Ciudadano> listaCiudadano() {
-        
-      ArrayList<Ciudadano> LISTA = new ArrayList();
-      
+
+        ArrayList<Ciudadano> LISTA = new ArrayList();
+
+        String SQL_LISTA = "SELECT nombre, apellido FROM ciudadano WHERE estado = 1";
+
         try {
-            ps = con.prepareStatement(SQL_LISTA);
-            rs = ps.executeQuery();
             
-            while (rs.next()) {
-                
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                
+            PreparedStatement PS = CON.prepareStatement(SQL_LISTA);
+            ResultSet RS = PS.executeQuery();
+
+            while (RS.next()) {
+
+                String nombre = RS.getString("nombre");
+                String apellido = RS.getString("apellido");
+
                 Ciudadano ciu = new Ciudadano(nombre, apellido);
-                
+
                 LISTA.add(ciu);
             }
-            
+
         } catch (SQLException ex) {
+            
             Logger.getLogger(CiudadanoData.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-      
-      return LISTA;
         
+        }
+
+        return LISTA;
+
     }
     
 }

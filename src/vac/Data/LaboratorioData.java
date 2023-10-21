@@ -14,31 +14,28 @@ import vac_Entidades.Laboratorio;
 
 public class LaboratorioData {
 
-    private Connection con = null;
+    private Connection CON = null;
+    
     Laboratorio lab = new Laboratorio();
 
-    String SQL_ACTUALIZAR = "UPDATE laboratorio set nomLaboratorio = ?, pais = ?, domComercial = ?, estado = ? WHERE cuit = ?";
-
-    // SELECT idLaboratorio,cuit, nomLaboratorio, pais, domComercial, estado FROM laboratorio WHERE nomLaboratorio like ?" 
-    // VALUES ('?,?,?,?,?')
-    String SQL_BUSCAR = "SELECT idLaboratorio,cuit, nomLaboratorio, pais, domComercial, estado FROM laboratorio WHERE nomLaboratorio = '?'";
-
-    private PreparedStatement PS;
-    private ResultSet RS;
     ArrayList<String> lista = new ArrayList();
 
     public LaboratorioData() {
-        con = MiConexion.getConexion();
+        
+        CON = MiConexion.getConexion();
+    
     }
 
     public void guardarLaboratorio(Laboratorio lab) {
+        
         //INSERT INTO `laboratorio`( `cuit`, `nomLaboratorio`, `pais`, `domComercial`, `estado`) 
         //VALUES ('?,?,?,?,?')
-
-        String sql = "INSERT INTO laboratorio (cuit,nomLaboratorio,pais,domComercial,estado)"
-                + "VALUES(?,?,?,?,?)";
+        String SQL_GUARDAR = "INSERT INTO laboratorio (cuit, nomLaboratorio, pais, domComercial, estado)"
+                + "VALUES(?, ?, ?, ?, ?)";
         try {
-            PS = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            PreparedStatement PS = CON.prepareStatement(SQL_GUARDAR, Statement.RETURN_GENERATED_KEYS);
+            
             PS.setInt(1, lab.getCuit());
             PS.setString(2, lab.getNomLab());
             PS.setString(3, lab.getPais());
@@ -46,27 +43,37 @@ public class LaboratorioData {
             PS.setBoolean(5, lab.isEstado());
 
             PS.executeUpdate();
-            RS = PS.getGeneratedKeys();
+            
+            ResultSet RS = PS.getGeneratedKeys();
 
             if (RS.next()) {
+                
                 lab.setIdLaboratorio(RS.getInt(1));//Si falla cambiar por "idLaboratorio"
                 JOptionPane.showMessageDialog(null, "Se agrego exitosamente el Laboratorio.");
                 PS.close();
+            
             }
 
         } catch (SQLException ex) {
+            
             JOptionPane.showMessageDialog(null, "No se puedo acceder a la tabla Laboratorio.");
+            
         }
 
     }
 
     public Laboratorio buscarLaboratorio(int cuit) {
 
+        // SELECT idLaboratorio,cuit, nomLaboratorio, pais, domComercial, estado FROM laboratorio WHERE nomLaboratorio like ?" 
+        // VALUES ('?,?,?,?,?')
+        String SQL_BUSCAR = "SELECT idLaboratorio,cuit, nomLaboratorio, pais, domComercial, estado FROM laboratorio WHERE nomLaboratorio = '?'";
+
         try {
-            PS = con.prepareStatement(SQL_BUSCAR);
+            
+            PreparedStatement PS = CON.prepareStatement(SQL_BUSCAR);
             PS.setInt(1, cuit);
 
-            RS = PS.executeQuery();
+            ResultSet RS = PS.executeQuery();
 
             if (RS.next()) {
 
@@ -76,18 +83,26 @@ public class LaboratorioData {
                 lab.setEstado(RS.getBoolean(4));
 
                 JOptionPane.showMessageDialog(null, "Laboratio Encontrado");
+            
             }
 
         } catch (SQLException ex) {
+            
             JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla Ciudadano");
+        
         }
+        
         return lab;
+    
     }
 
     public void actualizarLaboratorio(Laboratorio lab) {
+        
+        String SQL_ACTUALIZAR = "UPDATE laboratorio set nomLaboratorio = ?, pais = ?, domComercial = ?, estado = ? WHERE cuit = ?";
 
         try {
-            PS = con.prepareStatement(SQL_ACTUALIZAR);
+            
+            PreparedStatement PS = CON.prepareStatement(SQL_ACTUALIZAR);
 
             PS.setString(1, lab.getNomLab());
             PS.setString(2, lab.getPais());
@@ -98,12 +113,17 @@ public class LaboratorioData {
             int FILA = PS.executeUpdate();
 
             if (FILA == 1) {
+                
                 JOptionPane.showMessageDialog(null, "Se actualizo la información del Laboratorio");
+            
             }
 
         } catch (SQLException ex) {
+            
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla ciudadano");
+        
         }
+    
     }
 
     public void eliminarLab(Laboratorio cuit) {
@@ -111,22 +131,34 @@ public class LaboratorioData {
     }
 
     public ArrayList<String> listarLab() {
-        String sql = "SELECT nomLaboratorio FROM laboratorio";
+        
+        String SQL_LISTA = "SELECT nomLaboratorio FROM laboratorio";
+        
         String labo;
+        
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            
+            PreparedStatement PS = CON.prepareStatement(SQL_LISTA);
+            
+            ResultSet RS = PS.executeQuery();
 
-            while (rs.next()) {
-                labo=(rs.getString("nomLaboratorio"));
+            while (RS.next()) {
+                
+                labo=(RS.getString("nomLaboratorio"));
                 lista.add(labo);
 
             }
-            ps.close();
+            
+            PS.close();
+            
             JOptionPane.showMessageDialog(null, "Lista de Marcas Actualizada");
+        
         } catch (SQLException ex) {
+            
             JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla Laboratorio");
+        
         }
+        
         return lista;
     }
 

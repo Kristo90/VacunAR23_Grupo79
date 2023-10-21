@@ -18,26 +18,26 @@ import vac_Entidades.Vacuna;
 public class VacunaData {
 
     public Vacuna vac = new Vacuna();
+    
     private Connection CON = null;
+    
     public ArrayList<Integer>vacu=new ArrayList();
-
-    PreparedStatement PS;
-    ResultSet RS;
-
-    // INSERT INTO `vacuna`(`idVacuna`, `nroSerieDosis`, `marca`, `medida`, `fechaCaduca`, `colocada`, `estado`) 
-    // VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]','[value-6]','[value-7]')
-    String SQL_INGRESAR = "INSERT INTO vacuna (nroSerieDosis, marca, medida, fechaCaduca, colocada, estado)"
-            + "VALUES (?, ?, ?, ?, ?, ?)";
 
     public VacunaData() {
 
         CON = MiConexion.getConexion();
+        
     }
 
     public void ingresarVacuna(Vacuna vac) {
 
+        // INSERT INTO `vacuna`(`idVacuna`, `nroSerieDosis`, `marca`, `medida`, `fechaCaduca`, `colocada`, `estado`) 
+        // VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]','[value-6]','[value-7]')
+        String SQL_INGRESAR = "INSERT INTO vacuna (nroSerieDosis, marca, medida, fechaCaduca, colocada, estado)"
+                + "VALUES (?, ?, ?, ?, ?, ?)";
+
         try {
-            PS = CON.prepareStatement(SQL_INGRESAR, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement PS = CON.prepareStatement(SQL_INGRESAR, Statement.RETURN_GENERATED_KEYS);
 
             PS.setString(1, vac.getNoSerieDosis());
             PS.setString(2, vac.getMarca());
@@ -47,45 +47,67 @@ public class VacunaData {
             PS.setBoolean(6, vac.isEstado());
             PS.executeUpdate();
 
-            RS = PS.getGeneratedKeys();
+            ResultSet RS = PS.getGeneratedKeys();
 
             if (RS.next()) {
 
                 vac.setIdVacuna(RS.getInt(1));
                 JOptionPane.showMessageDialog(null, "Vacuna registrada correctamente");
+                
             }
+            
         } catch (SQLException ex) {
+            
             JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla Vacuna");
+            
         }
     }
 
     public void eliminarVacuna(String noSerie) {
-        String sql = "UPDATE vacuna SET estado=0 WHERE nroSerieDosis=?";
+        
+        String SQL_ELIMINAR = "UPDATE vacuna SET estado=0 WHERE nroSerieDosis=?";
         try {
-            PS= CON.prepareStatement(sql);
+            
+            PreparedStatement PS= CON.prepareStatement(SQL_ELIMINAR);
             PS.setString(1, noSerie);
+            
             int FILA = PS.executeUpdate();
 
             if (FILA == 1) {
+                
                 JOptionPane.showMessageDialog(null, "Eliminó la vacuna ingresada.");
+                
             }
+            
         } catch (SQLException ex) {
+            
             JOptionPane.showMessageDialog(null, "No se puede ingresar a la tabla Vacuna.");
+        
         }
         
     }
+    
     public ArrayList<Integer>  buscarvacuna(){
-        String sql="SELECT idVacuna FROM vacuna WHERE colocada=0";
+        
+        String SQL_BUSCAR = "SELECT idVacuna FROM vacuna WHERE colocada = 0";
+        
         try {
-            PS= CON.prepareStatement(sql);
-            RS=PS.executeQuery();
+            
+            PreparedStatement PS= CON.prepareStatement(SQL_BUSCAR);
+            ResultSet RS = PS.executeQuery();
+            
              while(RS.next()){
+                 
                vac.setIdVacuna(RS.getInt(1));
                vacu.add(vac.getIdVacuna());
                vacu.get(0);
-             }             
+            
+             }
+             
         } catch (SQLException ex) {
+            
             Logger.getLogger(VacunaData.class.getName()).log(Level.SEVERE, null, ex);
+        
         }
       
         return vacu;  
