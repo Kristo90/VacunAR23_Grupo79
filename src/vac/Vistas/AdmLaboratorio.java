@@ -86,7 +86,7 @@ public class AdmLaboratorio extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Gulim", 0, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Registro de Laboratorios");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 420, 40));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 420, 40));
 
         jLabel4.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
@@ -267,7 +267,7 @@ public class AdmLaboratorio extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
 
         } else {
-            lab.setCuit(Integer.parseInt(jTcuit.getText()));
+            lab.setCuit(jTcuit.getText());
             lab.setNomLab(jTnombre.getText());
             lab.setPais(jTpais.getText());
             lab.setDomCom(jTdomicilio.getText());
@@ -286,16 +286,10 @@ public class AdmLaboratorio extends javax.swing.JInternalFrame {
 
     private void jBactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBactualizarActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Para actualizar debe completar todos los campos con los datos del laboratorio a mofificar y luego presionar ACTUALIZAR");
-        if (jTnombre.getText().isEmpty() || jTnombre.getText().isEmpty() || jTcuit.getText().isEmpty() || jTdomicilio.getText().isEmpty() || jTdomicilio.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
-
-        } else {
-            //instanciar objeto lab
-            
-
-            limpiar();
-        }
+        ActualizaLab al= new ActualizaLab();
+        frmPrincipal.sDescritorio.add(al);
+        al.toFront();
+        al.setVisible(true);
     }//GEN-LAST:event_jBactualizarActionPerformed
 
     private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
@@ -306,6 +300,7 @@ public class AdmLaboratorio extends javax.swing.JInternalFrame {
             //capturar cuit
             jTdniEliminar.setText("");
         }
+        
     }//GEN-LAST:event_jBeliminarActionPerformed
 
     private void jTcuitEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcuitEliminarActionPerformed

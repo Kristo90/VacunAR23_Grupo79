@@ -36,7 +36,7 @@ public class LaboratorioData {
             
             PreparedStatement PS = CON.prepareStatement(SQL_GUARDAR, Statement.RETURN_GENERATED_KEYS);
             
-            PS.setInt(1, lab.getCuit());
+            PS.setString(1, lab.getCuit());
             PS.setString(2, lab.getNomLab());
             PS.setString(3, lab.getPais());
             PS.setString(4, lab.getDomCom());
@@ -66,7 +66,7 @@ public class LaboratorioData {
 
         // SELECT idLaboratorio,cuit, nomLaboratorio, pais, domComercial, estado FROM laboratorio WHERE nomLaboratorio like ?" 
         // VALUES ('?,?,?,?,?')
-        String SQL_BUSCAR = "SELECT idLaboratorio,cuit, nomLaboratorio, pais, domComercial, estado FROM laboratorio WHERE nomLaboratorio = '?'";
+        String SQL_BUSCAR = "SELECT idLaboratorio,cuit, nomLaboratorio, pais, domComercial, estado FROM laboratorio WHERE cuit = ?";
 
         try {
             
@@ -76,13 +76,15 @@ public class LaboratorioData {
             ResultSet RS = PS.executeQuery();
 
             if (RS.next()) {
+                 lab.setCuit(RS.getString(2));
+                lab.setNomLab(RS.getString(3));
+                lab.setPais(RS.getString(4));
+                lab.setDomCom(RS.getString(5));
+                lab.setEstado(RS.getBoolean(6));
+                System.out.println(lab);
+                
 
-                lab.setNomLab(RS.getString(1));
-                lab.setPais(RS.getString(2));
-                lab.setDomCom(RS.getString(3));
-                lab.setEstado(RS.getBoolean(4));
-
-                JOptionPane.showMessageDialog(null, "Laboratio Encontrado");
+                JOptionPane.showMessageDialog(null, "Laboratorio Encontrado");
             
             }
 
@@ -108,7 +110,7 @@ public class LaboratorioData {
             PS.setString(2, lab.getPais());
             PS.setString(3, lab.getDomCom());
             PS.setBoolean(4, lab.isEstado());
-            PS.setInt(5, lab.getCuit());
+            PS.setString(5, lab.getCuit());
 
             int FILA = PS.executeUpdate();
 

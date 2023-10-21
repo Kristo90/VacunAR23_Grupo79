@@ -29,7 +29,7 @@ public class ConsultaData {
             ResultSet RS = PS.executeQuery();
             
             while (RS.next()) {
-                RS.getInt();
+               // RS.getInt();
             }
             
             

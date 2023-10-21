@@ -4,7 +4,7 @@ package vac_Entidades;
 
 public class Laboratorio {
     private int idLaboratorio;
-    private int cuit;
+    private String cuit;
     private String nomLab;
     private String pais;
     private String domCom;
@@ -13,7 +13,7 @@ public class Laboratorio {
     public Laboratorio() {
     }
 
-    public Laboratorio(int cuit, String nomLab, String pais, String domCom, boolean estado) {
+    public Laboratorio(String cuit, String nomLab, String pais, String domCom, boolean estado) {
         this.cuit = cuit;
         this.nomLab = nomLab;
         this.pais = pais;
@@ -21,7 +21,7 @@ public class Laboratorio {
         this.estado = estado;
     }
 
-    public Laboratorio(int idLaboratorio, int cuit, String nomLab, String pais, String domCom, boolean estado) {
+    public Laboratorio(int idLaboratorio, String cuit, String nomLab, String pais, String domCom, boolean estado) {
         this.idLaboratorio = idLaboratorio;
         this.cuit = cuit;
         this.nomLab = nomLab;
@@ -38,11 +38,11 @@ public class Laboratorio {
         this.idLaboratorio = idLaboratorio;
     }
 
-    public int getCuit() {
+    public String getCuit() {
         return cuit;
     }
 
-    public void setCuit(int cuit) {
+    public void setCuit(String cuit) {
         this.cuit = cuit;
     }
 
