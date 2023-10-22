@@ -6,6 +6,7 @@
 package vac.Vistas;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import vac.Data.LaboratorioData;
 import vac_Entidades.Laboratorio;
@@ -30,8 +31,19 @@ public class ActualizaLab extends javax.swing.JInternalFrame {
         jBguardarCambios.setEnabled(false);
         jactivo.setEnabled(false);
         jinactivo.setEnabled(false);
+        cargaCombo();
     }
-
+public void limpiar(){
+    jTcuit.setText("");
+        jTnombre.setText("");
+        jTdomicilio.setText("");
+        jTpais.setText("");
+        jinactivo.setSelected(false);
+        jactivo.setSelected(false);
+        jCLabs.setEnabled(true);
+        jCLabs.setSelectedIndex(0);
+        
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,7 +54,6 @@ public class ActualizaLab extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel5 = new javax.swing.JLabel();
-        jTcuitini = new javax.swing.JTextField();
         jBbuscar = new javax.swing.JButton();
         jBsalir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -53,6 +64,7 @@ public class ActualizaLab extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jTpais = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        jCLabs = new javax.swing.JComboBox<>();
         jTdomicilio = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jactivo = new javax.swing.JCheckBox();
@@ -70,20 +82,8 @@ public class ActualizaLab extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel5.setText("Ingrese CUIT del laboratorio a actualizar:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 340, 20));
-
-        jTcuitini.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTcuitiniActionPerformed(evt);
-            }
-        });
-        jTcuitini.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTcuitiniKeyTyped(evt);
-            }
-        });
-        getContentPane().add(jTcuitini, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 140, -1));
+        jLabel5.setText("Seleccione el Laboratorio:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 230, 20));
 
         jBbuscar.setBackground(new java.awt.Color(153, 255, 204));
         jBbuscar.setText("Buscar");
@@ -115,6 +115,7 @@ public class ActualizaLab extends javax.swing.JInternalFrame {
         jLabel6.setText("N° de CUIT:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 100, 20));
 
+        jTcuit.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jTcuit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTcuitKeyTyped(evt);
@@ -127,6 +128,7 @@ public class ActualizaLab extends javax.swing.JInternalFrame {
         jLabel3.setText("Nombre:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 70, 20));
 
+        jTnombre.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jTnombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTnombreKeyTyped(evt);
@@ -139,6 +141,7 @@ public class ActualizaLab extends javax.swing.JInternalFrame {
         jLabel7.setText("Pais:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 50, 20));
 
+        jTpais.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jTpais.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTpaisKeyTyped(evt);
@@ -151,6 +154,15 @@ public class ActualizaLab extends javax.swing.JInternalFrame {
         jLabel8.setText("Domicilio Comercial:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 180, 20));
 
+        jCLabs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione..." }));
+        jCLabs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCLabsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jCLabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 230, -1));
+
+        jTdomicilio.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         jTdomicilio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTdomicilioKeyTyped(evt);
@@ -227,39 +239,37 @@ public class ActualizaLab extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jBsalirActionPerformed
 
-    private void jTcuitiniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcuitiniActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTcuitiniActionPerformed
-
-    private void jTcuitiniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTcuitiniKeyTyped
-        // TODO add your handling code here:
-        char car = evt.getKeyChar();
-        if ((car < '0' || car > '9') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
-            evt.consume();
-            JOptionPane.showMessageDialog(null, "Este campo solo admite números \nVuelva a ingresarlo");
-            jTcuitini.setText("");
-
-        }
-    }//GEN-LAST:event_jTcuitiniKeyTyped
-
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
         // TODO add your handling code here:
-        LaboratorioData ld=new LaboratorioData();
-        Laboratorio lab= new Laboratorio();
-        lab=ld.buscarLaboratorio(Integer.parseInt(jTcuitini.getText()));
-        
+        LaboratorioData ld = new LaboratorioData();
+        Laboratorio lab = new Laboratorio();
+        lab = ld.buscarLaboratorio(jCLabs.getSelectedItem().toString());
+
         jTcuit.setText(lab.getCuit());
         jTnombre.setText(lab.getNomLab());
         jTdomicilio.setText(lab.getDomCom());
         jTpais.setText(lab.getPais());
-        
-         
+
+        if (lab.isEstado()) {
+            jactivo.setSelected(true);
+            jinactivo.setSelected(false);
+        } else {
+            jinactivo.setSelected(true);
+            jactivo.setSelected(false);
+
+        }
+
+        jTcuit.setEnabled(false);
+        jTnombre.setEnabled(false);
+        jTdomicilio.setEnabled(false);
+        jTpais.setEnabled(false);
+        jinactivo.setEnabled(false);
+        jactivo.setEnabled(false);
+        jBguardarCambios.setEnabled(false);
         jBmodificar.setEnabled(true);
         jBcancelar.setEnabled(true);
-        jBbuscar.setEnabled(false);
-        
-        
-       
+        jBbuscar.setEnabled(true);
+
 
     }//GEN-LAST:event_jBbuscarActionPerformed
 
@@ -321,58 +331,64 @@ public class ActualizaLab extends javax.swing.JInternalFrame {
 
     private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
         // TODO add your handling code here:
-      
+        jTcuit.setEnabled(true);
+        jTnombre.setEnabled(true);
+        jTdomicilio.setEnabled(true);
+        jTpais.setEnabled(true);
+        jinactivo.setEnabled(true);
+        jactivo.setEnabled(true);
+        jBguardarCambios.setEnabled(true);
+        jBmodificar.setEnabled(false);
+        jBcancelar.setEnabled(true);
+        jBbuscar.setEnabled(false);
+        jCLabs.setEnabled(false);
+
 
     }//GEN-LAST:event_jBmodificarActionPerformed
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
         // TODO add your handling code here:
+        jTcuit.setEnabled(false);
+        jTnombre.setEnabled(false);
+        jTdomicilio.setEnabled(false);
+        jTpais.setEnabled(false);
+        jinactivo.setEnabled(false);
+        jactivo.setEnabled(false);
+        jBguardarCambios.setEnabled(false);
+        jBmodificar.setEnabled(false);
+        jBcancelar.setEnabled(true);
+        jBbuscar.setEnabled(true);
+        jCLabs.setEnabled(true);
+
+        limpiar();
         
 
     }//GEN-LAST:event_jBcancelarActionPerformed
 
     private void jBguardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarCambiosActionPerformed
         // TODO add your handling code here:
-//        if (jTnombre.getText().isEmpty() || jTapellido.getText().isEmpty() || jTdni.getText().isEmpty() || jTmail.getText().isEmpty() || jTtelefono.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
-//
-//        } else {
-//            pers.setDni(Integer.parseInt(jTdni.getText()));
-//            pers.setNombre(jTnombre.getText());
-//            pers.setApellido(jTapellido.getText());
-//            pers.setEmail(jTmail.getText());
-//            pers.setCelular(jTtelefono.getText());
-//            pers.setPatologia(jCriesgo.getSelectedItem().toString());
-//            pers.setAmbtrabajo(jCescencial.getSelectedItem().toString());
-//            if(jactivo.isSelected()){
-//                pers.setEstado(true);
-//            }else{
-//                pers.setEstado(false);
-//            }
-//
-//            cd.actualizarCiudadano(pers);
-//
-//            limpiar();
-//
-//            jTnombre.setEnabled(false);
-//            jTapellido.setEnabled(false);
-//            jTmail.setEnabled(false);
-//            jTtelefono.setEnabled(false);
-//            jinactivo.setEnabled(false);
-//            jactivo.setEnabled(false);
-//            jBguardarCambios.setEnabled(false);
-//            jCriesgo.setEnabled(false);
-//            jCescencial.setEnabled(false);
-//            jBmodificar.setEnabled(true);
-//            jinactivo.setEnabled(false);
-//            jactivo.setEnabled(false);
-//            jBbuscar.setEnabled(true);
-//            jBguardarCambios.setEnabled(false);
-//            jBmodificar.setEnabled(false);
-//            jBcancelar.setEnabled(false);
+        Laboratorio lab=new Laboratorio();
+        LaboratorioData ld=new LaboratorioData();
+        
+        if (jTnombre.getText().isEmpty() || jTnombre.getText().isEmpty() || jTcuit.getText().isEmpty() || jTdomicilio.getText().isEmpty() || jTdomicilio.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
 
-//        }
+        } else {
+            lab.setCuit(jTcuit.getText());
+            lab.setNomLab(jTnombre.getText());
+            lab.setPais(jTpais.getText());
+            lab.setDomCom(jTdomicilio.getText());
+            lab.setEstado(true);
+            ld.actualizarLaboratorio(lab);
+
+                    limpiar();
+                    jBbuscar.setEnabled(true);
+        } 
     }//GEN-LAST:event_jBguardarCambiosActionPerformed
+
+    private void jCLabsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCLabsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCLabsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -381,6 +397,7 @@ public class ActualizaLab extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBguardarCambios;
     private javax.swing.JButton jBmodificar;
     private javax.swing.JButton jBsalir;
+    private javax.swing.JComboBox<String> jCLabs;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -392,11 +409,22 @@ public class ActualizaLab extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTcuit;
-    private javax.swing.JTextField jTcuitini;
     private javax.swing.JTextField jTdomicilio;
     private javax.swing.JTextField jTnombre;
     private javax.swing.JTextField jTpais;
     private javax.swing.JCheckBox jactivo;
     private javax.swing.JCheckBox jinactivo;
     // End of variables declaration//GEN-END:variables
+ private void cargaCombo() {
+        LaboratorioData ld = new LaboratorioData();
+        ArrayList<String> lista = new ArrayList<>();
+        lista = ld.listarLab();
+
+        for (String elemento : lista) {
+
+            jCLabs.addItem(elemento);
+
+        }
+    }
+
 }

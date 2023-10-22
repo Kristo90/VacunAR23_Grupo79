@@ -62,16 +62,16 @@ public class LaboratorioData {
 
     }
 
-    public Laboratorio buscarLaboratorio(int cuit) {
+    public Laboratorio buscarLaboratorio(String nom) {
 
         // SELECT idLaboratorio,cuit, nomLaboratorio, pais, domComercial, estado FROM laboratorio WHERE nomLaboratorio like ?" 
         // VALUES ('?,?,?,?,?')
-        String SQL_BUSCAR = "SELECT idLaboratorio,cuit, nomLaboratorio, pais, domComercial, estado FROM laboratorio WHERE cuit = ?";
+        String SQL_BUSCAR = "SELECT idLaboratorio,cuit, nomLaboratorio, pais, domComercial, estado FROM laboratorio WHERE nomLaboratorio = ?";
 
         try {
             
             PreparedStatement PS = CON.prepareStatement(SQL_BUSCAR);
-            PS.setInt(1, cuit);
+            PS.setString(1, nom);
 
             ResultSet RS = PS.executeQuery();
 
