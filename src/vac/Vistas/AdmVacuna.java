@@ -22,11 +22,12 @@ import vac_Entidades.Vacuna;
  * @author Ana y Guille
  */
 public class AdmVacuna extends javax.swing.JInternalFrame {
-    public Laboratorio lab=new Laboratorio();
+
+    public Laboratorio lab = new Laboratorio();
     public LaboratorioData ld = new LaboratorioData();
     public Vacuna vac = new Vacuna();
-    public  VacunaData vd=new VacunaData();
-    
+    public VacunaData vd = new VacunaData();
+
     public AdmVacuna() {
         initComponents();
         jDateChooser1.setMinSelectableDate(Date.valueOf(LocalDate.of(2024, 10, 15)));
@@ -37,7 +38,7 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
 //        jDateChooser1.setMinSelectableDate(fechaColocada+28);
 //        jDateChooser1.setMaxSelectableDate(fechaColocada+56);
     }
-    
+
     public void limpiar() {
         jTnoDosis.setText("");
         jCvacunas.setSelectedIndex(0);
@@ -59,7 +60,7 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
         jBregistrar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jBsalir = new javax.swing.JButton();
-        jBactualizar = new javax.swing.JButton();
+        jBvencidas = new javax.swing.JButton();
         jBeliminaDosis = new javax.swing.JButton();
         jBlimpiar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -117,21 +118,21 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jBsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 150, 50));
 
-        jBactualizar.setBackground(new java.awt.Color(255, 255, 153));
-        jBactualizar.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jBactualizar.setForeground(new java.awt.Color(51, 51, 51));
-        jBactualizar.setText("Editar");
-        jBactualizar.addActionListener(new java.awt.event.ActionListener() {
+        jBvencidas.setBackground(new java.awt.Color(255, 255, 153));
+        jBvencidas.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jBvencidas.setForeground(new java.awt.Color(51, 51, 51));
+        jBvencidas.setText("Eliminar Vencidas");
+        jBvencidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBactualizarActionPerformed(evt);
+                jBvencidasActionPerformed(evt);
             }
         });
-        getContentPane().add(jBactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 150, 50));
+        getContentPane().add(jBvencidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 350, -1, 50));
 
         jBeliminaDosis.setBackground(new java.awt.Color(204, 0, 51));
         jBeliminaDosis.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jBeliminaDosis.setForeground(new java.awt.Color(255, 255, 255));
-        jBeliminaDosis.setText("Eliminar Vacuna");
+        jBeliminaDosis.setText("Baja Vacuna");
         jBeliminaDosis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBeliminaDosisActionPerformed(evt);
@@ -212,18 +213,18 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (jTnoDosis.getText().isEmpty() || jDateChooser1.getDate() == null || jCvacunas.getSelectedIndex() == 0 || jCmedida.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
-            
+
         } else {
             vac.setMarca(jCvacunas.getSelectedItem().toString());
             vac.setMedida(Double.parseDouble((String) jCmedida.getSelectedItem()));
             vac.setEstado(true);
             vac.setNoSerieDosis((jTnoDosis.getText()));
-            vac.setColocada(0==1);
+            vac.setColocada(0 == 1);
             vac.setFechaCaduca(jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-            
+
             vd.ingresarVacuna(vac);
             limpiar();
-            
+
         }
     }//GEN-LAST:event_jBregistrarActionPerformed
 
@@ -232,34 +233,46 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
         limpiar();
     }//GEN-LAST:event_jBlimpiarActionPerformed
 
-    private void jBactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBactualizarActionPerformed
+    private void jBvencidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvencidasActionPerformed
         // TODO add your handling code here:
-//        JOptionPane.showMessageDialog(null, "Para actualizar debe completar todos los campos con los datos del laboratorio a mofificar y luego presionar ACTUALIZAR");
-//        if (jTnombre.getText().isEmpty() || jTnombre.getText().isEmpty() || jTcuit.getText().isEmpty() || jTdomicilio.getText().isEmpty() || jTdomicilio.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
-//
-//        } else {
-//            //instanciar objeto lab
-//
-//            limpiar();
-//        }
-    }//GEN-LAST:event_jBactualizarActionPerformed
+        VacunaData vd = new VacunaData();
+        LocalDate hoy = LocalDate.now();
+        ArrayList<Vacuna> vac = new ArrayList();
+        vac = vd.buscarvacuna();
+        
+        int i = 0;
+        for (Vacuna vacuna : vac) {
+            if (vacuna.getFechaCaduca().isBefore(hoy) ) {
+                                
+                vd.eliminarVacuna(vacuna.getIdVacuna());
+               
+                i++;
+            }
+        }
+        if (i > 0) {
+            JOptionPane.showMessageDialog(null, "Vencieron " + i + " vacunas, se retiran del programa");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se detectaron vacunas vencidas.");
+        }
+
+
+    }//GEN-LAST:event_jBvencidasActionPerformed
 
     private void jTeliminaDosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTeliminaDosisActionPerformed
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_jTeliminaDosisActionPerformed
 
     private void jTnoDosisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTnoDosisKeyTyped
         // TODO add your handling code here:
         char car = evt.getKeyChar();
-        if ((car < '0' || car > '9') && (car != (char) KeyEvent.VK_BACK_SPACE)&&(car < 'A' || car > 'z')&&(car < 45 || car > 45)) {
-            
+        if ((car < '0' || car > '9') && (car != (char) KeyEvent.VK_BACK_SPACE) && (car < 'A' || car > 'z') && (car < 45 || car > 45)) {
+
             evt.consume();
             JOptionPane.showMessageDialog(null, "Este campo solo admite números \nVuelva a ingresarlo");
             jTnoDosis.setText("");
-            
+
         }
     }//GEN-LAST:event_jTnoDosisKeyTyped
 
@@ -269,17 +282,18 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
 
     private void jBeliminaDosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminaDosisActionPerformed
         // TODO add your handling code here:
-        vd.eliminarVacuna(jTeliminaDosis.getText());
+        vd.eliminarVacuna(Integer.parseInt(jTeliminaDosis.getText()));
         jTeliminaDosis.setText("");
+        JOptionPane.showMessageDialog(null, "Eliminó la vacuna ingresada.");
     }//GEN-LAST:event_jBeliminaDosisActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBactualizar;
     private javax.swing.JButton jBeliminaDosis;
     private javax.swing.JButton jBlimpiar;
     private javax.swing.JButton jBregistrar;
     private javax.swing.JButton jBsalir;
+    private javax.swing.JButton jBvencidas;
     private javax.swing.JComboBox<String> jCmedida;
     private javax.swing.JComboBox<String> jCvacunas;
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -297,15 +311,14 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargaCombo() {
-        
+
         ArrayList<String> lista = new ArrayList<>();
-        lista=ld.listarLab();
-        
-        
+        lista = ld.listarLab();
+
         for (String elemento : lista) {
-            
+
             jCvacunas.addItem(elemento);
-            
+
         }
     }
 }

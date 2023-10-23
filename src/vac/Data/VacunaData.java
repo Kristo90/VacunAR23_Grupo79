@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -17,16 +18,12 @@ import vac_Entidades.Vacuna;
 
 public class VacunaData {
 
-    public Vacuna vac = new Vacuna();
-    
     private Connection CON = null;
-    
-    public ArrayList<Integer>vacu=new ArrayList();
 
     public VacunaData() {
 
         CON = MiConexion.getConexion();
-        
+
     }
 
     public void ingresarVacuna(Vacuna vac) {
@@ -53,64 +50,65 @@ public class VacunaData {
 
                 vac.setIdVacuna(RS.getInt(1));
                 JOptionPane.showMessageDialog(null, "Vacuna registrada correctamente");
-                
+
             }
-            
+
         } catch (SQLException ex) {
-            
+
             JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla Vacuna");
-            
+
         }
     }
 
-    public void eliminarVacuna(String noSerie) {
-        
-        String SQL_ELIMINAR = "UPDATE vacuna SET estado=0 WHERE nroSerieDosis=?";
+    public void eliminarVacuna(int idVacuna) {
+
+        String SQL_ELIMINAR = "UPDATE vacuna SET estado=0 WHERE idVacuna=?";
         try {
-            
-            PreparedStatement PS= CON.prepareStatement(SQL_ELIMINAR);
-            PS.setString(1, noSerie);
-            
+
+            PreparedStatement PS = CON.prepareStatement(SQL_ELIMINAR);
+            PS.setInt(1, idVacuna);
+
             int FILA = PS.executeUpdate();
 
             if (FILA == 1) {
                 
-                JOptionPane.showMessageDialog(null, "Eliminó la vacuna ingresada.");
-                
             }
-            
+
         } catch (SQLException ex) {
-            
             JOptionPane.showMessageDialog(null, "No se puede ingresar a la tabla Vacuna.");
-        
+
         }
-        
+
     }
-    
-    public ArrayList<Integer>  buscarvacuna(){
-        
-        String SQL_BUSCAR = "SELECT idVacuna FROM vacuna WHERE colocada = 0";
-        
+
+    public ArrayList<Vacuna> buscarvacuna() {
+
+        ArrayList<Vacuna> vacu = new ArrayList();
+        String SQL_BUSCAR = "SELECT * FROM vacuna WHERE colocada = 0 AND estado=1";
+
         try {
-            
-            PreparedStatement PS= CON.prepareStatement(SQL_BUSCAR);
+
+            PreparedStatement PS = CON.prepareStatement(SQL_BUSCAR);
             ResultSet RS = PS.executeQuery();
-            
-             while(RS.next()){
-                 
-               vac.setIdVacuna(RS.getInt(1));
-               vacu.add(vac.getIdVacuna());
-               vacu.get(0);
-            
-             }
-             
+
+            while (RS.next()) {
+                Vacuna vac = new Vacuna();
+                vac.setIdVacuna(RS.getInt(1));
+                vac.setNoSerieDosis(RS.getString(2));
+                vac.setMarca(RS.getString(3));
+                vac.setMedida(RS.getDouble(4));
+                vac.setFechaCaduca(LocalDate.parse(RS.getString(5)));
+                vac.setColocada(RS.getBoolean(6));
+                vac.setEstado(RS.getBoolean(7));
+                vacu.add(vac);
+
+            }
+            PS.close();
+
         } catch (SQLException ex) {
-            
-            Logger.getLogger(VacunaData.class.getName()).log(Level.SEVERE, null, ex);
-        
+            JOptionPane.showMessageDialog(null, "No se puede ingresar a la tabla Vacuna.");
         }
-      
-        return vacu;  
+        return vacu;
     }
-    
+
 }
