@@ -23,8 +23,6 @@ import vac_Entidades.Vacuna;
  */
 public class AdmCita extends javax.swing.JInternalFrame {
 
-    Ciudadano pers = new Ciudadano();
-    CiudadanoData cd = new CiudadanoData();
     Vacuna vac = new Vacuna();
     VacunaData vd = new VacunaData();
     CitaData cdata = new CitaData();
@@ -256,7 +254,8 @@ public class AdmCita extends javax.swing.JInternalFrame {
 
     private void jBguardarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarTurnoActionPerformed
         // TODO add your handling code here:
-
+        Ciudadano pers = new Ciudadano();
+        CiudadanoData cd = new CiudadanoData();
         LocalDate fecha = null;
         pers = cd.buscarCiudadano(Integer.parseInt(jTdni.getText()));
         cv.setPersona(pers);
@@ -286,6 +285,8 @@ public class AdmCita extends javax.swing.JInternalFrame {
         jDateChooser1.setEnabled(false);
         jCvacunatorio.setEnabled(false);
         jChorario.setEnabled(false);
+        jBbuscarPers.setEnabled(true);
+
 
     }//GEN-LAST:event_jBguardarTurnoActionPerformed
 
@@ -295,25 +296,41 @@ public class AdmCita extends javax.swing.JInternalFrame {
         frmPrincipal.sDescritorio.add(ac);
         ac.toFront();
         ac.setVisible(true);
-      
+
 
     }//GEN-LAST:event_jBposponerTurnoActionPerformed
 
     private void jBbuscarPersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarPersActionPerformed
         // TODO add your handling code here:
+        Ciudadano pers = new Ciudadano();
+        CiudadanoData cd = new CiudadanoData();
+        
         pers = cd.buscarCiudadano(Integer.parseInt(jTdni.getText()));
-        jTnomApe.setText(pers.getNombre() + " " + pers.getApellido());
+        cv = cdata.buscarCita(pers);
+        
+        if (pers.getNombre() == null) {
+            JOptionPane.showMessageDialog(null, "Persona no existe");
+            jTdni.setText("");
+            jBbuscarPers.setEnabled(true);
+        } else {
+            jTnomApe.setText(pers.getNombre() + " " + pers.getApellido());
+        }
+        
+        if (cv.getPersona() == null) {
+            jCdosis.setSelectedIndex(1);
+        }
 
-        jTnomApe.setEnabled(true);
+        jTnomApe.setEnabled(false);
         jBcancelarTurno.setEnabled(true);
         jBposponerTurno.setEnabled(true);
         jBguardarTurno.setEnabled(true);
         jBinfoAplica.setEnabled(true);
-        jCdosis.setEnabled(true);
+        jCdosis.setEnabled(false);
         jDateChooser1.setEnabled(true);
         jCvacunatorio.setEnabled(true);
         jChorario.setEnabled(true);
         jBbuscarPers.setEnabled(false);
+
 
     }//GEN-LAST:event_jBbuscarPersActionPerformed
 

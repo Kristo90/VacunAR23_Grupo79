@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,8 +36,8 @@ public class CitaData {
 
 //      INSERT INTO `citavacunacion`(`codCita`, `persona`, `codRefuerzo`, `fechaHoraCita`, `centroVacunacion`, `fechaHoraColoca`, `dosis`, `estado`) 
 //      VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]','[value-6]','[value-7]','[value-8]')
-        String SQL_INGRESAR = "INSERT INTO citavacunacion (persona, codRefuerzo, fechaHoraCita, centroVacunacion, fechaHoraColoca, dosis, estado)"
-                + "VALUES (?, ?, ?, ?, ?, ?,?)";
+          String SQL_INGRESAR = "INSERT INTO citavacunacion (persona, codRefuerzo, fechaHoraCita, centroVacunacion, estado)"
+                + "VALUES (?, ?, ?, ?, ?)";
 
         try {
             
@@ -46,9 +47,9 @@ public class CitaData {
             PS.setInt(2, cv.getCodigoRefuerzo());
             PS.setString(3, cv.getFechaHoraCita());
             PS.setString(4, cv.getCentroVacunacion());
-            PS.setDate(5, Date.valueOf(cv.getFechaHoraColocada()));
-            PS.setInt(6, 9);//cv.getDosis().getIdVacuna());SALE ERROR 1452
-            PS.setBoolean(7, cv.isEstado());
+            //PS.setDate(5, Date.valueOf(cv.getFechaHoraColocada()));
+            //PS.setInt(6, 9);//cv.getDosis().getIdVacuna());SALE ERROR 1452
+            PS.setBoolean(5, cv.isEstado());
 
             PS.executeUpdate();
             
@@ -122,7 +123,7 @@ public class CitaData {
     
     }
 
-    public CitaVacunacion buscarCita(int DNipersona) {
+    public CitaVacunacion buscarCita(Ciudadano pers) {
 
 //      (`codCita`, `persona`, `codRefuerzo`, `fechaHoraCita`, `centroVacunacion`, `fechaHoraColoca`, `dosis`, `estado`)
         String SQL_BUSCAR = "SELECT * FROM citavacunacion WHERE persona=? ";
@@ -131,15 +132,17 @@ public class CitaData {
 
             PreparedStatement PS = CON.prepareStatement(SQL_BUSCAR);
 
-            PS.setInt(1, cv.getPersona().getDni());
+            PS.setInt(1, pers.getIdCiudadano());
 
             ResultSet RS = PS.executeQuery();
 
             if (RS.next()) {
 
                 cv.setIdCita(RS.getInt(1));
+                cv.setPersona(pers);
                 cv.setCodigoRefuerzo(RS.getInt(3));
                 cv.setFechaHoraCita(RS.getString(4));
+                cv.setCentroVacunacion(RS.getString(5));
 
                 JOptionPane.showMessageDialog(null, "Cita encontrada.");
 

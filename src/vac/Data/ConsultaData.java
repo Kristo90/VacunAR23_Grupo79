@@ -21,7 +21,7 @@ public class ConsultaData {
 //      SELECT `codCita`, `persona`, `codRefuerzo`, `fechaHoraCita`, `centroVacunacion`, `fechaHoraColoca`, `dosis`, `estado` FROM `citavacunacion` WHERE 1
 //        SELECT * FROM `citavacunacion` WHERE 1
 
-        String SQL_CITAS = "SELECT * FROM citavacunacion WHERE 1";
+        String SQL_CITAS = "SELECT * FROM citavacunacion ";
         
         try {
             PreparedStatement PS = CON.prepareStatement(SQL_CITAS);

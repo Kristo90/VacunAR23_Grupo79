@@ -18,6 +18,16 @@ public class CitaVacunacion {
     public CitaVacunacion() {
     }
 
+    public CitaVacunacion(int idCita, Ciudadano persona, int codigoRefuerzo, String fechaHoraCita, String centroVacunacion, boolean estado) {
+        this.idCita = idCita;
+        this.persona = persona;
+        this.codigoRefuerzo = codigoRefuerzo;
+        this.fechaHoraCita = fechaHoraCita;
+        this.centroVacunacion = centroVacunacion;
+        this.estado = estado;
+    }
+    
+
     public CitaVacunacion(Ciudadano persona, int codigoRefuerzo, String fechaHoraCita, String centroVacunacion, LocalDate fechaHoraColocada, Vacuna dosis, boolean estado) {
         this.persona = persona;
         this.codigoRefuerzo = codigoRefuerzo;
