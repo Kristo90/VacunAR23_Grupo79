@@ -352,6 +352,9 @@ public class AdmCita extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Persona no existe");
             jTdni.setText("");
             jBbuscarPers.setEnabled(true);
+            jBcancelar.setEnabled(false);
+            jCvacunatorio.setEnabled(false);
+            jChorario.setEnabled(false);
         } else {
             jTnomApe.setText(pers.getNombre() + " " + pers.getApellido());
         }
@@ -360,7 +363,7 @@ public class AdmCita extends javax.swing.JInternalFrame {
             jCdosis.setSelectedIndex(1);
             jTnomApe.setEnabled(false);
 
-            jBcancelar.setEnabled(false);
+            jBcancelar.setEnabled(true);
             jBposponerTurno.setEnabled(false);
             jBguardarTurno.setEnabled(false);
             jBinfoAplica.setEnabled(false);
@@ -401,10 +404,10 @@ public class AdmCita extends javax.swing.JInternalFrame {
             jBbuscarPers.setEnabled(false);
             jTdni.setText("");
             jTdni.setEnabled(true);
-            jDateChooser1.setMinSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(8)));
-            jDateChooser1.setMaxSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(10)));
+            jDateChooser1.setMinSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(4)));
+            jDateChooser1.setMaxSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(6)));
         } else if (cv.getCodigoRefuerzo() != 0) {
-            JOptionPane.showMessageDialog(null, "No se aplicó la primera dosis, no puede agendarse un nuevo turno");
+            JOptionPane.showMessageDialog(null, "No se aplico la dosis correspondiente, no puede agendarse un nuevo turno");
             jTnomApe.setEnabled(false);
             jTnomApe.setText("");
             jBcancelar.setEnabled(false);
@@ -419,12 +422,12 @@ public class AdmCita extends javax.swing.JInternalFrame {
             jTdni.setText("");
             jTdni.setEnabled(true);
         }
-        
+
         if (cv.getPersona() == null) {
             jCdosis.setSelectedIndex(1);
             jTnomApe.setEnabled(false);
 
-            jBcancelar.setEnabled(false);
+            jBcancelar.setEnabled(true);
             jBposponerTurno.setEnabled(false);
             jBguardarTurno.setEnabled(false);
             jBinfoAplica.setEnabled(false);
@@ -435,6 +438,21 @@ public class AdmCita extends javax.swing.JInternalFrame {
             jBbuscarPers.setEnabled(true);
             jTdni.setText("");
             jTdni.setEnabled(true);
+        }
+        if (pers.getNombre() == null) {
+            jBcancelar.setEnabled(false);
+            jBposponerTurno.setEnabled(false);
+            jBguardarTurno.setEnabled(false);
+            jBinfoAplica.setEnabled(false);
+            jCdosis.setEnabled(false);
+            jCdosis.setSelectedIndex(0);
+            jDateChooser1.setEnabled(false);
+            jCvacunatorio.setEnabled(false);
+            jChorario.setEnabled(false);
+            jBbuscarPers.setEnabled(true);
+            jTdni.setText("");
+            jTdni.setEnabled(true);
+            jTnomApe.setText("");
         }
     }//GEN-LAST:event_jBbuscarPersActionPerformed
 
@@ -481,6 +499,19 @@ public class AdmCita extends javax.swing.JInternalFrame {
 
     private void jBcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcancelarActionPerformed
         // TODO add your handling code here:
+        jBcancelar.setEnabled(false);
+        jBposponerTurno.setEnabled(true);
+        jBguardarTurno.setEnabled(false);
+        jBinfoAplica.setEnabled(true);
+        jCdosis.setEnabled(false);
+        jCdosis.setSelectedIndex(0);
+        jDateChooser1.setEnabled(false);
+        jCvacunatorio.setEnabled(false);
+        jChorario.setEnabled(false);
+        jBbuscarPers.setEnabled(true);
+        jTdni.setText("");
+        jTdni.setEnabled(true);
+        jTnomApe.setText("");
     }//GEN-LAST:event_jBcancelarActionPerformed
 
 
