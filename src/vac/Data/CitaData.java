@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -126,7 +125,7 @@ public class CitaData {
     public CitaVacunacion buscarCita(Ciudadano pers) {
 
 //      (`codCita`, `persona`, `codRefuerzo`, `fechaHoraCita`, `centroVacunacion`, `fechaHoraColoca`, `dosis`, `estado`)
-        String SQL_BUSCAR = "SELECT * FROM citavacunacion WHERE persona=? ";
+        String SQL_BUSCAR = "SELECT * FROM citavacunacion WHERE persona=?  ";
 
         try {
 
@@ -143,6 +142,7 @@ public class CitaData {
                 cv.setCodigoRefuerzo(RS.getInt(3));
                 cv.setFechaHoraCita(RS.getString(4));
                 cv.setCentroVacunacion(RS.getString(5));
+                cv.setFechaHoraColocada(RS.getDate(6).toLocalDate());
 
                 JOptionPane.showMessageDialog(null, "Cita encontrada.");
 
@@ -161,5 +161,28 @@ public class CitaData {
         return cv;
         
     }
-    
+    public void aplicaVac(CitaVacunacion vac){
+        String sql="UPDATE citavacunacion SET fechaHoraColoca=?, dosis=?, estado=? WHERE codCita=? ";
+        try {
+            ;
+            PreparedStatement PS = CON.prepareStatement(sql);
+            PS.setDate(1, Date.valueOf(cv.getFechaHoraColocada()));
+                        PS.setInt(2, cv.getDosis().getIdVacuna());
+                        PS.setBoolean(3, false);
+            PS.setInt(4,cv.getIdCita());
+            
+            int fila = PS.executeUpdate();
+            if (fila == 1) {
+
+                JOptionPane.showMessageDialog(null, "Se ha aplicado a "+cv.getPersona().getNombre()+" "+cv.getPersona().getApellido()+" la vacuna "+cv.getDosis().getNoSerieDosis());
+                PS.close();
+            
+            }
+        
+        } catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla citaVacunacion");
+        
+        }
+    }
 }

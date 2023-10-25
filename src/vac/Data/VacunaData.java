@@ -71,7 +71,7 @@ public class VacunaData {
             int FILA = PS.executeUpdate();
 
             if (FILA == 1) {
-                
+
             }
 
         } catch (SQLException ex) {
@@ -111,4 +111,19 @@ public class VacunaData {
         return vacu;
     }
 
+    public void actualizaVac(int idVac) {
+
+        Vacuna vac = new Vacuna();
+        String sql = "UPDATE vacuna SET colocada=1, estado=0 WHERE idVacuna=?";
+        try {
+            PreparedStatement PS = CON.prepareStatement(sql);
+            PS.setInt(1, idVac);
+            int fila = PS.executeUpdate();
+
+            PS.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(VacunaData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
