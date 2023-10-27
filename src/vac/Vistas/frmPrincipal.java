@@ -40,6 +40,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         jMvacuna = new javax.swing.JMenuItem();
         jConsultas = new javax.swing.JMenu();
         jConsultaD = new javax.swing.JMenuItem();
+        jCentros = new javax.swing.JMenuItem();
         jSalir = new javax.swing.JMenu();
         jMsalir = new javax.swing.JMenuItem();
 
@@ -103,6 +104,11 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         jConsultas.setText("Consultas");
         jConsultas.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsultasActionPerformed(evt);
+            }
+        });
 
         jConsultaD.setText("Lista Diarias");
         jConsultaD.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +117,9 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
         jConsultas.add(jConsultaD);
+
+        jCentros.setText("Lista Centros");
+        jConsultas.add(jCentros);
 
         jMenuBar1.add(jConsultas);
 
@@ -237,6 +246,18 @@ public class frmPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jConsultaDActionPerformed
 
+    private void jConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsultasActionPerformed
+        // TODO add your handling code here:
+        sDescritorio.removeAll();
+        
+        sDescritorio.repaint();
+        
+        centroEspecifico listaC = new centroEspecifico();
+        
+        listaC.setVisible(true);
+        sDescritorio.add(listaC);
+    }//GEN-LAST:event_jConsultasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -274,6 +295,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jAdm;
+    private javax.swing.JMenuItem jCentros;
     private javax.swing.JMenuItem jConsultaD;
     private javax.swing.JMenu jConsultas;
     private javax.swing.JMenuItem jMcita;
