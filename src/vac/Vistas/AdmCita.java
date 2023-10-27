@@ -286,7 +286,7 @@ public class AdmCita extends javax.swing.JInternalFrame {
 
     private void jBguardarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarTurnoActionPerformed
         // TODO add your handling code here:
-        
+
         Ciudadano pers = new Ciudadano();
         CiudadanoData cd = new CiudadanoData();
         LocalDate fecha = null;
@@ -294,20 +294,19 @@ public class AdmCita extends javax.swing.JInternalFrame {
         VacunaData vd = new VacunaData();
         CitaData cdata = new CitaData();
         CitaVacunacion cv = new CitaVacunacion();
-        
+
         pers = cd.buscarCiudadano(Integer.parseInt(jTdni.getText()));
         cv = cdata.buscarCita(pers);
-        
-        
+
         cv.setPersona(pers);
         cv.setCentroVacunacion(jCvacunatorio.getSelectedItem().toString());
         cv.setCodigoRefuerzo(Integer.parseInt(jCdosis.getSelectedItem().toString()));
-        cv.setFechaHoraCita(jDateChooser1.getDate().toString()+" "+jChorario.getSelectedItem().toString());
+        cv.setFechaHoraCita(jDateChooser1.getDate().toString() + " " + jChorario.getSelectedItem().toString());
         cv.setEstado(true);
         System.out.println(cv.getFechaHoraCita());
-        
+
         cdata.turnoVac(cv);
-        
+
         limpiar();
         jTnomApe.setEnabled(false);
         jBcancelar.setEnabled(false);
@@ -335,6 +334,10 @@ public class AdmCita extends javax.swing.JInternalFrame {
 
     private void jBbuscarPersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarPersActionPerformed
         // TODO add your handling code here:
+        if(jTdni.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe cargar un DNI para buscar a la persona");
+        }else{
+        
         Ciudadano pers = new Ciudadano();
         CiudadanoData cd = new CiudadanoData();
         Vacuna vac = new Vacuna();
@@ -344,7 +347,7 @@ public class AdmCita extends javax.swing.JInternalFrame {
 
         pers = cd.buscarCiudadano(Integer.parseInt(jTdni.getText()));
         cv = cdata.buscarCita(pers);
-       
+
         if (pers.getNombre() == null) {
             JOptionPane.showMessageDialog(null, "Persona no existe en Base de Datos");
             jTdni.setText("");
@@ -355,8 +358,9 @@ public class AdmCita extends javax.swing.JInternalFrame {
         } else {
             jTnomApe.setText(pers.getNombre() + " " + pers.getApellido());
         }
-        System.out.println(cv);
-        if (cv.getPersona() == null) {
+       
+            
+        if (cv.getPersona() == null&&pers.getApellido()!=null) {
             jCdosis.setSelectedIndex(1);
             jTnomApe.setEnabled(false);
 
@@ -370,52 +374,55 @@ public class AdmCita extends javax.swing.JInternalFrame {
             jChorario.setEnabled(true);
             jBbuscarPers.setEnabled(true);
             jTdni.setEnabled(true);
-        }
-        System.out.println(cv);
-        if (cv.getCodigoRefuerzo() == 1 && cv.isEstado() == false) {
-            jCdosis.setSelectedIndex(2);
-            jBcancelar.setEnabled(true);
-            jBposponerTurno.setEnabled(false);
-            jBguardarTurno.setEnabled(true);
-            jBinfoAplica.setEnabled(false);
-            jCdosis.setEnabled(false);
-            jDateChooser1.setEnabled(true);
-            jCvacunatorio.setEnabled(true);
-            jChorario.setEnabled(true);
-            jBbuscarPers.setEnabled(false);
-            jTdni.setEnabled(true);
-            jDateChooser1.setMinSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(4)));
-            jDateChooser1.setMaxSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(6)));
-        } else if (cv.getCodigoRefuerzo() == 2 && cv.isEstado() == false) {
-            jCdosis.setSelectedIndex(3);
-            jBcancelar.setEnabled(true);
-            jBposponerTurno.setEnabled(false);
-            jBguardarTurno.setEnabled(true);
-            jBinfoAplica.setEnabled(false);
-            jCdosis.setEnabled(false);
-            jDateChooser1.setEnabled(true);
-            jCvacunatorio.setEnabled(true);
-            jChorario.setEnabled(true);
-            jBbuscarPers.setEnabled(false);
-            jTdni.setEnabled(true);
-            jDateChooser1.setMinSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(4)));
-            jDateChooser1.setMaxSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(6)));
-        } else if (cv.getCodigoRefuerzo() != 0 && cv.getFechaHoraColocada()==null) {
-            JOptionPane.showMessageDialog(null, "No se aplico la dosis correspondiente, no puede agendarse un nuevo turno");
-            jTnomApe.setEnabled(false);
-            jTnomApe.setText("");
-            jBcancelar.setEnabled(false);
-            jBposponerTurno.setEnabled(false);
-            jBguardarTurno.setEnabled(false);
-            jBinfoAplica.setEnabled(false);
-            jCdosis.setEnabled(false);
-            jDateChooser1.setEnabled(false);
-            jCvacunatorio.setEnabled(false);
-            jChorario.setEnabled(false);
-            jBbuscarPers.setEnabled(true);
-            jTdni.setText("");
-            jTdni.setEnabled(true);
-        }
+        }else if(pers.getApellido()!=null) {
+        JOptionPane.showMessageDialog(null, "Ya hay un turno pendiente o una dosis por aplicar");
+        
+    }
+//        System.out.println(cv);
+//        if (cv.getCodigoRefuerzo() == 1 && cv.isEstado() == false) {
+//            jCdosis.setSelectedIndex(2);
+//            jBcancelar.setEnabled(true);
+//            jBposponerTurno.setEnabled(false);
+//            jBguardarTurno.setEnabled(true);
+//            jBinfoAplica.setEnabled(false);
+//            jCdosis.setEnabled(false);
+//            jDateChooser1.setEnabled(true);
+//            jCvacunatorio.setEnabled(true);
+//            jChorario.setEnabled(true);
+//            jBbuscarPers.setEnabled(false);
+//            jTdni.setEnabled(true);
+//            jDateChooser1.setMinSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(4)));
+//            jDateChooser1.setMaxSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(6)));
+//        } else if (cv.getCodigoRefuerzo() == 2 && cv.isEstado() == false) {
+//            jCdosis.setSelectedIndex(3);
+//            jBcancelar.setEnabled(true);
+//            jBposponerTurno.setEnabled(false);
+//            jBguardarTurno.setEnabled(true);
+//            jBinfoAplica.setEnabled(false);
+//            jCdosis.setEnabled(false);
+//            jDateChooser1.setEnabled(true);
+//            jCvacunatorio.setEnabled(true);
+//            jChorario.setEnabled(true);
+//            jBbuscarPers.setEnabled(false);
+//            jTdni.setEnabled(true);
+//            jDateChooser1.setMinSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(4)));
+//            jDateChooser1.setMaxSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(6)));
+//        } else if (cv.getCodigoRefuerzo() != 0 && cv.getFechaHoraColocada()==null) {
+//            JOptionPane.showMessageDialog(null, "No se aplico la dosis correspondiente, no puede agendarse un nuevo turno");
+//            jTnomApe.setEnabled(false);
+//            jTnomApe.setText("");
+//            jBcancelar.setEnabled(false);
+//            jBposponerTurno.setEnabled(false);
+//            jBguardarTurno.setEnabled(false);
+//            jBinfoAplica.setEnabled(false);
+//            jCdosis.setEnabled(false);
+//            jDateChooser1.setEnabled(false);
+//            jCvacunatorio.setEnabled(false);
+//            jChorario.setEnabled(false);
+//            jBbuscarPers.setEnabled(true);
+//            jTdni.setText("");
+//            jTdni.setEnabled(true);
+//        }
 
 //        if (cv.getPersona() == null) {
 //            jCdosis.setSelectedIndex(1);
@@ -446,7 +453,7 @@ public class AdmCita extends javax.swing.JInternalFrame {
 //            jTdni.setText("");
 //            jTdni.setEnabled(true);
 //            jTnomApe.setText("");
-//        }
+        }
     }//GEN-LAST:event_jBbuscarPersActionPerformed
 
     private void jBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalirActionPerformed
@@ -465,8 +472,7 @@ public class AdmCita extends javax.swing.JInternalFrame {
         listavac = vd.buscarvacuna();
 
         vac = listavac.get(0);
-        
-        
+
         vd.actualizaVac(vac.getIdVacuna());
 
         Ciudadano pers = new Ciudadano();
@@ -482,8 +488,32 @@ public class AdmCita extends javax.swing.JInternalFrame {
 
         JOptionPane.showMessageDialog(null, "Por favor scannear el código de la dosis aplicada");
         cdata.aplicaVac(cv);
-        jTdniAplica.setText("");
         
+        if (cv.getCodigoRefuerzo() == 1 || cv.getCodigoRefuerzo() == 2) {
+            JOptionPane.showMessageDialog(null, "Por favor agende un turno para la siguiente dosis");
+        }
+        if (cv.getCodigoRefuerzo() == 1) {
+            jCdosis.setSelectedIndex(2);
+            jDateChooser1.setMinSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(4)));
+            jDateChooser1.setMaxSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(6)));
+        }
+        if (cv.getCodigoRefuerzo() == 2) {
+            jCdosis.setSelectedIndex(3);
+            jDateChooser1.setMinSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(4)));
+            jDateChooser1.setMaxSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(6)));
+        } else if (cv.getCodigoRefuerzo() == 3) {
+            JOptionPane.showMessageDialog(null, "Ha completado las 3 dosis. Muchas gracias");
+        }
+jTdni.setText(jTdniAplica.getText());
+jTdniAplica.setText("");
+jBguardarTurno.setEnabled(true);
+jChorario.setEnabled(true);
+jCvacunatorio.setEnabled(true);
+jDateChooser1.setEnabled(true);
+
+
+
+
     }//GEN-LAST:event_jBinfoAplicaActionPerformed
 
     private void jTdniAplicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTdniAplicaActionPerformed
