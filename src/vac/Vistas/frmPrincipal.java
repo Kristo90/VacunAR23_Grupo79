@@ -39,6 +39,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         jMcita = new javax.swing.JMenuItem();
         jMvacuna = new javax.swing.JMenuItem();
         jConsultas = new javax.swing.JMenu();
+        jConsultaD = new javax.swing.JMenuItem();
         jSalir = new javax.swing.JMenu();
         jMsalir = new javax.swing.JMenuItem();
 
@@ -102,6 +103,15 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         jConsultas.setText("Consultas");
         jConsultas.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        jConsultaD.setText("Lista Diarias");
+        jConsultaD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsultaDActionPerformed(evt);
+            }
+        });
+        jConsultas.add(jConsultaD);
+
         jMenuBar1.add(jConsultas);
 
         jSalir.setText("Salir");
@@ -210,6 +220,23 @@ public class frmPrincipal extends javax.swing.JFrame {
         sDescritorio.add(admCita);
     }//GEN-LAST:event_jMcitaActionPerformed
 
+    private void jConsultaDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsultaDActionPerformed
+        // TODO add your handling code here:
+        // Remover la pantalla principal
+        sDescritorio.removeAll();
+        
+        // redibuja el escritorio principal
+        sDescritorio.repaint();
+        
+        // Crear el objeto de la ventana
+        listaDiarias listaD = new listaDiarias();
+        // Hacer visible el objeto
+        listaD.setVisible(true);
+        sDescritorio.add(listaD);
+        
+        
+    }//GEN-LAST:event_jConsultaDActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -247,6 +274,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jAdm;
+    private javax.swing.JMenuItem jConsultaD;
     private javax.swing.JMenu jConsultas;
     private javax.swing.JMenuItem jMcita;
     private javax.swing.JMenuItem jMciudadano;
