@@ -286,6 +286,7 @@ public class AdmCita extends javax.swing.JInternalFrame {
 
     private void jBguardarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarTurnoActionPerformed
         // TODO add your handling code here:
+        
         Ciudadano pers = new Ciudadano();
         CiudadanoData cd = new CiudadanoData();
         LocalDate fecha = null;
@@ -293,30 +294,26 @@ public class AdmCita extends javax.swing.JInternalFrame {
         VacunaData vd = new VacunaData();
         CitaData cdata = new CitaData();
         CitaVacunacion cv = new CitaVacunacion();
+        
         pers = cd.buscarCiudadano(Integer.parseInt(jTdni.getText()));
+        cv = cdata.buscarCita(pers);
+        
+        
         cv.setPersona(pers);
-        System.out.println(pers.getIdCiudadano());
-        System.out.println(pers.getDni());
-        cv.setCodigoRefuerzo(Integer.parseInt(jCdosis.getSelectedItem().toString()));
-
         cv.setCentroVacunacion(jCvacunatorio.getSelectedItem().toString());
-
-        cv.setFechaHoraCita((jDateChooser1.getDate().toInstant() + " " + jChorario.getSelectedItem()));
-
+        cv.setCodigoRefuerzo(Integer.parseInt(jCdosis.getSelectedItem().toString()));
+        cv.setFechaHoraCita(jDateChooser1.getDate().toString()+" "+jChorario.getSelectedItem().toString());
         cv.setEstado(true);
-
-        cv.setFechaHoraColocada(new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        //cv.setFechaHoraColocada(fecha);
-        cv.setDosis(vac);
-
+        System.out.println(cv.getFechaHoraCita());
+        
         cdata.turnoVac(cv);
-
+        
         limpiar();
         jTnomApe.setEnabled(false);
         jBcancelar.setEnabled(false);
-        jBposponerTurno.setEnabled(false);
+        jBposponerTurno.setEnabled(true);
         jBguardarTurno.setEnabled(false);
-        jBinfoAplica.setEnabled(false);
+        jBinfoAplica.setEnabled(true);
         jCdosis.setEnabled(false);
         jDateChooser1.setEnabled(false);
         jCvacunatorio.setEnabled(false);
@@ -328,10 +325,10 @@ public class AdmCita extends javax.swing.JInternalFrame {
 
     private void jBposponerTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBposponerTurnoActionPerformed
         // TODO add your handling code here:
-        ActualizaCiudadano ac = new ActualizaCiudadano();
-        frmPrincipal.sDescritorio.add(ac);
-        ac.toFront();
-        ac.setVisible(true);
+        PosponerCancelar pc = new PosponerCancelar();
+        frmPrincipal.sDescritorio.add(pc);
+        pc.toFront();
+        pc.setVisible(true);
 
 
     }//GEN-LAST:event_jBposponerTurnoActionPerformed
@@ -347,9 +344,9 @@ public class AdmCita extends javax.swing.JInternalFrame {
 
         pers = cd.buscarCiudadano(Integer.parseInt(jTdni.getText()));
         cv = cdata.buscarCita(pers);
-
+       
         if (pers.getNombre() == null) {
-            JOptionPane.showMessageDialog(null, "Persona no existe");
+            JOptionPane.showMessageDialog(null, "Persona no existe en Base de Datos");
             jTdni.setText("");
             jBbuscarPers.setEnabled(true);
             jBcancelar.setEnabled(false);
@@ -358,24 +355,23 @@ public class AdmCita extends javax.swing.JInternalFrame {
         } else {
             jTnomApe.setText(pers.getNombre() + " " + pers.getApellido());
         }
-
+        System.out.println(cv);
         if (cv.getPersona() == null) {
             jCdosis.setSelectedIndex(1);
             jTnomApe.setEnabled(false);
 
             jBcancelar.setEnabled(true);
             jBposponerTurno.setEnabled(false);
-            jBguardarTurno.setEnabled(false);
+            jBguardarTurno.setEnabled(true);
             jBinfoAplica.setEnabled(false);
             jCdosis.setEnabled(false);
             jDateChooser1.setEnabled(true);
             jCvacunatorio.setEnabled(true);
             jChorario.setEnabled(true);
             jBbuscarPers.setEnabled(true);
-            jTdni.setText("");
             jTdni.setEnabled(true);
         }
-
+        System.out.println(cv);
         if (cv.getCodigoRefuerzo() == 1 && cv.isEstado() == false) {
             jCdosis.setSelectedIndex(2);
             jBcancelar.setEnabled(true);
@@ -387,7 +383,6 @@ public class AdmCita extends javax.swing.JInternalFrame {
             jCvacunatorio.setEnabled(true);
             jChorario.setEnabled(true);
             jBbuscarPers.setEnabled(false);
-            jTdni.setText("");
             jTdni.setEnabled(true);
             jDateChooser1.setMinSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(4)));
             jDateChooser1.setMaxSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(6)));
@@ -402,11 +397,10 @@ public class AdmCita extends javax.swing.JInternalFrame {
             jCvacunatorio.setEnabled(true);
             jChorario.setEnabled(true);
             jBbuscarPers.setEnabled(false);
-            jTdni.setText("");
             jTdni.setEnabled(true);
             jDateChooser1.setMinSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(4)));
             jDateChooser1.setMaxSelectableDate(java.sql.Date.valueOf(cv.getFechaHoraColocada().plusWeeks(6)));
-        } else if (cv.getCodigoRefuerzo() != 0) {
+        } else if (cv.getCodigoRefuerzo() != 0 && cv.getFechaHoraColocada()==null) {
             JOptionPane.showMessageDialog(null, "No se aplico la dosis correspondiente, no puede agendarse un nuevo turno");
             jTnomApe.setEnabled(false);
             jTnomApe.setText("");
@@ -423,37 +417,36 @@ public class AdmCita extends javax.swing.JInternalFrame {
             jTdni.setEnabled(true);
         }
 
-        if (cv.getPersona() == null) {
-            jCdosis.setSelectedIndex(1);
-            jTnomApe.setEnabled(false);
-
-            jBcancelar.setEnabled(true);
-            jBposponerTurno.setEnabled(false);
-            jBguardarTurno.setEnabled(false);
-            jBinfoAplica.setEnabled(false);
-            jCdosis.setEnabled(false);
-            jDateChooser1.setEnabled(true);
-            jCvacunatorio.setEnabled(true);
-            jChorario.setEnabled(true);
-            jBbuscarPers.setEnabled(true);
-            jTdni.setText("");
-            jTdni.setEnabled(true);
-        }
-        if (pers.getNombre() == null) {
-            jBcancelar.setEnabled(false);
-            jBposponerTurno.setEnabled(false);
-            jBguardarTurno.setEnabled(false);
-            jBinfoAplica.setEnabled(false);
-            jCdosis.setEnabled(false);
-            jCdosis.setSelectedIndex(0);
-            jDateChooser1.setEnabled(false);
-            jCvacunatorio.setEnabled(false);
-            jChorario.setEnabled(false);
-            jBbuscarPers.setEnabled(true);
-            jTdni.setText("");
-            jTdni.setEnabled(true);
-            jTnomApe.setText("");
-        }
+//        if (cv.getPersona() == null) {
+//            jCdosis.setSelectedIndex(1);
+//            jTnomApe.setEnabled(false);
+//
+//            jBcancelar.setEnabled(true);
+//            jBposponerTurno.setEnabled(false);
+//            jBguardarTurno.setEnabled(true);
+//            jBinfoAplica.setEnabled(false);
+//            jCdosis.setEnabled(false);
+//            jDateChooser1.setEnabled(true);
+//            jCvacunatorio.setEnabled(true);
+//            jChorario.setEnabled(true);
+//            jBbuscarPers.setEnabled(true);
+//            jTdni.setEnabled(true);
+//        }
+//        if (pers.getNombre() == null) {
+//            jBcancelar.setEnabled(false);
+//            jBposponerTurno.setEnabled(false);
+//            jBguardarTurno.setEnabled(false);
+//            jBinfoAplica.setEnabled(false);
+//            jCdosis.setEnabled(false);
+//            jCdosis.setSelectedIndex(0);
+//            jDateChooser1.setEnabled(false);
+//            jCvacunatorio.setEnabled(false);
+//            jChorario.setEnabled(false);
+//            jBbuscarPers.setEnabled(true);
+//            jTdni.setText("");
+//            jTdni.setEnabled(true);
+//            jTnomApe.setText("");
+//        }
     }//GEN-LAST:event_jBbuscarPersActionPerformed
 
     private void jBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalirActionPerformed
@@ -471,22 +464,26 @@ public class AdmCita extends javax.swing.JInternalFrame {
         LocalDate hoy = LocalDate.now();
         listavac = vd.buscarvacuna();
 
-        vac = listavac.get(1);
-        vac.setColocada(true);
-        vac.setEstado(false);
-
+        vac = listavac.get(0);
+        
+        
         vd.actualizaVac(vac.getIdVacuna());
 
         Ciudadano pers = new Ciudadano();
         CiudadanoData cd = new CiudadanoData();
 
         pers = cd.buscarCiudadano(Integer.parseInt(jTdniAplica.getText()));
-        cv = cdata.buscarCita(pers);
+        cv = cdata.buscarCitaApli(pers);
         cv.setFechaHoraColocada(hoy);
         cv.setDosis(vac);
+        cv.setEstado(false);
+        vac.setColocada(true);
+        vac.setEstado(false);
 
         JOptionPane.showMessageDialog(null, "Por favor scannear el código de la dosis aplicada");
         cdata.aplicaVac(cv);
+        jTdniAplica.setText("");
+        
     }//GEN-LAST:event_jBinfoAplicaActionPerformed
 
     private void jTdniAplicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTdniAplicaActionPerformed

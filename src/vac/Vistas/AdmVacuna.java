@@ -204,6 +204,42 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_jBlimpiarActionPerformed
+
+    private void jBeliminaDosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminaDosisActionPerformed
+        // TODO add your handling code here:
+        vd.eliminarVacuna(Integer.parseInt(jTeliminaDosis.getText()));
+        jTeliminaDosis.setText("");
+        JOptionPane.showMessageDialog(null, "Eliminó la vacuna ingresada.");
+    }//GEN-LAST:event_jBeliminaDosisActionPerformed
+
+    private void jBvencidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvencidasActionPerformed
+        // TODO add your handling code here:
+        VacunaData vd = new VacunaData();
+        LocalDate hoy = LocalDate.now();
+        ArrayList<Vacuna> vac = new ArrayList();
+        vac = vd.buscarvacuna();
+
+        int i = 0;
+        for (Vacuna vacuna : vac) {
+            if (vacuna.getFechaCaduca().isBefore(hoy) ) {
+
+                vd.eliminarVacuna(vacuna.getIdVacuna());
+
+                i++;
+            }
+        }
+        if (i > 0) {
+            JOptionPane.showMessageDialog(null, "Vencieron " + i + " vacunas, se retiran del programa");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se detectaron vacunas vencidas.");
+        }
+
+    }//GEN-LAST:event_jBvencidasActionPerformed
+
     private void jBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -228,39 +264,8 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBregistrarActionPerformed
 
-    private void jBlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlimpiarActionPerformed
-        // TODO add your handling code here:
-        limpiar();
-    }//GEN-LAST:event_jBlimpiarActionPerformed
-
-    private void jBvencidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvencidasActionPerformed
-        // TODO add your handling code here:
-        VacunaData vd = new VacunaData();
-        LocalDate hoy = LocalDate.now();
-        ArrayList<Vacuna> vac = new ArrayList();
-        vac = vd.buscarvacuna();
-        
-        int i = 0;
-        for (Vacuna vacuna : vac) {
-            if (vacuna.getFechaCaduca().isBefore(hoy) ) {
-                                
-                vd.eliminarVacuna(vacuna.getIdVacuna());
-               
-                i++;
-            }
-        }
-        if (i > 0) {
-            JOptionPane.showMessageDialog(null, "Vencieron " + i + " vacunas, se retiran del programa");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se detectaron vacunas vencidas.");
-        }
-
-
-    }//GEN-LAST:event_jBvencidasActionPerformed
-
     private void jTeliminaDosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTeliminaDosisActionPerformed
         // TODO add your handling code here:
-
 
     }//GEN-LAST:event_jTeliminaDosisActionPerformed
 
@@ -279,13 +284,6 @@ public class AdmVacuna extends javax.swing.JInternalFrame {
     private void jTnoDosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTnoDosisActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTnoDosisActionPerformed
-
-    private void jBeliminaDosisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminaDosisActionPerformed
-        // TODO add your handling code here:
-        vd.eliminarVacuna(Integer.parseInt(jTeliminaDosis.getText()));
-        jTeliminaDosis.setText("");
-        JOptionPane.showMessageDialog(null, "Eliminó la vacuna ingresada.");
-    }//GEN-LAST:event_jBeliminaDosisActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

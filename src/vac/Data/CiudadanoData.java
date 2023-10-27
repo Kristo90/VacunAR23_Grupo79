@@ -76,7 +76,7 @@ public class CiudadanoData {
             ResultSet RS = PS.executeQuery();
 
             while (RS.next()) {
-
+                PERS.setDni(dni);
                 PERS.setIdCiudadano(RS.getInt(1));
                 PERS.setNombre(RS.getNString(2));
                 PERS.setApellido(RS.getNString(3));

@@ -14,6 +14,7 @@ public class CitaVacunacion {
     private LocalDate fechaHoraColocada;
     private Vacuna dosis;
     private boolean estado;
+    
 
     public CitaVacunacion() {
     }
