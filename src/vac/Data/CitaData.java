@@ -65,20 +65,21 @@ public class CitaData {
 
     }
 
-    public void cancelaCita(CitaVacunacion DNipersona) {
+    public void cancelaCita(CitaVacunacion cv) {
         Vacuna vac = new Vacuna();
         Ciudadano pers = new Ciudadano();
         CiudadanoData cd = new CiudadanoData();
         VacunaData vd = new VacunaData();
-        CitaVacunacion cv = new CitaVacunacion();
+        
 
-        String SQL_CANCELAR = "UPDATE citavacunacion Set estado=0 WHERE persona=? ";
+        String SQL_CANCELAR = "DELETE FROM citavacunacion WHERE codCita=? ";
 
         try {
 
             PreparedStatement PS = CON.prepareStatement(SQL_CANCELAR);
 
-            PS.setInt(1, cv.getPersona().getDni());
+            PS.setInt(1,cv.getIdCita());
+           
 
             int fila = PS.executeUpdate();
 
@@ -95,26 +96,31 @@ public class CitaData {
         }
     }
 
-    public void posponerCita(CitaVacunacion DNipersona) {
+    public void posponerCita(CitaVacunacion cv) {
         Vacuna vac = new Vacuna();
         Ciudadano pers = new Ciudadano();
         CiudadanoData cd = new CiudadanoData();
         VacunaData vd = new VacunaData();
-        CitaVacunacion cv = new CitaVacunacion();
-
-        String SQL_POSPONER = "UPDATE citavacunacion Set fechaHoraCita=? WHERE persona=? ";
+        
+        
+        String SQL_POSPONER = "UPDATE citavacunacion SET fechaHoraCita=?, centroVacunacion=? WHERE persona=?";
 
         try {
-
+            
             PreparedStatement PS = CON.prepareStatement(SQL_POSPONER);
             PS.setString(1, cv.getFechaHoraCita());
-            PS.setInt(2, cv.getPersona().getDni());
+            
+            PS.setString(2, cv.getCentroVacunacion());
+           
+            PS.setInt(3, cv.getPersona().getIdCiudadano());
+            System.out.println(cv.getPersona().getIdCiudadano());
+            
 
             int fila = PS.executeUpdate();
-
+            
             if (fila == 1) {
-
-                JOptionPane.showMessageDialog(null, "Se ha agendado una nueva cita.");
+                
+                JOptionPane.showMessageDialog(null, "Se ha pospuesto la cita.");
                 PS.close();
 
             }
@@ -252,5 +258,48 @@ public class CitaData {
         return cv;
 
     }
+public CitaVacunacion buscarCitaCancel(Ciudadano pers) {
+        Vacuna vac = new Vacuna();
+        CiudadanoData cd = new CiudadanoData();
+        VacunaData vd = new VacunaData();
+        CitaVacunacion cv = new CitaVacunacion();
 
+//      (`codCita`, `persona`, `codRefuerzo`, `fechaHoraCita`, `centroVacunacion`, `fechaHoraColoca`, `dosis`, `estado`)
+        String SQL_BUSCAR = "SELECT * FROM citavacunacion WHERE persona=?  AND estado=1";
+        
+        try {
+
+            PreparedStatement PS = CON.prepareStatement(SQL_BUSCAR);
+
+            PS.setInt(1, pers.getIdCiudadano());
+
+            ResultSet RS = PS.executeQuery();
+
+            if (RS.next()) {
+
+                cv.setIdCita(RS.getInt(1));
+                cv.setPersona(pers);
+                cv.setCodigoRefuerzo(RS.getInt(3));
+                cv.setFechaHoraCita(RS.getString(4));
+                cv.setCentroVacunacion(RS.getString(5));
+                cv.setFechaHoraColocada(LocalDate.now());
+                cv.setEstado(RS.getBoolean(8));
+                
+                JOptionPane.showMessageDialog(null, "Cita encontrada.");
+
+            }
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla citaVacunacion");
+
+        } catch (NullPointerException ex) {
+
+            JOptionPane.showMessageDialog(null, "No existe turno para la persona ingresada.");
+
+        }
+
+        return cv;
+
+    }
 }

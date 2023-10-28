@@ -301,7 +301,7 @@ public class AdmCita extends javax.swing.JInternalFrame {
         cv.setPersona(pers);
         cv.setCentroVacunacion(jCvacunatorio.getSelectedItem().toString());
         cv.setCodigoRefuerzo(Integer.parseInt(jCdosis.getSelectedItem().toString()));
-        cv.setFechaHoraCita(jDateChooser1.getDate().toString() + " " + jChorario.getSelectedItem().toString());
+        cv.setFechaHoraCita(jDateChooser1.getDate().toString() + "- " + jChorario.getSelectedItem().toString());
         cv.setEstado(true);
         System.out.println(cv.getFechaHoraCita());
 
