@@ -12,26 +12,25 @@ import vac.Data.CiudadanoData;
 import vac_Entidades.Ciudadano;
 
 public class AdmCiudadano extends javax.swing.JInternalFrame {
-
-     public Ciudadano pers = new Ciudadano();
+    
+    public Ciudadano pers = new Ciudadano();
     CiudadanoData cd = new CiudadanoData();
-
-   
+    
     public AdmCiudadano() {
         initComponents();
-
-
+        
     }
     
-public void limpiar(){
-    jTdni.setText("");
+    public void limpiar() {
+        jTdni.setText("");
         jTnombre.setText("");
         jTapellido.setText("");
         jTmail.setText("");
         jTtelefono.setText("");
         jCriesgo.setSelectedIndex(0);
         jCescencial.setSelectedIndex(0);
-}
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -259,22 +258,26 @@ public void limpiar(){
 
     private void jBinscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBinscribirActionPerformed
         // TODO add your handling code here:
-        if (jTnombre.getText().isEmpty() || jTapellido.getText().isEmpty() || jTdni.getText().isEmpty() || jTmail.getText().isEmpty() || jTtelefono.getText().isEmpty()||jCriesgo.getSelectedIndex()==0||jCescencial.getSelectedIndex()==0){
-            JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos");
-
-        } else {
-            pers.setDni(Integer.parseInt(jTdni.getText()));
-            pers.setNombre(jTnombre.getText());
-            pers.setApellido(jTapellido.getText());
-            pers.setEmail(jTmail.getText());
-            pers.setCelular(jTtelefono.getText());
-            pers.setPatologia(jCriesgo.getSelectedItem().toString());
-            pers.setAmbtrabajo(jCescencial.getSelectedItem().toString());
-            cd.inscribirCiudadano(pers);
-
-            limpiar();
+        try {
+            if (jTnombre.getText().isEmpty() || jTapellido.getText().isEmpty() || jTdni.getText().isEmpty() || jTmail.getText().isEmpty() || jTtelefono.getText().isEmpty() || jCriesgo.getSelectedIndex() == 0 || jCescencial.getSelectedIndex() == 0 || jTdni.getText().length() < 6 && jTdni.getText().length() > 9) {
+                JOptionPane.showMessageDialog(null, "Debe completar todos los datos requeridos o ingreso un DNI inválido");
+                
+            } else {
+                pers.setDni(Integer.parseInt(jTdni.getText()));
+                pers.setNombre(jTnombre.getText());
+                pers.setApellido(jTapellido.getText());
+                pers.setEmail(jTmail.getText());
+                pers.setCelular(jTtelefono.getText());
+                pers.setPatologia(jCriesgo.getSelectedItem().toString());
+                pers.setAmbtrabajo(jCescencial.getSelectedItem().toString());
+                cd.inscribirCiudadano(pers);
+                
+                limpiar();
+            }
+        } catch (NumberFormatException exN) {
+            JOptionPane.showMessageDialog(null, "Ingreso un DNI inválido, debe contener entre 6 y 9 digitos. Ingrese uno nuevo por Favor.");
+            jTdni.setText("");
         }
-
 
     }//GEN-LAST:event_jBinscribirActionPerformed
 
@@ -284,11 +287,11 @@ public void limpiar(){
 
     private void jBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeliminarActionPerformed
         // TODO add your handling code here:
-        if(jTdniEliminar.getText().isEmpty()){
+        if (jTdniEliminar.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe ingresar un DNI en el campo Eliminar Ciudadano");
-        }else{
-        cd.bajaCiudadano(Integer.parseInt(jTdniEliminar.getText()));
-        jTdniEliminar.setText("");
+        } else {
+            cd.bajaCiudadano(Integer.parseInt(jTdniEliminar.getText()));
+            jTdniEliminar.setText("");
         }
     }//GEN-LAST:event_jBeliminarActionPerformed
 
@@ -303,7 +306,7 @@ public void limpiar(){
             evt.consume();
             JOptionPane.showMessageDialog(null, "Este campo solo admite números \nVuelva a ingresarlo");
             jTdni.setText("");
-
+            
         }
     }//GEN-LAST:event_jTdniKeyTyped
 
@@ -314,7 +317,7 @@ public void limpiar(){
             evt.consume();
             JOptionPane.showMessageDialog(null, "Este campo solo admite números \nVuelva a ingresarlo");
             jTtelefono.setText("");
-
+            
         }
     }//GEN-LAST:event_jTtelefonoKeyTyped
 
@@ -325,7 +328,7 @@ public void limpiar(){
             evt.consume();
             JOptionPane.showMessageDialog(null, "Este campo solo admite letras \nVuelva a ingresarlo");
             jTnombre.setText("");
-
+            
         }
     }//GEN-LAST:event_jTnombreKeyTyped
 
@@ -336,7 +339,7 @@ public void limpiar(){
             evt.consume();
             JOptionPane.showMessageDialog(null, "Este campo solo admite letras \nVuelva a ingresarlo");
             jTapellido.setText("");
-
+            
         }
     }//GEN-LAST:event_jTapellidoKeyTyped
     public boolean isEmail(String correo) {
@@ -344,18 +347,18 @@ public void limpiar(){
         Matcher mat = null;
         pat = Pattern.compile("^[\\w\\\\\\+]+(\\.[\\w\\\\]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$");
         mat = pat.matcher(correo);
-
+        
         if (mat.find()) {
             return true;
         } else {
             return false;
         }
-
+        
     }
     private void jTmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTmailFocusLost
         // TODO add your handling code here:
         if (isEmail(jTmail.getText())) {
-
+            
         } else {
             JOptionPane.showMessageDialog(null, "El e-mail ingresado no es válido\nVuelva a ingresarlo");
             jTmail.setText("");
@@ -365,7 +368,7 @@ public void limpiar(){
 
     private void jBlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlimpiarActionPerformed
         // TODO add your handling code here:
-       limpiar();
+        limpiar();
     }//GEN-LAST:event_jBlimpiarActionPerformed
 
     private void jBsalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalir1ActionPerformed
@@ -375,11 +378,11 @@ public void limpiar(){
 
     private void jBactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBactualizarActionPerformed
         // TODO add your handling code here:
-        ActualizaCiudadano ac= new ActualizaCiudadano();
+        ActualizaCiudadano ac = new ActualizaCiudadano();
         frmPrincipal.sDescritorio.add(ac);
         ac.toFront();
         ac.setVisible(true);
-        
+
 //                    if (jTnombre.getText().isEmpty() || jTapellido.getText().isEmpty() || jTdni.getText().isEmpty() || jTmail.getText().isEmpty() || jTtelefono.getText().isEmpty()) {
 //            JOptionPane.showMessageDialog(null, "Para actualizar debe completar todos los campos con los datos de la persona a mofificar y luego presionar ACTUALIZAR");
 //
@@ -395,9 +398,7 @@ public void limpiar(){
 //
 //            limpiar();
 //        }
-     
-       
-         
+
     }//GEN-LAST:event_jBactualizarActionPerformed
 
 
