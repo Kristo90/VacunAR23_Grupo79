@@ -118,7 +118,12 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jConsultas.add(jConsultaD);
 
-        jCentros.setText("Lista Centros");
+        jCentros.setText("Aplicadas por Centro Vacunatorio");
+        jCentros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCentrosActionPerformed(evt);
+            }
+        });
         jConsultas.add(jCentros);
 
         jMenuBar1.add(jConsultas);
@@ -248,15 +253,20 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void jConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsultasActionPerformed
         // TODO add your handling code here:
-        sDescritorio.removeAll();
+       
+    }//GEN-LAST:event_jConsultasActionPerformed
+
+    private void jCentrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCentrosActionPerformed
+        // TODO add your handling code here:
+         sDescritorio.removeAll();
         
         sDescritorio.repaint();
         
-        centroEspecifico listaC = new centroEspecifico();
+        vacunasAplicadasporCentro vaxc = new vacunasAplicadasporCentro();
         
-        listaC.setVisible(true);
-        sDescritorio.add(listaC);
-    }//GEN-LAST:event_jConsultasActionPerformed
+        vaxc.setVisible(true);
+        sDescritorio.add(vaxc);
+    }//GEN-LAST:event_jCentrosActionPerformed
 
     /**
      * @param args the command line arguments

@@ -36,6 +36,7 @@ public class listaDiarias extends javax.swing.JInternalFrame {
         jCvacunatorio = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jBsalir1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -78,6 +79,17 @@ public class listaDiarias extends javax.swing.JInternalFrame {
         jLabel6.setText("Listas Diarias");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 240, 40));
 
+        jBsalir1.setBackground(new java.awt.Color(255, 153, 153));
+        jBsalir1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        jBsalir1.setForeground(new java.awt.Color(51, 51, 51));
+        jBsalir1.setText("Salir");
+        jBsalir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBsalir1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBsalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, 160, 50));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondoCiudadano.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 480));
 
@@ -112,8 +124,14 @@ public class listaDiarias extends javax.swing.JInternalFrame {
 //        }
     }//GEN-LAST:event_jCvacunatorioItemStateChanged
 
+    private void jBsalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsalir1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jBsalir1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBsalir1;
     private javax.swing.JComboBox<String> jCvacunatorio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
