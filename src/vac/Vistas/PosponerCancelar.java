@@ -30,6 +30,10 @@ public class PosponerCancelar extends javax.swing.JInternalFrame {
         jChorario.setEnabled(false);
         jCvacunatorio.setEnabled(false);
         jDateChooser1.setEnabled(false);
+        jBcancelarTurno.setEnabled(false);
+        jBposponerTurno1.setEnabled(false);
+        jBguardarPos.setEnabled(false);
+        jTnomApe.setEnabled(false);
     }
 
     /**
@@ -197,26 +201,33 @@ public class PosponerCancelar extends javax.swing.JInternalFrame {
 
     private void jBbuscarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarTurnoActionPerformed
         // TODO add your handling code here:
-        Ciudadano pers = new Ciudadano();
-        CiudadanoData cd = new CiudadanoData();
-        Vacuna vac = new Vacuna();
-        VacunaData vd = new VacunaData();
-        CitaData cdata = new CitaData();
-        CitaVacunacion cv = new CitaVacunacion();
-        try {
-            pers = cd.buscarCiudadano(Integer.parseInt(jTdniPosCan.getText()));
-            cv = cdata.buscarCitaCancel(pers);
+        if (jTdniPosCan.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un DNI");
+        } else {
+            Ciudadano pers = new Ciudadano();
+            CiudadanoData cd = new CiudadanoData();
+            Vacuna vac = new Vacuna();
+            VacunaData vd = new VacunaData();
+            CitaData cdata = new CitaData();
+            CitaVacunacion cv = new CitaVacunacion();
+            try {
+                pers = cd.buscarCiudadano(Integer.parseInt(jTdniPosCan.getText()));
+                cv = cdata.buscarCitaCancel(pers);
 
-            if (pers.getApellido() == null || cv.getPersona().getApellido() == null) {
-                JOptionPane.showMessageDialog(null, "No hay turnos agendados para la persona solicitada o la persona no ha sido ingresada a la Base de Datos");
+                if (pers.getApellido() == null || cv.getPersona().getApellido() == null) {
+                    JOptionPane.showMessageDialog(null, "No hay turnos agendados para la persona solicitada o la persona no ha sido ingresada a la Base de Datos");
+                    jTdniPosCan.setText("");
+                } else {
+                    jTnomApe.setText(pers.getNombre() + " " + pers.getApellido());
+                    jBcancelarTurno.setEnabled(true);
+                    jBposponerTurno1.setEnabled(true);
+
+                }
+                jTdatosTurno.setText(cv.getFechaHoraCita() + " " + cv.getCentroVacunacion());
+            } catch (NullPointerException nex) {
+                JOptionPane.showMessageDialog(null, "No hay un turno activo para la persona solicitada");
                 jTdniPosCan.setText("");
-            } else {
-                jTnomApe.setText(pers.getNombre() + " " + pers.getApellido());
             }
-            jTdatosTurno.setText(cv.getFechaHoraCita() + " " + cv.getCentroVacunacion());
-        } catch (NullPointerException nex) {
-            JOptionPane.showMessageDialog(null, "No hay un turno activo para la persona solicitada");
-            jTdniPosCan.setText("");
         }
     }//GEN-LAST:event_jBbuscarTurnoActionPerformed
 
@@ -258,38 +269,42 @@ public class PosponerCancelar extends javax.swing.JInternalFrame {
         jChorario.setEnabled(true);
         jCvacunatorio.setEnabled(true);
         jDateChooser1.setEnabled(true);
+        jBguardarPos.setEnabled(true);
         // cdata.posponerCita(cv);
     }//GEN-LAST:event_jBposponerTurno1ActionPerformed
 
     private void jBguardarPosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarPosActionPerformed
         // TODO add your handling code here:
+        if (jDateChooser1.getDate() == null || jChorario.getSelectedIndex() == 0 || jCvacunatorio.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar los datos solicitados");
+        } else {
+            Ciudadano pers = new Ciudadano();
+            CiudadanoData cd = new CiudadanoData();
+            LocalDate fecha = null;
+            Vacuna vac = new Vacuna();
+            VacunaData vd = new VacunaData();
+            CitaData cdata = new CitaData();
+            CitaVacunacion cv = new CitaVacunacion();
 
-        Ciudadano pers = new Ciudadano();
-        CiudadanoData cd = new CiudadanoData();
-        LocalDate fecha = null;
-        Vacuna vac = new Vacuna();
-        VacunaData vd = new VacunaData();
-        CitaData cdata = new CitaData();
-        CitaVacunacion cv = new CitaVacunacion();
+            pers = cd.buscarCiudadano(Integer.parseInt(jTdniPosCan.getText()));
+            cv = cdata.buscarCita(pers);
 
-        pers = cd.buscarCiudadano(Integer.parseInt(jTdniPosCan.getText()));
-        cv = cdata.buscarCita(pers);
-        
-        cv.setCentroVacunacion(jCvacunatorio.getSelectedItem().toString());
+            cv.setCentroVacunacion(jCvacunatorio.getSelectedItem().toString());
 
-        cv.setFechaHoraCita(jDateChooser1.getDate().toString() + "- " + jChorario.getSelectedItem().toString());
-        
-        cdata.posponerCita(cv);
-       
+            cv.setFechaHoraCita(jDateChooser1.getDate().toString() + "- " + jChorario.getSelectedItem().toString());
 
-        jTnomApe.setEnabled(false);
+            cdata.posponerCita(cv);
 
-        jBguardarPos.setEnabled(false);
+            jTnomApe.setEnabled(false);
+            jDateChooser1.setEnabled(false);
+            jCvacunatorio.setEnabled(false);
+            jChorario.setEnabled(false);
+            jBbuscarTurno.setEnabled(true);
+            jBguardarPos.setEnabled(false);
+            jBcancelarTurno.setEnabled(false);
+            jBposponerTurno1.setEnabled(false);
+        }
 
-        jDateChooser1.setEnabled(false);
-        jCvacunatorio.setEnabled(false);
-        jChorario.setEnabled(false);
-        jBbuscarTurno.setEnabled(true);
 
     }//GEN-LAST:event_jBguardarPosActionPerformed
 

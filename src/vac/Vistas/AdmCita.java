@@ -91,6 +91,7 @@ public class AdmCita extends javax.swing.JInternalFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/transparent white_1.png"))); // NOI18N
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setPreferredSize(new java.awt.Dimension(700, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -463,6 +464,9 @@ public class AdmCita extends javax.swing.JInternalFrame {
 
     private void jBinfoAplicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBinfoAplicaActionPerformed
         // TODO add your handling code here:
+       if(jTdniAplica.getText().isEmpty()){
+           JOptionPane.showMessageDialog(null, "Ingrese un DNI para informar dosis aplicada");
+       }else{
         Vacuna vac = new Vacuna();
         VacunaData vd = new VacunaData();
         CitaData cdata = new CitaData();
@@ -510,9 +514,7 @@ jBguardarTurno.setEnabled(true);
 jChorario.setEnabled(true);
 jCvacunatorio.setEnabled(true);
 jDateChooser1.setEnabled(true);
-
-
-
+       }
 
     }//GEN-LAST:event_jBinfoAplicaActionPerformed
 

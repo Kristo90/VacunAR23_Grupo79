@@ -33,11 +33,12 @@ public class listaDiarias extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jTdosis = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
         jCvacunatorio = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setPreferredSize(new java.awt.Dimension(500, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -52,13 +53,9 @@ public class listaDiarias extends javax.swing.JInternalFrame {
                 "centroVacunacion", "DosisAplicadas"
             }
         ));
-        getContentPane().add(jTdosis, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 590, 340));
+        getContentPane().add(jTdosis, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 590, 110));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setText("                            Lista Diaria");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 370, -1));
-
-        jCvacunatorio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "1- Cruz Roja Central", "2- Centro Cultural Leo Messi", "3- Club Social y Deportivo Cebollitas", "5- Escuela Normal N°10" }));
+        jCvacunatorio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "1- Cruz Roja Central", "2- Centro Cultural Leo Messi", "3- Club Social y Deportivo Cebollitas", "4-", "5- Escuela Normal N°10" }));
         jCvacunatorio.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCvacunatorioItemStateChanged(evt);
@@ -69,15 +66,20 @@ public class listaDiarias extends javax.swing.JInternalFrame {
                 jCvacunatorioActionPerformed(evt);
             }
         });
-        getContentPane().add(jCvacunatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 280, -1));
+        getContentPane().add(jCvacunatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 280, -1));
 
         jLabel11.setFont(new java.awt.Font("Gulim", 1, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
         jLabel11.setText("Vacunatorio:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, -1, 30));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, 30));
+
+        jLabel6.setFont(new java.awt.Font("Gulim", 0, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel6.setText("Listas Diarias");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 240, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondoCiudadano.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 690, 500));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -115,7 +117,7 @@ public class listaDiarias extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jCvacunatorio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel6;
     public javax.swing.JTable jTdosis;
     // End of variables declaration//GEN-END:variables
 }

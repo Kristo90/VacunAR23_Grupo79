@@ -241,6 +241,9 @@ public void limpiar(){
 
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
         // TODO add your handling code here:
+        if(jCLabs.getSelectedIndex()==0){
+         JOptionPane.showMessageDialog(null, "Seleccione un laboratorio por favor");   
+        }else{
         LaboratorioData ld = new LaboratorioData();
         Laboratorio lab = new Laboratorio();
         lab = ld.buscarLaboratorio(jCLabs.getSelectedItem().toString());
@@ -269,6 +272,7 @@ public void limpiar(){
         jBmodificar.setEnabled(true);
         jBcancelar.setEnabled(true);
         jBbuscar.setEnabled(true);
+        }
 
 
     }//GEN-LAST:event_jBbuscarActionPerformed

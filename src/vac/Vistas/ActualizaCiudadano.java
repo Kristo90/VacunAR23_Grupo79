@@ -398,6 +398,9 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
 
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
         // TODO add your handling code here:
+        if(jTdni.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe ingresar un DNI");
+        }else{
         pers = cd.buscarCiudadano(Integer.parseInt(jTdni.getText()));
 
         jTnombre.setText(pers.getNombre());
@@ -434,6 +437,7 @@ public class ActualizaCiudadano extends javax.swing.JInternalFrame {
         jCescencial.setEnabled(false);
         jBmodificar.setEnabled(true);
         jBcancelar.setEnabled(false);
+        }
 
 
     }//GEN-LAST:event_jBbuscarActionPerformed
