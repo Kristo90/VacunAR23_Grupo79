@@ -110,7 +110,7 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jConsultaD.setText("Lista Diarias");
+        jConsultaD.setText("Dosis aplicadas por Fecha en cada centro");
         jConsultaD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jConsultaDActionPerformed(evt);
@@ -118,7 +118,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         jConsultas.add(jConsultaD);
 
-        jCentros.setText("Aplicadas por Centro Vacunatorio");
+        jCentros.setText("Dosis aplicadas por Centro de vacunación");
         jCentros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCentrosActionPerformed(evt);
@@ -243,10 +243,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         sDescritorio.repaint();
         
         // Crear el objeto de la ventana
-        listaDiarias listaD = new listaDiarias();
+        totalporFechaPorCentro tpfpc = new totalporFechaPorCentro();
         // Hacer visible el objeto
-        listaD.setVisible(true);
-        sDescritorio.add(listaD);
+        tpfpc.setVisible(true);
+        sDescritorio.add(tpfpc);
         
         
     }//GEN-LAST:event_jConsultaDActionPerformed

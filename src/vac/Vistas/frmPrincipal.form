@@ -62,7 +62,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jConsultaD">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Lista Diarias"/>
+                <Property name="text" type="java.lang.String" value="Dosis aplicadas por Fecha en cada centro"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jConsultaDActionPerformed"/>
@@ -70,7 +70,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jCentros">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Aplicadas por Centro Vacunatorio"/>
+                <Property name="text" type="java.lang.String" value="Dosis aplicadas por Centro de vacunaci&#xf3;n"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCentrosActionPerformed"/>

@@ -113,112 +113,34 @@ public class ConsultaData {
         }
         return lista;
     }
-
-    public void listarCentroB() {
-
-//        ⦁	Para un centro especifico, listar las vacunas aplicadas, con número de serie y DNI del ciudadano receptor.
-        try {
-
-            int idCentro = 2;
-
-            String SQL_CONSULTA = "SELECT v.idVacuna, v.nroSerieDosis, c.dni"
-                    + "FROM vacuna v"
-                    + "INNER JOIN vacuna_ciudadano vc ON v.idVacuna = vc.idVacuna"
-                    + "INNER JOIN ciudadano c ON vc.idCiudadano = c.Ciudadano"
-                    + "WHERE v.idCentro = ?";
-
-            PreparedStatement PS = CON.prepareStatement(SQL_CONSULTA);
-            PS.setInt(1, idCentro);
-
+public ArrayList<String[]> aplicadasxFechaxVacunatorio(LocalDate date){
+  ArrayList<String[]>lista=new ArrayList();
+  
+  
+  String sql="SELECT centroVacunacion AS Vacunatorio,COUNT(dosis) AS Vacunas_Aplicadas FROM citavacunacion WHERE fechaHoraColoca=? GROUP BY centroVacunacion;";
+  try{  
+  PreparedStatement PS = CON.prepareStatement(sql);
+            PS.setDate(1,Date.valueOf(date));
             ResultSet RS = PS.executeQuery();
 
             while (RS.next()) {
-
-                int idVacuna = RS.getInt("idVacuna");
-                String nroSerieDosis = RS.getString("nroSerieDosis");
-                String dniCiudadano = RS.getString("dni");
-
+                String[]fila=new String[2];
+                
+                fila[0] = RS.getString(1);
+                fila[1] = RS.getString(2);
+                
+                lista.add(fila);
+                for (String[] row : lista){
+                    for(String fil:row){
+                    System.out.print(fil+" ");
+                        System.out.println(" ");
+                    }
+                }
             }
-
-            RS.close();
-
-        } catch (SQLException ex) {
-
+            PS.close();
+  }catch  (SQLException ex) {
             Logger.getLogger(ConsultaData.class.getName()).log(Level.SEVERE, null, ex);
-
         }
-
-    }
-
-    public void listarCentroC() {
-
-//        ⦁	Para un centro especifico, listar las vacunas aplicadas, con número de serie y DNI del ciudadano receptor.
-        try {
-
-            int idCentro = 3;
-
-            String SQL_CONSULTA = "SELECT v.idVacuna, v.nroSerieDosis, c.dni"
-                    + "FROM vacuna v"
-                    + "INNER JOIN vacuna_ciudadano vc ON v.idVacuna = vc.idVacuna"
-                    + "INNER JOIN ciudadano c ON vc.idCiudadano = c.Ciudadano"
-                    + "WHERE v.idCentro = ?";
-
-            PreparedStatement PS = CON.prepareStatement(SQL_CONSULTA);
-            PS.setInt(1, idCentro);
-
-            ResultSet RS = PS.executeQuery();
-
-            while (RS.next()) {
-
-                int idVacuna = RS.getInt("idVacuna");
-                String nroSerieDosis = RS.getString("nroSerieDosis");
-                String dniCiudadano = RS.getString("dni");
-
-            }
-
-            RS.close();
-
-        } catch (SQLException ex) {
-
-            Logger.getLogger(ConsultaData.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
-
-    }
-
-    public void listarCentroD() {
-
-//        ⦁	Para un centro especifico, listar las vacunas aplicadas, con número de serie y DNI del ciudadano receptor.
-        try {
-
-            int idCentro = 4;
-
-            String SQL_CONSULTA = "SELECT v.idVacuna, v.nroSerieDosis, c.dni"
-                    + "FROM vacuna v"
-                    + "INNER JOIN vacuna_ciudadano vc ON v.idVacuna = vc.idVacuna"
-                    + "INNER JOIN ciudadano c ON vc.idCiudadano = c.Ciudadano"
-                    + "WHERE v.idCentro = ?";
-
-            PreparedStatement PS = CON.prepareStatement(SQL_CONSULTA);
-            PS.setInt(1, idCentro);
-
-            ResultSet RS = PS.executeQuery();
-
-            while (RS.next()) {
-
-                int idVacuna = RS.getInt("idVacuna");
-                String nroSerieDosis = RS.getString("nroSerieDosis");
-                String dniCiudadano = RS.getString("dni");
-
-            }
-
-            RS.close();
-
-        } catch (SQLException ex) {
-
-            Logger.getLogger(ConsultaData.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
-
-    }
+    return lista;  
+}
 }
