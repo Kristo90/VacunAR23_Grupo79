@@ -86,7 +86,7 @@ public class ConsultaData {
 
     public ArrayList<String[]> listarCentroA(String CVac) {
         ArrayList<String[]> lista = new ArrayList();
-        String[] fila = new String[3];
+        
 
 //       	Para un centro especifico, listar las vacunas aplicadas, con número de serie y DNI del ciudadano receptor.
         String sql = "SELECT centroVacunacion,vacuna.nroSerieDosis, ciudadano.dni FROM citavacunacion INNER JOIN vacuna ON vacuna.idVacuna = citavacunacion.dosis INNER JOIN ciudadano ON ciudadano.idCiudadano= citavacunacion.persona WHERE fechaHoraColoca IS NOT  NULL AND centroVacunacion= ?";
@@ -97,6 +97,7 @@ public class ConsultaData {
             ResultSet RS = PS.executeQuery();
 
             while (RS.next()) {
+                String[] fila = new String[3];
                 
                 fila[0] = RS.getString("centroVacunacion");
                 fila[1] = RS.getString("nroSerieDosis");
